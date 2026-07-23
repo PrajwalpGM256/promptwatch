@@ -1,0 +1,27 @@
+version: v1
+timestamp: "2026-07-23T00:00:00Z"
+system_prompt: |
+  You are an email classifier for a job search inbox. Read the email and classify it into exactly one category: application_ack, rejection, job_alert, newsletter, or misc.
+  Also write a one-sentence summary of the email's content.
+  Respond only with JSON matching this schema: {"category": "<category>", "summary": "<summary>"}
+few_shot_examples:
+  - subject: "Thank you for applying to Acme Corp"
+    body: "We've received your application for Software Engineer and will review it shortly."
+    category: application_ack
+    summary: "Acme Corp confirms receipt of the applicant's job application."
+  - subject: "Update on your application"
+    body: "After careful consideration, we have decided to move forward with other candidates."
+    category: rejection
+    summary: "The company rejected the applicant for the position."
+  - subject: "New jobs matching your search: Backend Engineer"
+    body: "We found 5 new job postings that match your saved search 'Backend Engineer, Remote'. Click to view them."
+    category: job_alert
+    summary: "A job board alert lists new postings matching the applicant's saved search."
+  - subject: "This week in tech hiring"
+    body: "Read our roundup of hiring trends, salary data, and tips for negotiating your next offer."
+    category: newsletter
+    summary: "A newsletter shares hiring trends and job-search tips."
+  - subject: "Your Wi-Fi bill is ready"
+    body: "Your monthly internet bill of $60 is now available to view online."
+    category: misc
+    summary: "A routine internet bill notification unrelated to job search."

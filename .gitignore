@@ -1,0 +1,18 @@
+# Virtual environment
+promptwatch-env/
+venv/
+env/
+
+# Environment variables / secrets
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
