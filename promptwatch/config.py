@@ -3,7 +3,7 @@ from pathlib import Path
 import yaml
 from pydantic import BaseModel
 
-from models import Category
+from promptwatch.models import Category
 
 
 class FewShotExample(BaseModel):
