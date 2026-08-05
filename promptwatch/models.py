@@ -3,7 +3,14 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-Category = Literal["application_ack", "rejection", "job_alert", "newsletter", "misc"]
+Category = Literal[
+    "application_ack",
+    "interview_invite",
+    "rejection",
+    "job_alert",
+    "newsletter",
+    "misc",
+]
 
 
 @dataclass

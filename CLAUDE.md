@@ -10,7 +10,7 @@ The point of the project: most teams ship prompt/model changes blind. This prove
 
 ## Current status
 
-**Phase 1 (Define the feature under test).** The classifier and its contract are written; `classify_email()` has been verified up to the API call but not yet against a live Gemini key. Nothing downstream (dataset, eval engine, alerting, CI) exists yet. Do not scaffold ahead into later phases.
+**Phase 1 (Define the feature under test), complete.** `classify_email()` is verified end-to-end against live Gemini. Nothing downstream (dataset, eval engine, alerting, CI) exists yet. Do not scaffold ahead into later phases. Next: Phase 2, hand-labeling the golden dataset.
 
 ## Non-negotiables
 
@@ -47,7 +47,11 @@ Imports are always package-qualified: `from promptwatch.models import ...`, neve
 
 ## Categories (the contract)
 
-`application_ack`, `rejection`, `job_alert`, `newsletter`, `misc`. Changing this set is a breaking change.
+`application_ack`, `interview_invite`, `rejection`, `job_alert`, `newsletter`, `misc`. Changing this set is a breaking change.
+
+`interview_invite` was added in v2 after a live run showed interview invitations — the highest-value email in the inbox — landing in `misc` under the five-category set.
+
+**Known issue:** `_RESPONSE_SCHEMA` in `classifier.py` derives its enum from the `Category` literal in code, not from the prompt version. So widening `Category` changes what *every* historical prompt version can return — re-running v1 today yields `interview_invite` even though v1's system prompt never mentions it. Prompt versions are therefore not hermetic, which undercuts run-vs-run diffing. Fix before Phase 3 by moving the allowed category set into the prompt YAML so each version carries its own contract.
 
 ## Roadmap (don't build ahead)
 

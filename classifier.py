@@ -1,5 +1,3 @@
-"""Classify a job-search inbox email with Gemini, using a versioned PromptConfig."""
-
 import json
 import os
 from typing import get_args
@@ -111,7 +109,7 @@ def classify_email(
 
 
 if __name__ == "__main__":
-    config = PromptConfig.load("prompts/v1.yaml")
+    config = PromptConfig.load("prompts/v2.yaml")
     email = EmailInput(
         subject="Interview invitation: Backend Engineer at Initech",
         body=(
