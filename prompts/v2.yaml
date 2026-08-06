@@ -1,5 +1,12 @@
 version: v2
 timestamp: "2026-08-05T00:00:00Z"
+categories:
+  - application_ack
+  - interview_invite
+  - rejection
+  - job_alert
+  - newsletter
+  - misc
 system_prompt: |
   You are an email classifier for a job search inbox. Read the email and classify it into exactly one category: application_ack, interview_invite, rejection, job_alert, newsletter, or misc.
   Use application_ack only when the sender confirms receipt of an application. Use interview_invite when the sender proposes or schedules any interview, phone screen, or call.

@@ -1,27 +1,31 @@
 import json
 import os
 from functools import lru_cache
-from typing import get_args
 
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 
 from promptwatch.config import PromptConfig
-from promptwatch.models import Category, ClassificationResult, EmailInput
+from promptwatch.models import ClassificationResult, EmailInput
 
 load_dotenv()
 
-_ALLOWED_CATEGORIES = get_args(Category)
 
-_RESPONSE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "category": {"type": "string", "enum": list(_ALLOWED_CATEGORIES)},
-        "summary": {"type": "string"},
-    },
-    "required": ["category", "summary"],
-}
+def _response_schema(categories: list[str]) -> dict:
+    """Build the JSON Schema constraining the model to `categories`.
+
+    Derived from the prompt version rather than the `Category` type, so a
+    version's allowed outputs cannot drift when the type is widened.
+    """
+    return {
+        "type": "object",
+        "properties": {
+            "category": {"type": "string", "enum": list(categories)},
+            "summary": {"type": "string"},
+        },
+        "required": ["category", "summary"],
+    }
 
 
 def _format_email(subject: str, body: str) -> str:
@@ -69,15 +73,15 @@ def _build_contents(
     return contents
 
 
-def _parse_result(text: str) -> ClassificationResult:
-    """Parse the model's JSON response and validate it against the contract.
+def _parse_result(text: str, categories: list[str]) -> ClassificationResult:
+    """Parse the model's JSON response and validate it against `categories`.
 
     Returns:
         A validated ClassificationResult.
 
     Raises:
         ValueError: if `text` is not valid JSON, omits a summary, or names a
-            category outside the allowed Category values.
+            category this prompt version does not declare.
     """
     try:
         data = json.loads(text)
@@ -86,10 +90,10 @@ def _parse_result(text: str) -> ClassificationResult:
 
     category = data.get("category")
     summary = data.get("summary")
-    if category not in _ALLOWED_CATEGORIES:
+    if category not in categories:
         raise ValueError(
             f"Model returned an off-contract category {category!r}; "
-            f"expected one of {_ALLOWED_CATEGORIES}"
+            f"expected one of {categories}"
         )
     if not summary:
         raise ValueError(f"Model response is missing a summary: {data!r}")
@@ -133,10 +137,10 @@ def classify_email(
         config=types.GenerateContentConfig(
             system_instruction=prompt_config.system_prompt,
             response_mime_type="application/json",
-            response_schema=_RESPONSE_SCHEMA,
+            response_schema=_response_schema(prompt_config.categories),
         ),
     )
-    return _parse_result(response.text)
+    return _parse_result(response.text, prompt_config.categories)
 
 
 if __name__ == "__main__":

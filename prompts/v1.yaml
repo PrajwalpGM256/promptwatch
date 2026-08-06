@@ -1,5 +1,11 @@
 version: v1
 timestamp: "2026-07-23T00:00:00Z"
+categories:
+  - application_ack
+  - rejection
+  - job_alert
+  - newsletter
+  - misc
 system_prompt: |
   You are an email classifier for a job search inbox. Read the email and classify it into exactly one category: application_ack, rejection, job_alert, newsletter, or misc.
   Also write a one-sentence summary of the email's content.

@@ -52,7 +52,9 @@ Imports are always package-qualified: `from promptwatch.models import ...`, neve
 
 `interview_invite` was added in v2 after a live run showed interview invitations — the highest-value email in the inbox — landing in `misc` under the five-category set.
 
-**Known issue:** `_RESPONSE_SCHEMA` in `classifier.py` derives its enum from the `Category` literal in code, not from the prompt version. So widening `Category` changes what *every* historical prompt version can return — re-running v1 today yields `interview_invite` even though v1's system prompt never mentions it. Prompt versions are therefore not hermetic, which undercuts run-vs-run diffing. Fix before Phase 3 by moving the allowed category set into the prompt YAML so each version carries its own contract.
+**Prompt versions are hermetic.** Each YAML declares its own `categories` list, and `classifier.py` builds both the response schema and the validation check from `prompt_config.categories` — never from the `Category` type. Widening `Category` in code therefore cannot change what an older version emits; v1 still returns `misc` for interview invites, as it did the day it was written. Keep it that way: a new category means a new prompt version, never an edit to an existing one.
+
+`Category` in `models.py` remains the union of every value valid across all versions — it types `ClassificationResult` and constrains what a YAML may declare, but it is never handed to the API.
 
 ## Roadmap (don't build ahead)
 
