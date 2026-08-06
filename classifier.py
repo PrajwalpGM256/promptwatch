@@ -1,5 +1,6 @@
 import json
 import os
+from functools import lru_cache
 from typing import get_args
 
 from dotenv import load_dotenv
@@ -27,31 +28,18 @@ def _format_email(subject: str, body: str) -> str:
     return f"Subject: {subject}\nBody: {body}"
 
 
-def classify_email(
-    prompt_config: PromptConfig,
-    email: EmailInput,
-    model: str = "gemini-2.5-flash",
-) -> ClassificationResult:
-    """Classify an email into a Category and summarize it, via Gemini.
+def _build_contents(
+    prompt_config: PromptConfig, email: EmailInput
+) -> list[types.Content]:
+    """Replay the few-shot examples as prior turns, then append the email.
 
-    Builds the request from `prompt_config`: its system prompt as the
-    system instruction, its few-shot examples as prior user/model turns,
-    and `email` as the final user turn. The model is constrained to return
-    JSON matching the ClassificationResult schema.
+    Each example becomes a user turn holding the formatted email and a model
+    turn holding the expected JSON, so the model continues an established
+    pattern rather than following a described format.
 
     Returns:
-        A validated ClassificationResult.
-
-    Raises:
-        RuntimeError: if GEMINI_API_KEY is not set.
-        ValueError: if the model's response is not valid JSON, is missing
-            required fields, or returns a category outside the allowed
-            Category values.
+        The turn list to send as `contents`.
     """
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        raise RuntimeError("GEMINI_API_KEY is not set. Add it to your .env file.")
-
     contents: list[types.Content] = []
     for example in prompt_config.few_shot_examples:
         contents.append(
@@ -78,22 +66,23 @@ def classify_email(
             parts=[types.Part(text=_format_email(email.subject, email.body))],
         )
     )
+    return contents
 
-    client = genai.Client(api_key=api_key)
-    response = client.models.generate_content(
-        model=model,
-        contents=contents,
-        config=types.GenerateContentConfig(
-            system_instruction=prompt_config.system_prompt,
-            response_mime_type="application/json",
-            response_schema=_RESPONSE_SCHEMA,
-        ),
-    )
 
+def _parse_result(text: str) -> ClassificationResult:
+    """Parse the model's JSON response and validate it against the contract.
+
+    Returns:
+        A validated ClassificationResult.
+
+    Raises:
+        ValueError: if `text` is not valid JSON, omits a summary, or names a
+            category outside the allowed Category values.
+    """
     try:
-        data = json.loads(response.text)
+        data = json.loads(text)
     except json.JSONDecodeError as exc:
-        raise ValueError(f"Model response was not valid JSON: {response.text!r}") from exc
+        raise ValueError(f"Model response was not valid JSON: {text!r}") from exc
 
     category = data.get("category")
     summary = data.get("summary")
@@ -106,6 +95,48 @@ def classify_email(
         raise ValueError(f"Model response is missing a summary: {data!r}")
 
     return ClassificationResult(category=category, summary=summary)
+
+
+@lru_cache(maxsize=1)
+def _get_client(api_key: str) -> genai.Client:
+    """Return a cached Gemini client so connections are reused across calls."""
+    return genai.Client(api_key=api_key)
+
+
+def classify_email(
+    prompt_config: PromptConfig,
+    email: EmailInput,
+    model: str = "gemini-2.5-flash",
+) -> ClassificationResult:
+    """Classify an email into a Category and summarize it, via Gemini.
+
+    Builds the request from `prompt_config`: its system prompt as the system
+    instruction and its few-shot examples as prior turns, with `email` as the
+    final user turn. The model is constrained to JSON matching the
+    ClassificationResult schema.
+
+    Returns:
+        A validated ClassificationResult.
+
+    Raises:
+        RuntimeError: if GEMINI_API_KEY is not set.
+        ValueError: if the model's response is off-contract (see _parse_result).
+    """
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        raise RuntimeError("GEMINI_API_KEY is not set. Add it to your .env file.")
+
+    client = _get_client(api_key)
+    response = client.models.generate_content(
+        model=model,
+        contents=_build_contents(prompt_config, email),
+        config=types.GenerateContentConfig(
+            system_instruction=prompt_config.system_prompt,
+            response_mime_type="application/json",
+            response_schema=_RESPONSE_SCHEMA,
+        ),
+    )
+    return _parse_result(response.text)
 
 
 if __name__ == "__main__":

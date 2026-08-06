@@ -25,6 +25,7 @@ The point of the project: most teams ship prompt/model changes blind. This prove
 - **Keep it minimal; think like a senior dev.** Smallest change that does the job. No speculative abstraction, no defensive scaffolding for problems that don't exist yet, no restating the obvious in comments, docstrings, or commit messages. This applies to prose too — commit messages and explanations should be short and carry only what isn't already evident from the diff.
 - Python 3.11+, full type hints on every function signature.
 - Prefer stdlib and deps already in `requirements.txt`. Ask before adding a new dependency.
+- **Be modular.** Every function does one thing and its seams are obvious — build, call, validate are separate steps, not one long body. Modular means clean boundaries, not file count: extract a function when a block has a name, split a file when it has two reasons to change. Don't scatter a small module across files for its own sake.
 - Small, single-purpose functions. Short docstring on every public function: what it does, what it returns, what it raises.
 - Config from env via `python-dotenv`. Never hardcode keys or model names; make the model a parameter with a sensible default.
 - Fail loud and early: validate model output against the `Category` contract and raise a clear error on anything off-contract. No silent fallbacks.
