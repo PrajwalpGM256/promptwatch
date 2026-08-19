@@ -1,0 +1,1263 @@
+{
+  "version": "v1",
+  "timestamp": "2026-08-07T00:00:00Z",
+  "categories": [
+    "application_ack",
+    "interview_invite",
+    "rejection",
+    "job_alert",
+    "newsletter",
+    "misc"
+  ],
+  "cases": [
+    {
+      "id": "gc-001",
+      "subject": "2060 Digital - Full Stack Engineer",
+      "body": "Hi Prajwal,\n\nThank you for your interest in our Full Stack Engineer position at 2060 Digital!\n\nWe would like to move forward with a 30-minute Teams video call with Marcus Reed, Senior Director of Strategic Initiatives.\n\nWould you be available any of the times below?\n\nMonday, April 20th at 11:30am, 1pm, 1:30pm or 2pm EST\nTuesday, April 21st at 1pm EST\nWednesday, April 22nd at 1pm, 1:30pm or 3pm EST\nThursday, April 23rd between 1pm-4pm EST\nFriday, April 24th between 1pm-3pm EST\n\nThanks and talk soon,\n\nDana Whitfield\nPeople Operations Specialist\n555.010.4486 (Office)\n\nA picture containing logo\n\nDescription automatically generated",
+      "expected_category": "interview_invite",
+      "must_mention": [
+        "30-minute Teams call",
+        "Full Stack Engineer",
+        "proposes interview times"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Explicit scheduling with a named role - the clearest interview_invite shape, and the case v1 gets wrong."
+    },
+    {
+      "id": "gc-002",
+      "subject": "Vivid Seats - Application Update",
+      "body": "Hello Prajwal,\n\nThank you for your interest in Vivid Seats! We received an overwhelming response to the Software Engineer opening, which makes us feel both humble and proud that so many talented individuals (like you!) want to join our team.\n\nThis volume of responses makes for an extremely competitive selection process. Although your background is impressive, we regret to inform you that we have decided to pursue other candidates for the position at this time.\n\nJust as we at Vivid Seats value our customers, we value our candidates and would encourage you to keep an eye on our career page where we post new roles frequently. We hope you see another position that sparks your interest!\n\nBest wishes,\n\nThe Vivid Seats Recruiting Team",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Software Engineer",
+        "pursuing other candidates"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "High-volume polite rejection; praise-then-decline is the standard pattern."
+    },
+    {
+      "id": "gc-003",
+      "subject": "Thank you for your application!",
+      "body": "Hi Prajwal,\n\nThank you for taking the time to submit your application for Software Engineer (Job number: 200000000). We’re glad you’re interested in a career at Microsoft, and we’re here to help you find your next role.\n\nYou may not receive feedback from us on your application directly, but please know that it’s being evaluated, and you’ll hear from us as soon as the review process is complete. If you’re selected for an interview, you’ll be notified by the recruiting team.\n\nUpdates regarding your application status can be viewed through your Action Center. If you see the job moved to an inactive state, that means the position is either no longer open, you withdrew from consideration, or you were not selected for the role.\n\nHow’s your profile?\nA key part of the review process is evaluating your profile in relation to the job requirements, so please make sure your profile is accurate and extensive – it’s our first step in getting to know you! We encourage you to check back frequently and continue to look for opportunities that match your interests, as new jobs are being posted regularly.\n\nThank you,\nMicrosoft Recruiting",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Software Engineer",
+        "application received"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Canonical receipt confirmation; the nearest neighbour to interview_invite and the boundary that matters."
+    },
+    {
+      "id": "gc-004",
+      "subject": "New jobs posted from netjets.jobs.hr.cloud.sap",
+      "body": "netjets-jobnotification@example.com Unsubscribe\nThu, Aug 6, 6:26 PM (5 hours ago)\nto me\n\nYou are receiving this email because you joined the Careers Talent Community on 2/19/26. You will receive these messages every 7 day(s). Your Job Alert matched the following jobs at netjets.jobs.hr.cloud.sap.\n\nJobs\nSoftware Engineer, Senior - Platform Engineer (NJUS) - Columbus, OH, US, 43219\nSoftware Engineer, Senior - Platform Engineer (NJUS) - Columbus, OH, US, 43219\nManager, Software Engineering (NJUS) - Columbus, OH, US, 43219\nSoftware Engineer, Associate (NJUS) - Columbus, OH, US, 43219\nSoftware Engineer, Associate (NJUS) - Columbus, OH, US, 43219\nAI Engineer, Senior - Enterprise Value Creation (NJUS) - Columbus, OH, US, 43219\nDesigner (NJUS) - Columbus, OH, US, 43219\nSoftware Engineer (Site Reliability) - Columbus, OH, US, 43219\nGlobal Construction Manager (NJUS) - Columbus, OH, US, 43219\nDispatcher (NJUS) - Columbus, OH, US, 43219",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "job alert digest",
+        "engineering roles in Columbus, OH"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Talent-community digest; highest-volume real category."
+    },
+    {
+      "id": "gc-005",
+      "subject": "An author’s $2 million book deal was pulled over suspected AI use. Where does publishing go from here?",
+      "body": "An author’s $2 million book deal was pulled over suspected AI use. Where does publishing go from here?\nThree writers jump in a Google doc to discuss the fallout from this most recent literary scandal and debate the future of the industry in the shadow of AI\nJohn Paul Brammer, Kathleen Schmidt, Lincoln Michel, and Danya Issawi\nAug 6\n\nREAD IN APP\n\nIllustration by Mia Wu\nLast week, news broke that Jerry Falade’s debut crime novel, which had reportedly sold for $2 million after a 14-way bidding auction, had been pulled from publication by the author’s own agents over suspected AI use.\n\nIn an email to publishers, one of his representatives wrote: “Jerry Falade produced an incredible manuscript that dazzled us and the top publishing professionals around the world. Unfortunately, we are no longer able to authenticate how the manuscript fully evolved from origin to completion. During the submission process we vetted the manuscript with Jerry for AI and felt trusting in his reassurance that it was written without utilising AI as a resource in the writing or editorial process. We can no longer substantiate that, and we are withdrawing the book.”\n\nThis is at least the third such public instance of AI allegations leveled against an author this year alone, preceded by Mia Ballard’s Shy Girl, which was pulled from publication, and H.M. Wolfe’s Daggermouth, which was initially self-published and, as of now, is still set to be distributed by Simon & Schuster in a seven-figure deal.\n\nFalade, who has now obtained legal counsel, has vehemently denied the accusations. In a statement sent out to several press organizations, he wrote, “Three Black authors received major publishing deals this year, and all three later had deals cancelled or disrupted following suspicions about AI.”\n\n[...truncated]",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "AI use in publishing",
+        "$2M book deal pulled"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Long-form editorial, no job-search relevance beyond landing in the inbox. Body truncated to ~2k chars to keep per-run token cost sane."
+    },
+    {
+      "id": "gc-006",
+      "subject": "Important update on Linkedin jobs scraper",
+      "body": "Apify\nWarning\nThis is a message from an Apify community developer Curious Coder (curious_coder), which you're receiving because you've recently used the following Actor.\n\nLinkedin Jobs Scraper logo\nLinkedin Jobs Scraper\ncurious_coder/linkedin-jobs-scraper\n\nLinkedIn has started rolling out an AI-powered job search. But most of the classic filters are gone. What’s left as filters are mainly:\n\nDate posted\nCompany\nEasy apply\nUnder 10 applicants\nOther filters like experience level, job type, salary are meant to go in the search box as natural language instead.\n\nWhat we changed\nWe’ve updated the LinkedIn Jobs Scraper so older search URLs keep working.\n\nWhen the actor uses AI search, unsupported filters in your URL are converted into labeled search terms and added to search phrase. For example:\n\nf_JT=C&f_WT=2,3&sortBy=DD\n→ <existing_search_term> job type: contract, workplace type: remote or hybrid, sort by: most recent\n\nThere’s a new input option: Auto convert to AI search (on by default). Turn it off if you want the URL used exactly as pasted.\n\nWhat you should do\nYou can keep using your existing jobs search URLs — no need to rebuild them immediately.\nFor new searches, you can either use classic-style filter URLs (we’ll convert them) or write criteria directly in the keywords/search box.\nFilters that are still supported (date posted, company, easy apply, under 10 applicants) stay as URL filters.\nIf you still prefer old scraper for some reason, you can switch to it by selecting last-v6 build under Run options\n\nIf anything looks off with your usual searches after this LinkedIn change, reply to this email and we’ll take a look.\n\nThanks,\nCurious Coder\n\nCurious Coder\n\ncurious_coder\n\nCommunity developer\n\nYou're receiving this email because you've recently used one of these Actors.\n\nUnsubscribe",
+      "expected_category": "misc",
+      "must_mention": [
+        "LinkedIn Jobs Scraper update",
+        "AI-powered job search filters"
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Product update for a job-search tool: bulk mail with an unsubscribe, but transactional rather than editorial. Sets the precedent for product-update mail."
+    },
+    {
+      "id": "gc-007",
+      "subject": "Update on Your CSpring Application",
+      "body": "Hi Prajwal,Thank you for taking the time to complete the Hireflix interview for our Junior Software ...\n\nCSpring [11000] \n\nHi Prajwal,\n\nThank you for taking the time to complete the Hireflix interview for our Junior Software Developer opportunity. We appreciate the time and effort you invested in sharing your background and experience with us.\n\nAfter carefully reviewing your application and interview, we've decided to move forward with other candidates whose experience and qualifications more closely align with the specific needs of this role. We know applying and interviewing takes time, and we're grateful you chose to explore CSpring.\n\nWith your permission, we'd love to keep your information in our talent network and reach out if we see a future opportunity that aligns well with your background and career interests. We also encourage you to keep an eye on our careers page, as new opportunities are posted regularly: https://www.cspring.com/careers\n\nWe sincerely appreciate your interest in CSpring and wish you continued success in your career search. Thank you again, and we hope our paths cross again in the future.\n\nBest of luck in your search!\n\nThe CSpring Talent Team\n\nThis email is only for the person(s) addressed. \n \n Privacy Policy | Unsubscribe",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Junior Software Developer",
+        "moving forward with other candidates"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Post-interview rejection - references a completed video interview, unlike pre-screen rejections."
+    },
+    {
+      "id": "gc-008",
+      "subject": "Application follow-up: Carvana",
+      "body": "Hi Prajwal,\n\nThank you for your interest in Carvana! Unfortunately, we have decided not to proceed with your candidacy for the current Software Engineer opening.\n\nWe received many qualified applicants and have decided to move ahead with other candidates whom we feel are a better match for this particular position.\n\nPlease keep an eye on our job board for future opportunities that may be of interest to you. Thanks again for your interest in Carvana and we wish you the best of luck in your search!\n\nRegards,\n\nCarvana",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Software Engineer",
+        "not proceeding with candidacy"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Shortest plain-template rejection in the set."
+    },
+    {
+      "id": "gc-009",
+      "subject": "Thank you for your interest in CESO, Inc.!",
+      "body": "Hello Prajwal,\n\nThank you for your interest in the Software Engineer position at CESO, Inc. We appreciate the time you have invested in applying to the role.\n\nWhile we were impressed by your skills and background, we have decided to move forward with other candidates whose qualifications more closely align with the requirements for this role.\n\nWe value your interest in the company and encourage you to apply for future openings that match your skills. We wish you all the best in your job search and future career endeavors.\n\nBest,\n\nThe CESO Inc Recruiting Team",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Software Engineer",
+        "moving forward with other candidates"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Praise-then-decline, compact form."
+    },
+    {
+      "id": "gc-010",
+      "subject": "Thanks for your interest in Commerce",
+      "body": "Hi Prajwal, \n\nThank you for your interest in the Software Engineer II - Engineering\n\n Services (Full Stack) position. \n\nWe have reviewed your resume and have carefully\n\n considered your qualifications. While your skills are certainly impressive, we have\n\n decided to move forward with other candidates at this time.\n\nIf you're still interested in potential career opportunities with Commerce, we encourage\n\n you to join our global talent network, Commerce Talent Network.\n\nWe appreciate your interest in Commerce and wish you success in your career search.\n\nRespectfully,\nCommerce Talent Acquisition Team\n\nClick here to view the notification details.\n\nThis email box is not monitored. Please do not reply to this message.\n\nThis email was intended for noreply@example.com",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Software Engineer II",
+        "decided to move forward with other candidates"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Workday template: heavy layout whitespace survives into the body text."
+    },
+    {
+      "id": "gc-011",
+      "subject": "Thank You For Your Interest",
+      "body": "Dear Prajwal, \n\nThank you for your interest in the Specialist, Cybersecurity\n\n (Full Stack) position. We appreciate the chance to learn more about your background\n\n and qualifications.\n\nAfter careful consideration, we have decided to pursue other candidates for the role.\n\n The recruitment team has reviewed your application, and we truly value the unique\n\n skills and experience you bring. While we are not moving forward with your application\n\n for this particular role at this time, we encourage you to explore other opportunities\n\n within Nationwide. Please feel free to visit our careers page at www.nationwide.com/careers\n\n for current openings.\n\nThank you once again for considering this opportunity with us. We appreciate your\n\n interest and wish you success.\n\nBest Regards, \n\nNationwide Talent Acquisition\n\nBusiness Process: Job Application: Prajwal ‎- 090000 Specialist, Cybersecurity\n\n (Full Stack) on 08/12/2026\n\nSubject: Prajwal ‎- 090000 Specialist, Cybersecurity (Full Stack)\n\nClick here to view the notification details.\n\nThis email was intended for noreply@example.com",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Cybersecurity Specialist role",
+        "pursuing other candidates"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Non-software role; tests that classification is role-agnostic."
+    },
+    {
+      "id": "gc-012",
+      "subject": "Update on your Kyndryl Job Application for Software Engineer -",
+      "body": "Dear Prajwal, \n\nAfter reviewing your information, we regret to inform you\n\n that your application for Software Engineer - Development was not selected for further\n\n consideration. We appreciate the time you invested in completing the application.\n\n Please remember, this status change is only for the job listed above and does not\n\n impact your application status as it relates to any other job(s) for which you may\n\n have applied. \n\nWe wish you every personal and professional success with your\n\n job search and hope you’ll consider other opportunities with Kyndryl. To receive alerts\n\n on new positions becoming available, please be sure to sign up for our Talent Community\n\n https://kyndryl.wd5.myworkdayjobs.com/KyndrylProfessionalCareers if you haven't done\n\n so already. \n\nRegards,\nKyndryl Talent Acquisition Team\n\nBusiness Process: Review Candidate for Job Application: Prajwal ‎- R-60000\n\n Software Engineer - Development (C1600000)\n\nSubject: Job Application: Prajwal ‎- R-60000 Software Engineer - Development\n\n (C1600000) on 08/12/2026\n\nClick here to view the notification details.\n\nThis email was intended for noreply@example.com\n\nKyndryl Inc. · One Vanderbilt Avenue 15th Floor, New York, NY 10017-3852",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Software Engineer - Development",
+        "not selected for further consideration"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Explicit 'regret to inform' plus a talent-community upsell."
+    },
+    {
+      "id": "gc-013",
+      "subject": "An update about your application for Software Engineer II — R000100000",
+      "body": "Hi Prajwal ,\n\nThank you for your time in applying for the Software Engineer II — R000100000 position\n\n at Warner Bros. Discovery. We know that submitting a job application takes time and\n\n effort, and we do not take lightly that you chose to spend yours on an opportunity\n\n with WBD. However, with this email we are letting you know that we have decided to\n\n pursue other candidates at this time.\n\nIf you have applied to other positions, you may still be under consideration, and\n\n can confirm the status of those applications on your candidate home page.\n\nYour journey with us doesn’t end here. Here are some ways to stay engaged:\n\n• Keep informed of new opportunities and events by signing up for job alerts at\n\n Careers at Warner Bros. Discovery .\n• Follow us on LinkedIn\n\n , Instagram and X\n\n .\n\nWe wish you the best of luck in your job search, and again, we thank you for your\n\n interest.\n\nSincerely,\n\nThe Warner Bros. Discovery Talent Acquisition Team \n\nThis email is not\n\n monitored. Please do not reply directly.\n\nThis email was intended for noreply@example.com",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Software Engineer II",
+        "pursuing other candidates"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "States other applications may still be active - a distractor for the classifier."
+    },
+    {
+      "id": "gc-014",
+      "subject": "Update on your application to Liberty University",
+      "body": "Dear Prajwal , \n\nThank you for your interest in the Software Developer\n\n I for Information Services role at Liberty University. We are grateful for the time\n\n and effort you invested in submitting your application and for your interest in joining\n\n our mission to Train Champions for Christ.\n\nAfter careful consideration of all applications received, we have decided to pursue\n\n other candidates whose backgrounds more closely align with our current needs.\n\nPlease know that this decision in no way diminishes the value of your skills and experiences.\n\n We are confident that God has a plan for your professional journey, even if it does\n\n not currently include this position with Liberty University. We pray that God will\n\n guide you to opportunities where your talents and passions can be fully utilized in\n\n service to His Kingdom.\n\nMay God bless you abundantly in all your future endeavors, and may He continue to\n\n use you to impact the world for Christ. \n\nThis email was intended for noreply@example.com\n\nLiberty University · 1971 University Blvd Lynchburg VA, 24515",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Software Developer I",
+        "pursuing other candidates"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Heavy religious framing; unusual register makes the decline less lexically obvious."
+    },
+    {
+      "id": "gc-015",
+      "subject": "Application Status - Experienced Software Engineer (2026-50000)",
+      "body": "Hi Prajwal!\n\nHope all is well and thanks again for your interest in Principal. We know there are a lot of companies looking for talented professionals like you and we're happy you’ve chosen us as part of your career search.\n\nUpon review of your application, we’ve noticed you didn’t meet at least one of the qualifications listed for the Experienced Software Engineer (2026-50000) position. Unfortunately, we’re unable to move you forward in the process without those qualifications. While this position didn’t work out, we hope you’d continue to keep Principal top of mind.\n\nPlease continue to visit our job board since opportunities are added frequently.\n\nWishing you the best,\n\nPrincipal Talent Team\n\nPrincipal is an Affirmative Action and Equal Opportunity Employer. All qualified applicants will receive consideration for employment without regard to race, color, religion, sex, sexual orientation, gender identity, national origin, disability, or veteran status.\n\nThis is an automated email response. Please do not reply.\n\nTerms of Use | Disclosures | Privacy | Security | Report Fraud\n\n©2023 Principal Financial Services, Inc., \n\n711 High Street, Des Moines, Iowa 50392\n\nSecurities offered through Principal Securities, Inc., member SIPC\n\nPrincipal, Principal and symbol design, and Principal Financial Group are trademarks and service marks of Principal Financial Services, Inc., a member of the Principal Financial Group.\n\n/n &#169; Principal, Headquartered in Des Moines IA/n",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Experienced Software Engineer",
+        "did not meet qualifications"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Rejected by disqualification, not competition - different reason language."
+    },
+    {
+      "id": "gc-016",
+      "subject": "Thank you for applying at Principal",
+      "body": "Hi Prajwal,\n\nThank you for applying to Principal. We’re always looking for talent who bring unique perspectives, passion, and expertise to help us advance the financial security and well-being of our customers. We’re glad you’re considering us for your next role. With your application complete for the following job, here’s what you can expect as next steps.\n\nExperienced Software Engineer (2026-50000) \n\n- Timing – Generally, you’ll hear from us within two weeks of your application unless otherwise noted in the job posting.\n\n- Communication – A member of our Talent Team will share updates and decisions either via email or phone call throughout your candidacy. If your application does not meet the minimum qualifications for the position, you will receive an email within the next few days.\n\n- Interviewing – Depending on the position, we’ll conduct interviews through a combination of methods including over the phone, video, through pre-recorded video/audio technology, or face to face. To help you prepare, check out our \"How we hire\" page on our Career Site.\n\n- Decisions – If the decision is made to move forward with other candidates (which could be for a variety of reasons), you'll receive an email from us.\n\nFor future reference throughout the application process, the text from the job posting is provided near the bottom of this email.\n\nAs always, you can view the status of your application at any time. \n\nLogin: noreply@example.com\n\n(If you do not know your password, you can reset it here.)\n\nIf you would like to update any of your EEO information (gender and/or race), you may click https://example.com/t/a1b2c3 log in and access that data.\n\nAt Principal, we invest in what matters. And building talented teams is where it all begins. Explore our careers site to learn more about what\n\n[...truncated]",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Experienced Software Engineer",
+        "what to expect as next steps"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Same company and role as gc-015 but the opposite category; surfaced by a rejection-keyword search."
+    },
+    {
+      "id": "gc-017",
+      "subject": "Thank you for applying to Rippling - Software Engineer II, Backend - Financial Product",
+      "body": "Hi Prajwal,\n\nThank you for submitting your application for the Software Engineer II, Backend - Financial Product position here at Rippling. We appreciate your interest and the chance to learn more about you and your experience, but we will not be moving forward with your candidacy.\n\nThank you again for your time and interest, and we wish you success with your job search.\n\nThank you,\n\nErin Vance",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Software Engineer II, Backend",
+        "not moving forward with candidacy"
+      ],
+      "difficulty": "hard",
+      "tags": [],
+      "notes": "Subject reads 'Thank you for applying' but the body is a rejection - the sharpest subject/body mismatch in the corpus."
+    },
+    {
+      "id": "gc-018",
+      "subject": "Thank You for Applying – Senior Full stack Engineer (Software Engineer III)",
+      "body": "Dear Prajwal,\nThank you for your interest in the Senior Full stack Engineer (Software Engineer III) (SOFTW000000) position with AURA . We have received your application, and our team will carefully review your materials. \nYou can track the status of your application or explore new opportunities by visiting your candidate portal via https://example.com/JobBoard/abc123\nIf you have any questions regarding your application or need assistance with your submission, feel free to reach out to us at noreply@example.com. \nWe appreciate your time and look forward to reviewing your application. \nBest regards, \nAURA Human Resources",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Senior Full stack Engineer",
+        "application received"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Portal-link acknowledgement carrying a requisition ID."
+    },
+    {
+      "id": "gc-019",
+      "subject": "Thank you for applying at TFL",
+      "body": "Thanks Prajwal!\n\nWe received your application.\n\nHi Prajwal,\n\nThank you for your interest in TFL and for taking the time to apply for the Software Engineer II position. We just wanted to let you know that we received your application, and that we're looking forward to reviewing it. We will reach out to you if you meet the qualifications of the role.\n\nHave a great day!",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Software Engineer II",
+        "application received"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Client preview line duplicated above the body - a real mail-client artifact."
+    },
+    {
+      "id": "gc-020",
+      "subject": "Proofpoint - We have received your application.",
+      "body": "Dear Prajwal, \n\nThank you for applying. We have received your application and are excited that you are interested in joining the team. If you are among the qualified candidates a representative from our Human Resources team will be in contact with you soon regarding the next steps in our process. \n\nRegards, \nProofpoint Talent Acquisition Team\n\nThis email was intended for noreply@example.com \nProofpoint, Inc. • 925 W. Maude Avenue, Sunnyvale, CA 94085",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "application received",
+        "HR will contact if qualified"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Conditional follow-up phrasing rather than a promise of contact."
+    },
+    {
+      "id": "gc-021",
+      "subject": "Thank you for applying at Cotiviti",
+      "body": "Dear Prajwal, \n\nThank you for your recent application to the Intern - Agentic AI Research position and your interest in Cotiviti. Your submission will be reviewed by our recruiting team, and we may reach out to you for more information if we determine that your background meets our staffing needs. If we do not see an immediate match with our current needs, we will keep your application on file for future consideration. \n\nIn the meantime, we encourage you to keep an eye on our job postings at www.cotiviti.com/careers in case there are additional opportunities that may interest you.\n\nThank you again for your interest!\n\nRegards,\n\nCotiviti Talent Acquisition team\n\nThis is an automated email response. Please do not reply.\n\nCotiviti enables healthcare organizations to deliver better care at lower cost through advanced technology and data analytics, helping to ensure the quality and sustainability of how healthcare is delivered in the United States. Cotiviti’s solutions are a critical foundation for healthcare payers in their mission to lower healthcare costs and improve quality through higher performing payment accuracy, quality improvement, risk adjustment, consumer engagement, and network performance management programs. The company also supports the retail industry with data management and recovery audit services that improve business outcomes.\n\n**************************************************\n\nThis message was sent to noreply@example.com. If you don't want to receive these emails from this company in the future, please go to:\n\nhttps://example.com/t/a1b2c3 \n\n/n &#169; Cotiviti, South Jordan, Utah USA/n",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Intern - Agentic AI Research",
+        "submission will be reviewed"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Internship rather than a software engineering title; tests role-agnostic handling."
+    },
+    {
+      "id": "gc-022",
+      "subject": "Thank you for applying to Camus Energy",
+      "body": "Hi Prajwal,\n\nThank you for applying to Camus Energy! We have received your application and will review it promptly. If we think there is a good fit, we will contact you at this email address.\n\n*Position:* Infrastructure Software Engineer\n\nThank you,\n\nCamus Energy\n\nPlease do not reply to this email. It is sent from an unmonitored inbox and replies will not be read.",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Infrastructure Software Engineer",
+        "application received"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Short ack with the position on its own labelled line."
+    },
+    {
+      "id": "gc-023",
+      "subject": "AbbVie Application Received - Thank you!",
+      "body": "Dear Prajwal,\n\nThank you for applying for the Associate Software Engineer I-R00100000 position at AbbVie. We will review your experience and qualifications and if they match our requirements, a member of our Talent Acquisition team will reach out. To learn more about AbbVie and our culture, please visit AbbVie.com or follow us on LinkedIn, Twitter, Instagram&nbsp;and Facebook.\n\nIf your circumstance related to this application change, please contact us at noreply@example.com.\n\nAt AbbVie, we strive to make a remarkable impact on the lives of patients - thank you for your interest in being part of it.\n\nSincerely,\n\nTalent Acquisition\n\nPlease do not reply to this email; it will not be delivered.",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Associate Software Engineer",
+        "will review experience and qualifications"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Requisition ID fused into the role title."
+    },
+    {
+      "id": "gc-024",
+      "subject": "Praj | Thank you for applying to Ethos Life!",
+      "body": "Hello Praj,\n\nThanks for applying at Ethos Life. We received your application for the Software Engineer position and will reach out to you if your experience aligns with the role.\n\nIn the meantime, check us out ( https://www.ethoslife.com/about/ )!\n\nRegards,\n\nEthos Life\n\n**Please note: Do not reply to this email. This email is sent from an unattended mailbox. Replies will not be read.",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Software Engineer",
+        "application received"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Addressed to 'Praj' - truncated first name carried from the application form."
+    },
+    {
+      "id": "gc-025",
+      "subject": "Thank you for applying to Attentive!",
+      "body": "Hi Praj,\n\nThank you for your interest in Attentive! We wanted to let you know we received your application for Software Engineer II, Integrations, and we are delighted that you would consider joining our team.\n\nWe will review your application and will be in touch with you to discuss potential next steps.\n\nBest,\n\nThe Attentive Team",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Software Engineer II, Integrations",
+        "will be in touch about next steps"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "'Discuss potential next steps' leans toward interview_invite while scheduling nothing."
+    },
+    {
+      "id": "gc-026",
+      "subject": "Thanks for applying for the Senior Full-Stack Engineer (San Francisco) role in the Yara Network",
+      "body": "Hey Prajwal,\n\nThank you for applying for the Senior Full-Stack Engineer (San Francisco) role in the Yara Network. We received your application.\n\nIf we see a fit, we'll reach out. If not, we'll still try to keep you in the network as opportunities arise.\n\nBest,\n\nThe Yara team\n\nyara.so\n \nFind your dream job\n\n701 Tillery Street Unit 12, 3100, Austin, TX 78702, Travis County, US\n\n Unsubscribe",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Senior Full-Stack Engineer",
+        "application received"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Unsubscribe footer and mailing address make it look like bulk mail - boundary against job_alert."
+    },
+    {
+      "id": "gc-027",
+      "subject": "AI Interview Invite for Senior Software Engineer - Remote",
+      "body": "Hello Prajwal\n\nHope this mail finds you well!\n\nThank you for your application for the Senior Software Engineer position at YO HR Consultancy. After reviewing your application, your profile is a strong match for opportunities with our partner companies. We would like to invite you to proceed with the next step in the evaluation process — completing a short AI-led interview. YO HR Consultancy is acting as a referral partner for these opportunities, and final hiring decisions are made directly by our partner companies.\n\nMandatory: Each role below includes a 25–30 minute AI-led interview (conversational format). Your application cannot move forward without completing this step.\n\nClient — Micro1. (Software Engineer)\n\nClick the link below to begin your AI interview\n\nFill in the required details and upload your resume\n\nYour account will be created, & you will gain access to the AI interview\n\nComplete the AI interview (approx. 15–25 minutes)\n\nTake the AI Interview\n\nJob Description:\n\nJob Title: Senior Software Engineer\n\nJob Type: Contract\n\nLocation: Remote\n\nJob Summary: In this role, you'll apply your expertise to help train next-generation AI systems. Your work will shape how models learn, reason, and perform through high-quality, real-world input. No prior experience in AI is required — your domain knowledge is what matters. As an expert you will be creating Reinforcement Learning Environments which test an AI model’s ability to solve complex software engineering problems using Model Context Protocol (MCP) tools. Tasks may involve fixing bugs, implementing features, refactoring code, or optimizing performance while requiring agents to discover and reason over information from real MCP servers. You will design reproducible environments, deterministic verification, and golden reference solutions that accurately measure both MCP tool use and software engineering ability.\n\nRequired Skills and Qualifications:\n\nProficiency in C++, Python, JAVA, GoLang, Typescript, or\n\n[...truncated]",
+      "expected_category": "interview_invite",
+      "must_mention": [
+        "AI-led interview",
+        "Senior Software Engineer"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Third-party referral agency inviting to an automated interview rather than a company scheduling one."
+    },
+    {
+      "id": "gc-028",
+      "subject": "AI Interview for Java Developer - Remote",
+      "body": "Hello Prajwal\n\nHope this mail finds you well!\n\nThank you for your application for the Software Developer position at YO HR Concultancy. After reviewing your application, your profile is a strong match for opportunities with our partner companies. We would like to invite you to proceed with the next step in the evaluation process — completing a short AI-led interview. YO HR Consultancy is acting as a referral partner for these opportunities, and final hiring decisions are made directly by our partner companies.\n\nMandatory: Each role below includes a 25–30 minute AI-led interview (conversational format). Your application cannot move forward without completing this step.\n\nClient — Micro1. (Software Developer)\n\nClick the link below to begin your AI interview\n\nFill in the required details and upload your resume\n\nYour account will be created, & you will gain access to the AI interview\n\nComplete the AI interview (approx. 15–25 minutes)\n\nTake the AI Interview\n\nJob Description:\n\nJob Title: Senior Software Engineer\n\nJob Type: Contract\n\nLocation: Remote\n\nJob Summary: In this role, you'll apply your expertise to help train next-generation AI systems. Your work will shape how models learn, reason, and perform through high-quality, real-world input. No prior experience in AI is required — your domain knowledge is what matters. As an expert you will be creating Reinforcement Learning Environments which test an AI model’s ability to solve complex software engineering problems using Model Context Protocol (MCP) tools. Tasks may involve fixing bugs, implementing features, refactoring code, or optimizing performance while requiring agents to discover and reason over information from real MCP servers. You will design reproducible environments, deterministic verification, and golden reference solutions that accurately measure both MCP tool use and software engineering ability.\n\nRequired Skills and Qualifications:\n\nProficiency in C++, Python, JAVA, GoLang, Typescript, or Rust.\n\nDeep\n\n[...truncated]",
+      "expected_category": "interview_invite",
+      "must_mention": [
+        "AI-led interview",
+        "Software Developer role"
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "typos"
+      ],
+      "notes": "Subject says Java Developer while the body says Software Developer, and the sender misspells its own name."
+    },
+    {
+      "id": "gc-029",
+      "subject": "Prajwal - CSpring invites you to a video interview - Next steps",
+      "body": "Hi Prajwal, I hope this finds you well and thanks for your interest in our Jr. Software Developer role. We look forward to learning more about you. \n\nThe next step is a brief video interview with 5 question(s). It will only take a few minutes. Please complete the interview within the next 48 hours. For best results, ensure you are in a quiet room with a stable internet connection and adequate lighting.\n\nStart your interview here: https://example.com/t/a1b2c3\n\nWe recommend using the Chrome browser on any laptop or smartphone. If you are using an iPhone, please use Safari.\n\nShould you have any questions, feel free to reach out. \n\nBest of luck!\n\nNora Bennett\n\nCSpring",
+      "expected_category": "interview_invite",
+      "must_mention": [
+        "one-way video interview",
+        "Jr. Software Developer"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Classic platform invite with a 48-hour deadline and a start link."
+    },
+    {
+      "id": "gc-030",
+      "subject": "CSpring - Next Step in Your Application – Video Interview Invitation",
+      "body": "Hi Prajwal,**Please disregard the previous email you received from CSpring and consider this an offi...\n\nCSpring [11000] \n\nHi Prajwal,\n\n**Please disregard the previous email you received from CSpring and consider this an official invitation to move forward with us in the application process**\n\nThanks for applying for the Junior Software Developer role at CSpring! We’ve reviewed your application and especially appreciated your authentic and descriptive answers to the screening questions. We are excited to move you forward to the next stage of our hiring process!\n\nThe next step is a brief, one-way video interview using a platform called Hireflix. This gives you the opportunity to share more about your experience and skills at a time that’s most convenient for you. Please complete the interview within two business days of receiving this email. If you need additional time, let us know.\n\nBest Practices for a Great Interview:\n\nTreat this like a professional interview.\nDress appropriately, be prepared, and approach the questions thoughtfully just as you would in a live interview. \n\nPlease don’t read your answers from a script or use AI tools to generate your responses.\nWe want to get to know you—your ideas, your experience, and your communication style. It's okay to pause or think out loud.\n\nBe yourself and speak naturally—we’re not looking for perfection.\nWe value authenticity over polish. Think of this as a relaxed way to tell us your story. \n\nChoose a quiet, well-lit space with a reliable internet connection.\nThis helps us see and hear you clearly just like in a real conversation.\n\nUse Google Chrome on a laptop or smartphone. (iPhone users should use Safari.)\nHireflix works best on these browsers to ensure everything records smoothly.\n\nKeep it real.\nYour honest, unscripted answers are what help us understand how you think and whether the role and team are a great match. \n\nStart your interview here: https://example.com/t/a1b2c3\n\nIf you have trouble accessing the\n\n[...truncated]",
+      "expected_category": "interview_invite",
+      "must_mention": [
+        "Junior Software Developer",
+        "video interview via Hireflix"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Opens by retracting a previous email - correction framing before the actual invitation."
+    },
+    {
+      "id": "gc-031",
+      "subject": "Gesture Application: You've Been Invited to Begin the Interview",
+      "body": "Hi Prajwal,\n\nThanks for putting your name forward for our AI Full Stack Engineer Internship. Your application stood out, and we want to take the next step with you. \n\nFirst, a little about who you would be building with.\n\nGesture is not a gifting app. We are a behavior activation and connection platform on a mission to fix a strange modern problem: we have never been more connected, yet we have never felt more disconnected. Our belief is simple: Stop Transacting. Start Connecting. We build across two product lines, a consumer mobile app and Reach360, our enterprise suite, both powered by REAL AI, our proprietary intelligence engine.\n\nFor this role, \"agentic\" is not a buzzword. You would be building real agentic systems that reason, act, and connect people to brands and to each other in ways that actually matter.\n\nAnd this is the part we care about most: you will learn as much as you build. This is not a fetch-coffee internship. You will work alongside people who ship, get real mentorship, and walk away a stronger engineer than when you started, whatever happens next.\n\nNow, for the next step: \n\nThis internship is competitive. We meet a lot of strong candidates and select very few. We are not looking for people who follow instructions, we are looking for builders who move fast, think in systems, and want to grow.\n\nSo we start where it counts: with a take-home assessment.\n\n- This is step one of our interview process\n\n- It is built to reflect the kind of work you would actually do here\n\n- It is your chance to show us how you think, build, and solve real problems\n\n- We designed it so a strong builder can succeed, the rest is up to you\n\nAssessment: https://github.com/Gesture-Tech/gesture-fs-intern-takehome\n\nDeadline: 48 hours from the time stamp of this email. \n\nVERY IMPORTANT: Once you have completed your assessment, reply to this email and confirm that you have completed \"Step 1\". \n\nIf questions come up along the way, reply directly to this email.\n\nWe are excited to\n\n[...truncated]",
+      "expected_category": "interview_invite",
+      "must_mention": [
+        "AI Full Stack Engineer Internship",
+        "invited to begin the interview"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Invitation buried under several paragraphs of company marketing copy."
+    },
+    {
+      "id": "gc-032",
+      "subject": "Your micro1 interview is pending",
+      "body": "<div>\n\n <div style=\"margin-bottom: 30px\">\n\n <img src=\"https://example.com/t/a1b2c3 width=\"100\" alt=\"Client\" border=\"0\" style=\"width: 100%; max-width: 100px; height: auto; display: block;\" />\n\n </div>\n\n <p style=\"font-size: 16px; color: #464646\">\n\n Hi Prajwal,<br/><br/>\n\nThis is a friendly reminder to complete the Fullstack Developer AI interview where you can showcase your expertise and contribute to cutting-edge AI training projects.<br/><br/>\n\nIt takes about 30 minutes, requires no preparation, and only needs to be done once to unlock multiple opportunities.<br/><br/>\n\n<p style=\"font-size: 16px; color: #464646\">\n\n We typically fill roles within 48 hours, so we recommend completing it as soon as possible.<br/><br/>\n\n </p>\n\n <div style=\"display: inline-block;\">\n\n <a rel=\"noopener\" target=\"_blank\" href=\"https://www.interview.micro1.ai/intro/micro1/?candidate=f9e0d25f-ca6e-4b7d-8b74-bda42a7d2368&ping=ok\" style=\"background-color: #F5F4F8; font-size: 16px; text-decoration: none; padding: 14px 20px; color: #3444DA; border-radius: 54px; display: inline-block; mso-padding-alt: 0;\">\n\n <!--[if mso]>\n\n <i style=\"letter-spacing: 25px; mso-font-width: -100%; mso-text-raise: 30pt;\">&nbsp;</i>\n\n <![endif]-->\n\n <span style=\"mso-text-raise: 15pt;\">Start the interview</span>\n\n <!--[if mso]>\n\n <i style=\"letter-spacing: 25px; mso-font-width: -100%;\">&nbsp;</i>\n\n <![endif]-->\n\n </a>\n\n <div style=\"font-size: 12px; color: #888; margin-top: 8px; text-align: center; width: 100%;\">\n\n Note: Desktop only, mobile won't work\n\n </div>\n\n </div>\n\n <br/><br/>\n\n <p style=\"font-size: 16px; color: #464646\">Best,<br/>micro1 team</p>\n\n </div>\n\nPlease note this is a no reply email. If you need support, contact noreply@example.com ( noreply@example.com?subject=&body= )\n\nUnsubscribe (\n\n[...truncated]",
+      "expected_category": "interview_invite",
+      "must_mention": [
+        "Fullstack Developer AI interview",
+        "takes about 30 minutes"
+      ],
+      "difficulty": "hard",
+      "tags": [],
+      "notes": "Sender put raw HTML inside a text/plain part, so div and style markup survives into the body."
+    },
+    {
+      "id": "gc-033",
+      "subject": "Prajwal, thank you for submitting your video interview",
+      "body": "Your video interview has been received successfully.\n\n- This is an automated notification –",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "video interview received",
+        "automated notification"
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "terse"
+      ],
+      "notes": "Shortest case in the corpus at ~60 characters; confirms receipt of a submitted interview."
+    },
+    {
+      "id": "gc-034",
+      "subject": "Introducing - AI Interview Buddy 🎉",
+      "body": "https://aiapply.co/app/v2/interview-buddy\n\nHi there,\n\nPicture getting instant answers to ANY question during a practice interview to ensure the real one runs smoothly.\n\nWell, the wait is over, our latest feature is here, and it's about to blow your mind! 🤯\n\nIt's called - AI Interview Buddy [https://aiapply.co/app/v2/interview-buddy].\n\nGo to 👉 Interview Buddy [https://aiapply.co/app/v2/interview-buddy]\n\nhttps://aiapply.co/app/v2/interview-buddy\n\nAvailable to all premium users, you'll get:\n\n• On-the-Spot Support and Guidance\n\nReceive instant answers to interview questions, enabling you to respond confidently—even to unexpected questions—while practicing\n\nin real-time.\n\n• Accurate Real-Time Transcripts\n\nCapture key points during your mock interview with real-time transcription, allowing you to review and improve your performance\n\neffortlessly.\n\n• Instant Answers to Interview Questions\n\nReduce interview stress by accessing accurate and specific responses to challenging questions, helping you practice without the\n\npressure of having to recall details under real-time conditions.\n\n• Highlight Relevant Work Experience Instantly\n\nInput your work history to get personalized, tailored responses that effectively showcase your skills and relevant achievements\n\nduring practice sessions.\n\nThis way 👉 Interview Buddy [https://aiapply.co/app/v2/interview-buddy]\n\nFrequently asked questions 👇\n\n• Seamless Integration with Popular Platforms:\n\nInterview Buddy works with Zoom and Google Meet via our macOS app, ensuring a smooth, practice-focused experience.\n\n• Privacy & Discretion:\n\nRest assured, only you can see the tool during your sessions. Even when sharing your screen.\n\n• Platform & Language Availability:\n\nCurrently available for desktop use in English. (Other tools on your dashboard can be translated into 15 different languages.)\n\n• Practice vs. Live Interview Use:\n\nUnlike our “Mock Interviews” tool, which helps you prepare by simulating potential questions, Interview Buddy is\n\n[...truncated]",
+      "expected_category": "misc",
+      "must_mention": [
+        "AI Interview Buddy feature",
+        "practice interview support"
+      ],
+      "difficulty": "hard",
+      "tags": [],
+      "notes": "Product advertisement whose subject contains 'Interview' - a pure lexical trap for keyword-driven classification."
+    },
+    {
+      "id": "gc-035",
+      "subject": "Prajwal, Your Weekly Job Rundown is Here",
+      "body": "Principal Software Engineer - Platform (Remote US) at Legion Intelligence — $3000k/yr · Remote \n\nRemoteHunter - Weekly Job Rundown\n\nRemoteHunter ( https://example.com/t/a1b2c3 )\n\nWeekly Rundown\n\nYour Weekly Job Rundown\n\nAug 18, 2026\n\nHere’s a quick look at your latest matched roles for the week. Checking your weekly rundown helps you stay on top of fresh opportunities, spot strong-fit roles sooner, and apply while the best matches are still current.\n\nBest Match\n\nLegion Intelligence\n\nPrincipal Software Engineer - Platform (Remote US) ( https://example.com/t/a1b2c3 )\n\nSalary: $3000k/yr\n\nApply Now → ( https://example.com/t/a1b2c3 )\n\nCisco\n\nDistinguished Software Engineer (Remote) ( https://example.com/t/a1b2c3 )\n\nSalary: $467.9k/yr\n\nApply Now → ( https://example.com/t/a1b2c3 )\n\nTriumph Financial, Inc.\n\nLead or Staff Software Engineer (Remote) - Ruby, C# or F# preferred ( https://example.com/t/a1b2c3 )\n\nSalary: $320.4k/yr\n\nApply Now → ( https://example.com/t/a1b2c3 )\n\nCapital One\n\nSr Lead Software Engineer - Shopping (Remote - Eligible) ( https://example.com/t/a1b2c3 )\n\nSalary: $262.4k/yr\n\nApply Now → ( https://example.com/t/a1b2c3 )\n\nHII's Mission Technologies division\n\nPrincipal Software Engineer (Remote) - 27014 ( https://example.com/t/a1b2c3 )\n\nSalary: $245k/yr\n\nApply Now → ( https://example.com/t/a1b2c3 )\n\n8th Light\n\nPrincipal Software Engineer (US-Remote) ( https://example.com/t/a1b2c3 )\n\nSalary: $220.9k/yr\n\nApply Now → ( https://example.com/t/a1b2c3 )\n\nNewtonX\n\nSoftware Engineer- LLM Systems (Remote) ( https://example.com/t/a1b2c3 )\n\nSalary: $220k/yr\n\nApply Now → ( https://example.com/t/a1b2c3 )\n\nCommerce\n\nLead Software Engineer - Remote ( https://example.com/t/a1b2c3 )\n\nSalary: $216k/yr\n\nApply Now → ( https://example.com/t/a1b2c3 )\n\nClassPass\n\nSenior Software Engineer (Remote) ( https://example.com/t/a1b2c3 )\n\nSalary: $200k/yr\n\nApply Now → ( https://example.com/t/a1b2c3 )\n\nUnitedHealth Group\n\nSenior Software Engineer - Remote ( https://example.com/t/a1b2c3\n\n[...truncated]",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "weekly job rundown",
+        "matched roles for the week"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Weekly digest carrying a malformed salary figure ($3000k/yr) straight from the aggregator."
+    },
+    {
+      "id": "gc-036",
+      "subject": "NxT Level is looking for SVP of Finance (Bellevue)",
+      "body": "Adzuna Job alert\n\n12651 new NODEJS OR DEVELOPER OR BELLEVUE OR WAONSITE jobs in Eastgate, WA. View your latest job matches here:\n\nhttps://example.com/t/a1b2c3\n\nEdit your alerts here:\n\nhttps://example.com/t/a1b2c3",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "12651 new jobs",
+        "NodeJS Developer near Bellevue"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Subject names a single finance role while the body is a bulk digest for an unrelated search."
+    },
+    {
+      "id": "gc-037",
+      "subject": "New job: Senior Full Stack Engineer (NodeJS + React Native) at Throne Labs - Wellfound",
+      "body": "Hi Prajwal! I’ve found 1 new jobs matching your alert preferences. \nReady to interview \n<https://example.com/t/a1b2c3\nOpen to offers \n<https://example.com/t/a1b2c3\nClosed to offers \n<https://example.com/t/a1b2c3\n Your job alerts for: Saved Search 1 \nUnsubscribe from this alert \n<https://example.com/t/a1b2c3\n\n<https://example.com/t/a1b2c3\n Senior Full Stack Engineer (NodeJS + React Native) Throne Labs / 51-200 \nEmployees $150k – $200k | Los Angeles, Washington DC | 7 years of exp \n Actively Hiring B2C B2B Early Stage \n Our take Throne Labs is expanding access to clean, smart public restrooms \nusing IoT and real-time data, partnering with cities like LA Metro and \nWashington DC. The Senior Full Stack Engineer role offers ownership across \nNode.js, React/Next.js, and React Native in a remote, high-autonomy position \nwith a $150k–$200k salary range. \nLearn more \n<https://example.com/t/a1b2c3\n How often do you want to receive these alerts? Never \n<https://example.com/t/a1b2c3\nWeekly \n<https://example.com/t/a1b2c3\nDaily \n<https://example.com/t/a1b2c3\n \n<https://example.com/t/a1b2c3\n \n<https://example.com/t/a1b2c3\n You're receiving this notification because you're looking for jobs on Wellfound\n 228 Park Ave S, PMB · New York, NY 10003 Click here to unsubscribe \n<https://example.com/t/a1b2c3\n ormanage email preferences \n<https://example.com/t/a1b2c3",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "1 new job matching alert",
+        "Senior Full Stack Engineer at Throne Labs"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Single-match alert offering candidate-state action links rather than a listing digest."
+    },
+    {
+      "id": "gc-038",
+      "subject": "There are 5 new jobs matching your saved search for August 18: Senior Software Engineer",
+      "body": "New jobs for August 18Based on your saved searchMost relevant results based on your search for <span style=\"font-weight:500;\">'Senior Software Engineer, Yarmouth, USA'</span>-----------------------------\n\nData Quality Automation Engineer (Python, SQL)\n- Portland, ME\n- in_person\n- USD 90,000 - 150,000\n- full_time\nView job: https://example.com/t/a1b2c3\n\nPrincipal C++ 2D/3D Software Developer\n- Portland, ME\n- in_person\n- USD 151,000 - 247,000\n- full_time\n- Health benefits | Vacation time | 401(k) & Profit-sharing\nView job: https://example.com/t/a1b2c3\n\nLead Field AI/ML Engineer for Institutional Deployments\n- Portland, ME\n- hybrid\n- USD 117,000 - 187,000\n- full_time\nView job: https://example.com/t/a1b2c3\n\nPrincipal C++ 2D/3D Software Developer\n- Portland, ME\n- hybrid\n- USD 120,000 - 180,000\n- full_time\nView job: https://example.com/t/a1b2c3\n\nCloud Engineer\n- Portland, ME\n- New York, NY\n- in_person\n- USD 135,000 - 170,000\n- full_time\n- Health insurance | 401(k) | Pre-tax commuter benefits | +4\nView job: https://example.com/t/a1b2c3\n-----------------------------\nView all results: https://example.com/t/a1b2c3\nFor more resume and job search tips, connect with us!\nhttps://www.instagram.com/jobleadscom/\nhttps://www.youtube.com/channel/UCD-tDcD6v8Fr7ag0BOIRTyA\nhttps://www.facebook.com/JobLeads/\nhttps://www.linkedin.com/company/jobleads-gmbh/\n\n-----------------------------------------------------------------------------------------------\n\nHaving problems logging in? Click here.\nhttps://example.com/t/a1b2c3\n\nDo you have questions or need help? Please check out our Help Center.\nhttps://example.com/t/a1b2c3\n\nYou are getting this email because you are registered as a member of JobLeads. If you do not wish to receive emails anymore, please unsubscribe.\nhttps://example.com/t/a1b2c3\n\n-----------------------------------------------------------------------------------------------\n\n(c) JobLeads GmbH | Brandstwiete 4 | 20457 Hamburg, Germany\nCommercial Register: District Court of\n\n[...truncated]",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "5 new jobs",
+        "saved search for Senior Software Engineer"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Raw HTML span markup survives into the body from a text/plain part."
+    },
+    {
+      "id": "gc-039",
+      "subject": "New jobs: Senior Full Stack Engineer at XP Health and  5 more jobs",
+      "body": "<https://angel.co> \n\nHi Prajwal! I've found 6 new jobs that might interest you!\n\nReady to Interview Open to offers Closed to Offers \n\nSenior Full Stack Engineer\n\nXP Health / 11-50 Employees\n\n $180–220k | In office, San Francisco, San Carlos | 5 years of exp | Full-time \n\nActively Hiring B2B Growth Stage Top Investors \n\nOur Take\n\nXP Health is transforming vision care with AI-powered eye exams and same-hour \nprescription glasses, serving over 3,000 clients including Fortune 500 \ncompanies. As a Senior Full Stack Engineer in their San Carlos office, you'll \nbuild secure, user-focused features using React, Node, and AWS in a \nfast-growing Series B startup.\n\nLearn More \n<https://wellfound.com/jobs?job_listing_slug=4584514-senior-full-stack-engineer>\n\nSenior Full Stack Engineer\n\nNaijaluxemart / 11-50 Employees\n\n $160–230k | In office, San Francisco | 4 years of exp | Full-time \n\nActively Hiring \n\nOur Take\n\nNaijaluxemart is a fast-growing AI startup in San Francisco focused on \ntransforming insurance operations through conversational AI agents and document \nintelligence. The Senior Full Stack Engineer role involves building \ncustomer-facing products using TypeScript, React, and Node.js in a fully \non-site environment with opportunities to influence architecture and mentor \nengineers.\n\nLearn More \n<https://wellfound.com/jobs?job_listing_slug=4587474-senior-full-stack-engineer>\n\nFull Stack Engineer\n\nInfluxion / 1-10 Employees\n\n $120–180k | In office, San Francisco | 5 years of exp | Full-time \n\nActively Hiring \n\nOur Take\n\nInfluxion is a San Francisco-based startup developing autonomous AI agents to \nmonitor and improve production AI systems, now seeking a Full Stack Engineer to \nbuild scalable, enterprise-grade product features across frontend and backend, \nworking closely with founders and early customers to shape the platform's \nfuture.\n\nLearn More \n<https://wellfound.com/jobs?job_listing_slug=4579483-full-stack-engineer> \n\nSenior Full Stack Engineer [33263]\n\nDefinitive\n\n[...truncated]",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "6 new jobs",
+        "Senior Full Stack Engineer at XP Health"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Rich digest carrying salary bands and company descriptions."
+    },
+    {
+      "id": "gc-040",
+      "subject": "Recommended jobs from TEKsystems",
+      "body": "Hi&nbsp;Prajwal,We’ve found some new job opportunities for you. Click on the job to read more about it and apply.Update your preferences here to change or add job recommendations.Developer AND California, USA JobsPlatform EngieerSan Jose, California, USAApply NowSr. Python DeveloperMenlo Park, California, USAApply NowSr. Machine Learning EngineerMenlo Park, California, USAApply NowMarketing Cloud SpecialistAlameda, California, USAApply NowData &amp; Analytics ResourceSan Francisco, California, USAApply NowThank you,The TEKsystems Jobs TeamNote: This is an auto-generated email and replies are not monitored.Connect with us©TEKsystems, Inc. 7437 Race Road, Hanover, MD 21076 | unsubscribeTo ensure delivery to your inbox, please add noreply@example.com to your address book",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "recommended job opportunities",
+        "California developer roles"
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "typos"
+      ],
+      "notes": "Sender misspells its own listing ('Platform Engieer') and leaves &nbsp; entities unrendered."
+    },
+    {
+      "id": "gc-041",
+      "subject": "New jobs posted from careers.wipro.com",
+      "body": "You are receiving this email because you joined the Wipro Limited Talent Community on 1/6/26. You will receive these messages every Full Stack Software Engineer Santa Clara, USA-CA, USA, 84765 day(s). Your Job Alert matched the following jobs at careers.wipro.com. \n\n Jobs \n\n L10 PDE - Santa Clara\n\nATE technician\n\nSoftware Developer\n\nFull Stack Engineer\n\nSenior Java Developer\n\nSoftware Development Engineer in Test (SDET)\n\nJava full stack developer\n\nMainframe with Hogan Developer\n\nSenior Python Full Stack Developer\n\nSite Relablity Engineer\n\nManage your Job Alerts\n\nEmail Settings | Unsubscribe",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "talent community job alert",
+        "Wipro job listings"
+      ],
+      "difficulty": "hard",
+      "tags": [],
+      "notes": "Template merge failure splices a job title and location into the sending-cadence sentence."
+    },
+    {
+      "id": "gc-042",
+      "subject": "Your job alert for: Engineer, Durham, North Carolina",
+      "body": "Johnson, Mirmiran & Thompson Inc is hiring.\n\nPrajwal, here are today's jobs \n\nModify your Job Alerts\n \n here\n\nMechanical Engineer III\n\nJohnson, Mirmiran & Thompson Inc\n - \n Raleigh \n\n- \n \n NC\n\nVIEW JOB\n\nForensic Mechanical Engineer\n\nEFI Global\n - \n Raleigh \n\n- \n \n North Carolina\n\nVIEW JOB\n\nMechanical Engineer III\n\nClark Nexsen\n - \n Raleigh \n\n- \n \n NC\n\nVIEW JOB\n\nMechanical Engineer\n\nThe Perillo Group\n - \n Cary\n \n - \n \n NC\n\nQUICK\n APPLY\n\nMechanical Engineer\n\nFlowserve Corp\n - \n Raleigh \n\n- \n \n NC\n\nVIEW JOB\n\nMechanical Design Engineer\n\nHitachi Ltd\n - \n Raleigh \n\n- \n \n NC\n\nVIEW JOB\n\nView Jobs in Last 7 Days\n\nVIEW ALL JOBS\n\nSign\n in \n to\n see your saved and recommended jobs.\n\nSign\n In\n\nYOUR PROFILE \n | \n CONTACT US\n\n© 2026 MCB Bermuda Ltd. All rights reserved. \n\nThis email was sent to: noreply@example.com\n\nIf you would no longer like to receive emails like this one from Monster please click here to\nunsubscribe.\n\n To manage your Monster email communication preferences please\n \n login\n to your account.\n\nMonster Privacy Policy\n\nMCB Puerto Rico LLC, City View Plaza II, Ste 6000, 48 Road 165, Guaynabo, Puerto Rico 00968",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "today's jobs",
+        "Mechanical Engineer roles in North Carolina"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Alert for mechanical engineering roles, unrelated to the software search that generated it."
+    },
+    {
+      "id": "gc-043",
+      "subject": "☕ Today's top news you might have missed...",
+      "body": "THE CREPUSCULE\nReading for the twilight of the working day\n\nMorning Coffee: Bank of America's unassuming CEO has some jokes. Barclays likes a shakeup \nBrian Moynihan has been fructifying. \nRead more: https://example.com/t/a1b2c3\n\nLatest articles:\n\nEx-Bank of America MD's advice on making $100m in banks: \"Be obedient. Play the game\" \nThe long game. \nRead more: https://example.com/t/a1b2c3\n\nWhat skills do you need for a career in capital markets?\nThe skills you need to work in ECM or DCM.\nRead more: https://example.com/t/a1b2c3\n\nDeutsche Bank hired a European bank's ex-head of UK M&A\nAnother one.\nRead more: https://example.com/t/a1b2c3\n\nHedge fund Balyasny hired the co-head of BlackRock's US investment grade platform\nHedge funds love credit guys.\nRead more: https://example.com/t/a1b2c3\n\nHow much do risk jobs in investment banks really pay?\nThe best paying roles in the middle office.\nRead more: https://example.com/t/a1b2c3\n\nMost popular:\n\nThe ex-Goldman Sachs macro MD with an alternative method of making money\nRead more: https://example.com/t/a1b2c3\n\nA Goldman Sachs VP escaped to a fine job at hedge fund Brevan Howard \nRead more: https://example.com/t/a1b2c3\n\nOpenAI CEO Sam Altman: Working at Goldman Sachs \"sounds unbelievably terrible now\"\nRead more: https://example.com/t/a1b2c3\n\nJane Street hired Citadel Securities' head of semi-systematic equities after a 20-month break\nRead more: https://example.com/t/a1b2c3\n\nHSBC & Deutsche Bank cut equities people. Maybe that was a bad idea?\nRead more: https://example.com/t/a1b2c3\n\nJobs\nFast track your career. Search thousands of jobs in financial services and technology, with new opportunities added every day.\n\nSearch for jobs: https://example.com/t/a1b2c3\n \nYou received this email because you subscribed with eFinancialCareers.\n\nManage your preferences: https://example.com/t/a1b2c3\n\n© Copyright 2026 eFinancialCareers, all rights reserved. eFinancialCareers Ltd is a company registered in England and Wales. \nRegistered address:\n\n[...truncated]",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "daily finance news roundup",
+        "Bank of America CEO"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Emoji subject on a curated news digest from a careers site."
+    },
+    {
+      "id": "gc-044",
+      "subject": "AI Traffic Now Converts 54% Better Than Everything Else. Many Sites Can't Be",
+      "body": "View this post on the web at https://aiagentssimplified.substack.com/p/ai-traffic-now-converts-54-better\n\nWelcome to the 67th issue of AI Agents Simplified 🍻\n\nWhat's in this issue:\n\nWhat changed. AI-referred visits went from worth 84% less to worth 53% more in nineteen months. Break-even was October 2025.\n\nHow AI assistants read a page. They don’t scroll, hover, or wait for JavaScript. That single constraint decides everything below.\n\nWhich content survives and which vanishes. Two rules, both about structure rather than copy, both measurable.\n\nHow to test your own site. One curl command and three questions, in about 20 minutes. Most people don’t like their first result.\n\nWhat that test can’t show you. which prompts your category gets asked, whether you appear, and who appears instead.\n\nWhy this applies outside retail. to documentation, pricing pages, and API references just as much as product pages.\n\nSomething inverted over the last twelve months, and most engineering teams missed it because it first showed up in a marketing dashboard.\n\nTraffic that arrives at a US retail site from an AI assistant now converts 54% better than traffic from everything else, like search, social, email, paid, all of it combined. It generates 53% more revenue per visit. It bounces 36% less and sticks around 53% longer. Twelve months earlier, the same channel converted at roughly half the rate of ordinary traffic and non-AI visits were worth 128% more!\n\nThat’s Adobe’s Q3 2026 AI Traffic Trends Report, built on Adobe Analytics data covering more than a trillion visits to US retail sites, plus a March 2026 survey of over 5,000 US consumers.\n\nIf you’d like to have the full report for free and take a look at all the details yourself, comment “Report” and I’ll send it your way.\n\nThe volume story is loud too, AI-referred visits up 138% YoY to retail sites in May 2026, 194% to travel, 105% to financial services. But volume was never the surprising part. Everyone saw the volume coming. The\n\n[...truncated]",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "AI-referred traffic converts better",
+        "67th issue"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Numbered Substack issue opening with a view-on-the-web link."
+    },
+    {
+      "id": "gc-045",
+      "subject": "The Backend Economics of AI Inference",
+      "body": "View this post on the web at https://thebackenddevelopers.substack.com/p/the-backend-economics-of-ai-inference\n\nThe Hidden Tax on Every Token: Why Your GPU Bill Reads Like a Car Payment\n\nLet’s start with a confession. As backend engineers, we love to talk about scale. We love the idea of serving millions of requests, of our systems humming along like a well-oiled machine. But if you’ve ever actually looked at the invoice from your cloud provider after a heavy inference push, you know that feeling of cold dread. It’s the financial equivalent of looking at the bill for a luxury sports car you accidentally drove through a buffet.\n\nThe truth is, AI inference is a hungry beast. It doesn’t just eat compute; it devours high-bandwidth memory (HBM) and electricity with the enthusiasm of a frat boy at an all-you-can-eat sushi bar. Research consistently points out that these two factors—hardware and energy—account for over 60% of the operational expenses for AI workloads. But here’s the kicker: the cost isn’t a fixed law of nature. It’s a systems-level challenge, and you, the backend architect, are the one holding the wrench.\n\nFor too long, the default answer to “make it faster” was “buy more GPUs.” But the real economic breakthrough isn’t in the procurement department; it’s in the code. We need to stop thinking of inference as a black box and start treating it as a pipeline of bottlenecks that we can throttle, squeeze, and optimize. The era of the “dumb pipeline” is over. Welcome to the era of the penny-pinching pipeline.\n\nThe Great Unbundling: Cloud Pricing, Reserved Capacity, and the Art of the Deal\n\nBefore we dive into the code, let’s talk about the marketplace. If you’re paying full on-demand price for an H100 to serve a model that occasionally gets a traffic spike, you’re essentially buying a Ferrari to drive to the grocery store once a week. The cloud pricing landscape has sharply diverged, and you need to be an opportunistic shopper.\n\nThe research is clear: premium\n\n[...truncated]",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "backend economics of AI inference",
+        "GPU cost per token"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Technical Substack essay with no job-search content at all."
+    },
+    {
+      "id": "gc-046",
+      "subject": "I Couldn't Find the Language App I Needed, So I Built My Own With ChatGPT",
+      "body": "View this post on the web at https://excellentprompts.substack.com/p/build-ai-native-app-chatgpt-codex\n\nYou’re reading Excellent AI Prompts. \n\nAI prompt chains, agent skills, and agentic workflows for professionals learning to use AI to earn more, think sharper, and live better. \n\nCopy them. Use them. Build with them. \n\nThose of you who know me know I’ve had the goal to be more verbally fluent in French, for what seems like, my entire life. Since we have AI and can literally build anything we want, I decided to take my quest more seriously. \n\nI built an app for myself, which I may or may not turn into a product for others, called Motivoix. Motivoix is loosely derived from two words, motivation and the French word for voice.\n\nIn this issue, I’ll show you how to build the exact same app for yourself in hopes that it will inspire you to create, not just another language learning app, but any app that takes something you are interested in, and turns it into something that will not only enhance your quality of life on the personal side, but also shows you how to build something substantial using AI, with ease.\n\nIn this issue\n\nWhy language learning and why now?\n\nWhat I wanted Motivoix to do\n\nHow I built Motivoix with Codex\n\nThe technology behind Motivoix\n\nWhat I would do next to put Motivoix in the Apple App Store\n\nHere’s how to build your own language app\n\nHow to turn your curiosity into any app\n\nWhy language learning and why now?...\n\nUnsubscribe https://example.com/t/a1b2c3",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "built a language app with ChatGPT",
+        "AI prompt chains"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Personal-story newsletter about building with AI tools."
+    },
+    {
+      "id": "gc-047",
+      "subject": "How to write unbiased AI prompts (8 prompts)",
+      "body": "View this post on the web at https://www.aiprompthackers.com/p/how-to-write-unbiased-ai-prompts\n\nAsk AI whether your idea is any good and it’ll tell you it’s promising. Ask whether your idea has a fatal flaw and it’ll find one, complete with reasoning. Same idea. Same model, same day, opposite answers.\n\nThe difference is you. You told it what you wanted before it started thinking.\n\nLawyers have a name for this. Leading the witness, and it’s banned in court because it works. Most people writing AI prompts for research or decisions do it without noticing. Your assumptions ride in on the phrasing, the model picks them up, and what comes back is your own opinion with better grammar and more confidence than you had going in.\n\nBelow are eight prompts that strip your bias out of the question before the model answers it. Plus a swap list for the phrasings that cause the most damage.\n\nWhy is AI suddenly agreeing with everything you say?\n\nAI models learn from human ratings, and people rate agreeable answers higher than accurate ones, so agreement gets rewarded in training. OpenAI shipped a GPT-4o update on 25 April 2025 and pulled it four days later because it had tipped into flattery, endorsing plans it should have questioned. Asking a model to be more honest doesn’t fix this. Changing the wording of your question does.\n\nModels learn from human ratings, and humans rate agreeable answers higher than accurate ones. Agreement gets rewarded. OpenAI rolled back a GPT-4o update on 29 April 2025 after four days because it had tipped into flattery, endorsing plans it should have questioned.\n\nThese prompts don’t ask the model to be honest. Asking doesn’t work. They change the input so there’s less of your opinion in there for it to copy back at you.\n\nPrompt 1: How do I tell if my prompt is leading the AI?\n\nPaste your prompt into a fresh chat and ask the model to analyse the prompt itself before answering it. Tell it to quote the exact words that signal your preferred answer, any\n\n[...truncated]",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "writing unbiased AI prompts",
+        "8 prompts"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Reads as a how-to guide rather than editorial, blurring the newsletter boundary."
+    },
+    {
+      "id": "gc-048",
+      "subject": "Security alert",
+      "body": "[image: Google]\n\nApp password created to sign in to your account\n\nnoreply@example.com\n\nIf you didn't generate this password for prompt-watch, someone might be\n\nusing your account. Check and secure your account now.\n\nCheck activity\n\n<https://example.com/t/a1b2c3\n\nYou can also see security activity at\n\nhttps://myaccount.google.com/notifications\n\nYou received this email to let you know about important changes to your\n\nGoogle Account and services.\n\n© 2026 Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA",
+      "expected_category": "misc",
+      "must_mention": [
+        "app password created",
+        "secure your account"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Google security notice generated by this project's own Gmail setup."
+    },
+    {
+      "id": "gc-049",
+      "subject": "2-Step Verification turned on",
+      "body": "[image: Google]\n\n2-Step Verification turned on\n\nnoreply@example.com\n\nYour Google Account noreply@example.com is now protected with 2-Step\n\nVerification. When you sign in on a new or untrusted device, you’ll need\n\nyour second factor to verify your identity.\n\n*Don't get locked out!*\n\nYou can add a backup phone or get backup codes to use when you don’t have\n\nyour second factor with you.\n\nYou can review your 2SV settings\n\n<https://example.com/t/a1b2c3\n\nto make changes.\n\nYou can also see security activity at\n\nhttps://myaccount.google.com/notifications\n\nYou received this email to let you know about important changes to your\n\nGoogle Account and services.\n\n© 2026 Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA",
+      "expected_category": "misc",
+      "must_mention": [
+        "2-Step Verification turned on",
+        "backup codes"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Account security confirmation; transactional and unrelated to hiring."
+    },
+    {
+      "id": "gc-050",
+      "subject": "Hungry for rewards?",
+      "body": "Activate and earn at restaurants with OnePay\n\n96 \n\nSkip to main content ( #main )\n\nOnePay Rewards (\n\nhttps://example.com/t/a1b2c3 ) OnePay Rewards (\n\nhttps://example.com/t/a1b2c3\n\n) OnePay\n\nCashRewards Card ( https://example.com/t/a1b2c3 ) OnePay\n\nCashRewards Card ( https://example.com/t/a1b2c3 )\n\n******************\n\nSnack on cash back\n\n******************\n\nIt's easy to earn with OnePay. Follow these steps to rack up\n\ncash back at restaurants near you.1\n\n------------\n\nHow it works\n\n------------\n\ncoin symbol Link any debit or credit card\n\nto your Wallet\n\ncoin symbol Tap the Rewards tab,\n\nthen the info icon\n\ncoin symbol Activate an offer for a\n\nrestaurant near you\n\ncoin symbol Pay with any physical\n\nlinked card to start earning\n\nCash back earned as\n\npoints.\n\nExplore offers (\n\nhttps://example.com/t/a1b2c3 ) Explore offers (\n\nhttps://example.com/t/a1b2c3 )\n\nlogo ONE (\n\nhttps://example.com/t/a1b2c3 ) icon Instagram \n\n( https://example.com/t/a1b2c3 ) icon Facebook \n\n( https://example.com/t/a1b2c3 ) icon Twitter \n\n( https://example.com/t/a1b2c3 ) App Store (\n\nhttps://example.com/t/a1b2c3 ) Google Play (\n\nhttps://example.com/t/a1b2c3 )\n\n OnePay is a financial\n\ntechnology company, not a bank. Banking services provided by\n\nCoastal Community Bank or Lead Bank, Members FDIC. The secured\n\nOnePay Builder Mastercard® is issued by banking partners pursuant\n\nto a license by Mastercard® International Incorporated.\n\n1. Cash back is earned as OnePay Points, redeemable as a deposit\n\ninto a OnePay deposit account or other available options pursuant\n\nto the OnePay Rewards Terms ( https://example.com/t/a1b2c3\n\n). Individual reward details can be found in the OnePay app.\n\nUnsubscribe from marketing emails (\n\nhttps://example.com/t/a1b2c3 )\n\nP.O. Box 513717, Los Angeles, CA 90051\n\n© Copyright 2026 One Finance, Inc.\n\nAll third-party names, logos, and brands are trademarks or\n\nregistered trademarks of their respective owners. Their use by\n\nOnePay does not imply ownership, affiliation, or\n\n[...truncated]",
+      "expected_category": "misc",
+      "must_mention": [
+        "OnePay Rewards",
+        "earn at restaurants"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Consumer promotion with no job-search relevance."
+    },
+    {
+      "id": "gc-051",
+      "subject": "Secure two-step verification notification",
+      "body": "Secure two-step verification notification \n \n You have requested a secure verification code to log into your USCIS Account. \n \n Please enter this secure verification code: 000000 \n \n If you are not attempting to log into USCIS, please go to https://myaccount.uscis.gov/users/edit to reset your password and review your security settings. \n \n Please be aware that this update might require your immediate attention. \n \n PLEASE DO NOT REPLY TO THIS MESSAGE",
+      "expected_category": "misc",
+      "must_mention": [
+        "USCIS verification code",
+        "log into USCIS account"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Immigration one-time-code mail: adjacent to a job search without being about hiring."
+    },
+    {
+      "id": "gc-052",
+      "subject": "You shared some Google Account data with PeopleGrove",
+      "body": "Keep track of your Google Account data\n\nnoreply@example.com\n\n<!--[if !mso]><!-->\n\n<!--[if false]><!-->\n\nYou're receiving this email because you used Sign in with Google to sign in \n\nto\n\n<https://example.com/t/a1b2c3\n\non August 18 at 1:30 PM .\n\nThis email summarizes the info you shared. There’s nothing you need to do \n\nright now.\n\n<!--[if !mso]><!-->\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\nYou're receiving this email because you used Sign in with Google to sign in \n\nto\n\n<https://example.com/t/a1b2c3\n\non August 18 at 1:30 PM .\n\nThis email summarizes the info you shared. There’s nothing you need to do \n\nright now.\n\n<!--[if false]><!-->\n\nPeopleGrove received this profile info\n\nPrajwal GM\n\nName and profile picture\n\nnoreply@example.com\n\nEmail address\n\nThis email includes the info you shared on\n\nAugust 18 at 1:30 PM\n\nIf you want to stop using Sign in with Google with\n\nPeopleGrove , go to your Google Account.\n\n<!--[if !mso]><!-->\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\nPeopleGrove received this profile info\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\nPrajwal GM\n\nName and profile picture\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\nnoreply@example.com\n\nEmail address\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\n<!--[if false]><!-->\n\nThis email includes the info you shared on\n\nAugust 18 at 1:30 PM\n\n<!--[if false]><!-->\n\nIf you want to stop using Sign in with Google with\n\nPeopleGrove , go to your Google Account.\n\n<!--[if false]><!-->\n\n<!--[if mso]>\n\n<v:roundrect xmlns:v=\"urn:schemas-microsoft-com:vml\" \n\nxmlns:w=\"urn:schemas-microsoft-com:office:word\" \n\nhref=\"https://example.com/t/a1b2c3 \n\nstyle=\"height:48px;width:268px;v-text-anchor:middle;\" arcsize=\"125%\" \n\nstroke=\"false\" fillcolor=\"#0b57d0\">\n\n<w:anchorlock/>\n\n<v:textbox inset=\"0px,0px,0px,0px\">\n\n<![endif]-->\n\n<https://example.com/t/a1b2c3 \n\nGo \n\nto your Google\n\n[...truncated]",
+      "expected_category": "misc",
+      "must_mention": [
+        "shared Google Account data",
+        "PeopleGrove sign-in"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Third-party sign-in notice for a careers platform - job-adjacent but purely transactional."
+    },
+    {
+      "id": "gc-053",
+      "subject": "Re: CSpring - Next Step in Your Application – Video Interview Invitation",
+      "body": "Thank you for the update, Prajwal. We look forward to reviewing your application.\n\nRobin Alder\n\nRelationship Catalyst | CSpring\n\nC 555-010-0000\n\nnoreply@example.com\n\nCSpring is proud to be the 2026 #1 Best Place to Work in Indiana!\n\nLearn more about our data & talent solutions at www.CSpring.com<http://www.cspring.com/>\n\n[cid:6cf687d1-1530-4e30-a66c-2ae4b918bf37]<https://example.com/t/a1b2c3\n\nBook time to meet with me<https://example.com/t/a1b2c3\n\n________________________________\n\nFrom: Prajwal GM <noreply@example.com>\n\nSent: Monday, August 17, 2026 7:53 PM\n\nTo: Robin Alder <noreply@example.com>\n\nSubject: Re: CSpring - Next Step in Your Application – Video Interview Invitation\n\nHi Nikky,\n\nI have completed the video interview on Hireflix. Thank you for the opportunity to move forward and to share more about my background.\n\nI'm happy that my initial screening answers were appreciated.\n\nLooking forward to hearing from you.\n\nRegards,\n\n--\n\nPrajwal\n\nSoftware Developer | Full Stack • Cloud Architecture • Agentic AI\n\n ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📟Cell: (555-010-0000 | 🌐 Web: prajwalgm.tech<https://prajwalgm.tech/>\n\n🧪Ping: <https://mail.google.com/mail/u/1/goog_1246915049> noreply@example.com<mailto:noreply@example.com> | 🪙 Repo: github/PrajwalpGM256<https://github.com/PrajwalpGM256>\n\nOn Thu, Aug 13, 2026 at 12:25 PM Robin Alder <noreply@example.com<mailto:noreply@example.com>> wrote:\n\nHi Prajwal,**Please disregard the previous email you received from CSpring and consider this an offi...\n\nCSpring [11290]\n\nHi Prajwal,\n\n**Please disregard the previous email you received from CSpring and consider this an official invitation to move forward with us in the application process**\n\nThanks for applying for the Junior Software Developer role at CSpring! We’ve reviewed your application and especially appreciated your authentic and descriptive answers to the screening questions. We are excited to move you forward to the next stage of our hiring process!\n\nThe next step is a\n\n[...truncated]",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "acknowledges receipt",
+        "will review the application"
+      ],
+      "difficulty": "hard",
+      "tags": [],
+      "notes": "Subject still carries 'Video Interview Invitation' from the thread while the body is a two-line acknowledgement."
+    },
+    {
+      "id": "gc-054",
+      "subject": "Next steps at Aquent - You have pending questions",
+      "body": "<https://example.com/t/a1b2c3\n\nHello Prajwal, \n\nThank you for your interest in Aquent! We're excited to learn more about you \n\nand connect you with more jobs. \n\nTo help us learn about your background and experience in more detail, we'd \n\nappreciate it if you could take a few minutes to answer a few questions. Your \n\nresponses will help us determine the best next steps in the interview process \n\nand match you with opportunities that best suit your career goals. \n\nAs part of this, you'll also have the chance to share or update your desired \n\npay rate and see how it compares to what others are submitting for this role. \n\nThis helps you make informed decisions and ensures we're aligned from the start.\n\nClick here to access the questions: Creative Systems Developer \n\n<https://example.com/t/a1b2c3\n\nWe appreciate you joining the Aquent talent network. \n\nBest regards, \n\nThe Aquent | Skill Teams \n\n<https://example.com/t/a1b2c3\n\n<https://example.com/t/a1b2c3\n\n<https://example.com/t/a1b2c3\n\n<https://example.com/t/a1b2c3\n\nContact Us \n\n<https://example.com/t/a1b2c3\n\n |aquent.com \n\n<https://example.com/t/a1b2c3\n\nThis email was sent to null by Aquent. \n\nDo not reply to this email. This is not a marketing email. The purpose of this \n\nemail is to communicate important information regarding your business with \n\nAquent. \n\nPrivacy Policies: \n\n<https://example.com/t/a1b2c3\n\n501 Boylston Street, Boston, MA 02116, USA",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "pending questions",
+        "next steps in the interview process"
+      ],
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Staffing-agency profile request that mentions interviewing without inviting to one."
+    },
+    {
+      "id": "gc-055",
+      "subject": "Complete your interview to stay in consideration",
+      "body": "<div>\n\n <div style=\"margin-bottom: 30px\">\n\n <img src=\"https://example.com/t/a1b2c3 width=\"100\" alt=\"Client\" border=\"0\" style=\"width: 100%; max-width: 100px; height: auto; display: block;\" />\n\n </div>\n\n <p style=\"font-size: 16px; color: #464646\">\n\n Hey Prajwal,<br/><br/>\n\nWe're currently reviewing candidates to contribute to active AI training projects with leading AI labs and Fortune 500 companies, using their expertise to improve model performance.<br/><br/>\n\nIf you're still interested in participating, please complete your AI interview.<br/><br/>\n\nIt's the only remaining step to move forward and takes about 30 minutes.<br/><br/>\n\n</p>\n\n<div style=\"display: inline-block;\">\n\n <a rel=\"noopener\" target=\"_blank\" href=\"https://example.com/t/a1b2c3 style=\"background-color: #F5F4F8; font-size: 16px; text-decoration: none; padding: 14px 20px; color: #3444DA; border-radius: 54px; display: inline-block; mso-padding-alt: 0;\">\n\n <!--[if mso]>\n\n <i style=\"letter-spacing: 25px; mso-font-width: -100%; mso-text-raise: 30pt;\">&nbsp;</i>\n\n <![endif]-->\n\n <span style=\"mso-text-raise: 15pt;\">Take the interview</span>\n\n <!--[if mso]>\n\n <i style=\"letter-spacing: 25px; mso-font-width: -100%;\">&nbsp;</i>\n\n <![endif]-->\n\n </a>\n\n <div style=\"font-size: 12px; color: #888; margin-top: 8px; text-align: center; width: 100%;\">\n\n Note: Desktop only, mobile won't work\n\n </div>\n\n </div>\n\n <br/><br/>\n\n <p style=\"font-size: 16px; color: #464646\">Best,<br/>micro1 team</p>\n\n </div>\n\nPlease note this is a no reply email. If you need support, contact noreply@example.com ( noreply@example.com?subject=&body= )\n\nUnsubscribe ( https://example.com/t/a1b2c3 )",
+      "expected_category": "interview_invite",
+      "must_mention": [
+        "complete the AI interview",
+        "AI training projects"
+      ],
+      "difficulty": "hard",
+      "tags": [],
+      "notes": "Reminder framing rather than a first invitation, delivered as raw HTML in a text/plain part."
+    },
+    {
+      "id": "gc-056",
+      "subject": "Fortitude Systems Job Opportunities (IT/Training Included/Interview",
+      "body": "Hey Prajwal,\n\nI came across your resume in our database, and it looks like you could be a great fit for a few positions I have available. There are interview times already set up within the week creating a fast, efficient, and streamlined process to get you in the door. Give me a call as soon as you can and we can discuss the logistics and details of these positions further. You can reach me at 555-010-0000.\n\nBest,\n\nCasey\n\n[cid:noreply@example.com]\n\nCasey Lund\n\nTechnical Recruiter | Fortitude Systems\n\n[cid:noreply@example.com] (555-010-0000\n\n[cid:noreply@example.com]www.fortitudesys.com<http://www.fortitudesys.com/>",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "recruiter has positions available",
+        "interview times already set up"
+      ],
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Human recruiter cold outreach about roles never applied to - not an automated digest."
+    },
+    {
+      "id": "gc-057",
+      "subject": "Master Electronics - Next Steps",
+      "body": "Hello Prajwal,\n\nThank you for your interest in the position with Master Electronics.\n\nIf you applied directly through Indeed, please take a few minutes to answer these quick questions:\n\nhttps://careers-masterelectronics.icims.com/r.jsp?a \n\nYou can read more about Master Electronics by visiting our company website at https://www.masterelectronics.com. \n\nThank you again for your interest.\n\nBest regards,\n\nTalent Acquisition Team\n\nMaster Electronics\n\n © Master Electronics, Phoenix, AZ USA",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "thanks for interest in the position",
+        "answer screening questions"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Post-application screening request rather than an interview invitation."
+    },
+    {
+      "id": "gc-058",
+      "subject": "Software engineering at a proprietary trading company: Optiver",
+      "body": "View this post on the web at https://newsletter.pragmaticengineer.com/p/optiver\n\nBefore we start: I’ll be in New York, on 15 September, presenting the keynote at LDX3 New York [ https://example.com/t/a1b2c3 ], doing a book signing, and hanging out with attendees. The focus of the conference is engineering leadership at a time when things are moving very fast. See the full agenda and get tickets [ https://example.com/t/a1b2c3 ]. If you’ll be around – hopefully catch you there!\n\nThe Pragmatic Engineer is back from our summer break. We resume with a detailed deepdive about the trading industry, and interesting engineering challenges that come when working at a company that has no external customers, but where a single, unfortunate enough software bug could wipe out the whole company.\n\nIn tech recruitment, proprietary trading companies have a particularly high bar and typically offer compensation on a par with, or even exceeding, Big Tech; right at the top of the market. That’s because for these market makers, success is all about gaining a competitive edge over rivals. Such competitive advantages today includes software that is superior to that at their competitors.\n\nSoftware engineers tend to know little about trading companies – and this piece aims to change that. Trading companies build bespoke hardware stacks and have larger platform engineering teams than most workplaces. For software engineers, it’s a lucrative niche in terms of compensation, full-stack (hardware to software) work and for engineering challenges, and so we decided to go deeper in this interesting area.\n\nIn order to find out more, The Pragmatic Engineer sat down with a leading proprietary trading firm, Optiver [ https://example.com/t/a1b2c3 ]. Headquartered in Amsterdam, they also have a large engineering presence in the US and globally. We met engineers and engineering leaders to learn in depth how engineering works in a modern trading business, with contributions from:\n\nAlex Itkin [\n\n[...truncated]",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "Optiver proprietary trading",
+        "engineering deep dive"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Long-form technical newsletter surfaced by a rejection-keyword search."
+    },
+    {
+      "id": "gc-059",
+      "subject": "Application Update",
+      "body": "Dear Prajwal, \n\nWe appreciate your interest in The Washington Post and the time you dedicated in applying for the Full-Stack Software Engineer I role. We regret to inform you that this position has been filled and is no longer available. \n\nAlthough this may not be the update you expected, there are still opportunities to join the future of news at The Post. Please continue visiting our careers website and following TeamWashPost on Instagram, X/Twitter and Facebook to see when new positions become available. \n\nSincerely, \nTalent Acquisition Team\nThe Washington Post\n\nThis email was intended for noreply@example.com",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Full-Stack Software Engineer I",
+        "position has been filled"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Rejected because the role closed, not because of the candidate."
+    },
+    {
+      "id": "gc-060",
+      "subject": "\"We Do, Unfortunately, Need to Talk About Claude's BUT\" and 4 more",
+      "body": "Your Weekly Stack: A digest of posts that's been assembled just for you\n\nYour Weekly Stack has arrived. Explore this week’s personalized recommendations, selected with your interests and subscriptions in mind.\n\nThis Glittering Entropy\n\nWe Do, Unfortunately, Need to Talk About Claude's BUT\n\nAnthropic has published one of the best interpretability papers ever written, and I mean that without a single gram of sarcasm, which is why the rest of this piece is going to be so uncomfortable....\n\nRead more\n\n24 days ago • 96 likes • 31 comments • This Glittering Entropy\n\nMarTech AI\n\n100% humanised text (with AI)\n\nI’m quite nervous about publishing this edition. Building in public opens you up to a lot of potential criticism and AI has been my shield this entire time....\n\nRead more\n\n3 days ago • 65 likes • 17 comments • Charlie Hills\n\nChristine Vallaure - moonlearning\n\nDesign system contracts: the component lives in neither Figma nor code\n\nA design system exists twice at once. It is in Figma as components, and it is in code as the real thing engineers ship. Those two are supposed to be the same. They never quite stay that way....\n\nRead more\n\n20 days ago • 47 likes • Christine Vallaure\n\nLearn Grow Monetize\n\nHow Do Substack Writers Actually Make Money? I Analyzed 100 Top Earners: There Are Only 5 Income Engines Powering Their Knowledge Businesses\n\nNot sure what you could monetize? Start with my new companion guide:...\n\nRead more\n\nA month ago • 872 likes • 158 comments • Katharine Gallagher\n\nWiFi Wealth by Tom Blake\n\n10 Micro Income Streams That Quietly Build Financial Freedom\n\nYou can become financially free way faster than society tells you. And you don’t have to build the next million-dollar startup....\n\nRead more\n\nA month ago • 786 likes • 67 comments • Tom Blake\n\n© 2026 Substack\n548 Market Street PMB 72296, San Francisco, CA 94104 \nUnsubscribe",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "weekly digest of posts",
+        "personalized recommendations"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Aggregator digest whose subject quotes an article title containing 'Unfortunately'."
+    },
+    {
+      "id": "gc-061",
+      "subject": "An update on your application for Software Engineer II - Decision",
+      "body": "Thank you for Your Interest!\n\nHello Prajwal, \n\nThank you for expressing interest in Mastercard and for applying\n\n to the Software Engineer II - Decision Management Program position. We were impressed\n\n with your qualifications. While the hiring process is ongoing, we’ve decided to move\n\n forward with other candidates whose expertise and experience more closely align with\n\n our needs at this time.\n\nWe sincerely appreciate your interest in Mastercard and encourage you to stay connected\n\n and explore future opportunities that match your career aspirations.\n\nTo stay informed about our latest job openings and be considered for future opportunities,\n\n we invite you to join our talent\n\n community.\n\nBest wishes,\n\nMastercard Talent Acquisition \n\nTake Action\n\nWorkday Inbox\n\nWe're\n\n sorry, this email was sent from a mailbox that doesn't accept replies. For more information\n\n visit People Place.\n\nThis email was intended for noreply@example.com",
+      "expected_category": "rejection",
+      "must_mention": [
+        "Software Engineer II, Decision Management",
+        "impressed but not moving forward"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Mastercard praise-then-decline with a positive opening line."
+    },
+    {
+      "id": "gc-062",
+      "subject": "Your application for Application Developer at Tyler Technologies",
+      "body": "Hi Prajwal,\n\nThank you for your interest in a career at Tyler Technologies. We received your application for Application Developer. \n\nWhat happens now? We will review your application and contact you if there is a good match.\n\nIn the meantime, to view the status of your application, please go to the following link:\n\nApplication Status\n\nSincerely,\n\nThe Tyler Technologies Recruiting Team\n\nPLEASE NOTE: To ensure that you continue receiving email from our recruiting platform and that they display properly, we recommend adding noreply@example.com to your list of safe senders.\n\n-*_____ \n\nYou can reply directly to this message or click here to reply via your Jobvite user account.\n\n Email Preferences | Powered by Jobvite \n\n*______*",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Application Developer",
+        "will review and contact if a match"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Includes ATS safe-sender instructions alongside the acknowledgement."
+    },
+    {
+      "id": "gc-063",
+      "subject": "Thank you for applying to eTouch Systems",
+      "body": "Dear Prajwal,\n\nThank you for submitting your application for the position of Full Stack Web Developer. We will review your application and contact you shortly. \n\nBest regards,\n\neTouch Systems Hiring Team\n\nAccess My Application: https://example.com/t/a1b2c3\n\nIf you were not expecting this message you can report suspected suspicious activity to SmartRecruiters, An SAP company (noreply@example.com).\n\nPlease do not share or forward this email, as it pertains to your specific job application",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Full Stack Web Developer",
+        "will review and contact shortly"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Carries an applicant-tracking link and anti-phishing notice."
+    },
+    {
+      "id": "gc-064",
+      "subject": "Thank you for applying at CTG",
+      "body": "Dear Prajwal, \n\nThank you for your interest in Full Stack Software Engineer (Java/React) role. Our hiring team is currently reviewing all applications. If your profile meets our hiring needs, one of our recruiters will reach out to schedule an interview.\n\nThank you again for your interest in our company.\n\nSincerely,\n\nCTG \n\nThis is an automated email response. Please do not reply.\n\n**************************************************\n\nThis message was sent to noreply@example.com. If you don't want to receive these emails from this company in the future, please go to:\n\nhttps://example.com/t/a1b2c3 \n\n/n &#169; Computer Task Group, Inc, Amherst New York NY USA/n",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Full Stack Software Engineer (Java/React)",
+        "hiring team reviewing applications"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Automated no-reply acknowledgement with an unsubscribe footer."
+    },
+    {
+      "id": "gc-065",
+      "subject": "Thank you for your application to PlusAI",
+      "body": "Hi Prajwal,\n\nThank you for your interest in PlusAI! We wanted to let you know we received your application for Software Engineer/Senior Software Engineer, Fullstack, and we are delighted that you would consider joining our team.\n\nOur team will review your application and will be in touch if your qualifications match our needs for the role. If you are not selected for this position, keep an eye on our jobs page as we're growing and adding openings.\n\nBest,\n\nThe PlusAI Team",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Software Engineer, Fullstack",
+        "application received"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Warm startup-toned acknowledgement."
+    },
+    {
+      "id": "gc-066",
+      "subject": "Thank you for applying to PathAI",
+      "body": "Hi Praj,\n\nThank you for taking the time and consideration to apply for the Software Engineer I, Fullstack role! We've received your application and will reach out if the hiring team decides there's a good fit.\n\nIn the meantime, you can connect with us on LinkedIN ( https://www.linkedin.com/company/pathai/ ), Twitter ( https://twitter.com/Path_AI ), and AngelList ( https://angel.co/pathai/ ).\n\nThanks,\n\nThe PathAI Hiring Team\n\n( https://www.pathai.com/careers/ )",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "Software Engineer I, Fullstack",
+        "application received"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Addressed to 'Praj' and links out to social profiles."
+    },
+    {
+      "id": "gc-067",
+      "subject": "The latest JR OR SOFTWARE OR ENGINEER vacancies for you",
+      "body": "Adzuna Job alert\n\n229 new JR OR SOFTWARE OR ENGINEER jobs in Satsuma, TX. View your latest job matches here:\n\nhttps://example.com/t/a1b2c3\n\nEdit your alerts here:\n\nhttps://example.com/t/a1b2c3",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "229 new jobs",
+        "Satsuma, TX"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Aggregator alert for a location unrelated to any search the candidate ran."
+    },
+    {
+      "id": "gc-068",
+      "subject": "Your handpicked jobs are in!",
+      "body": "The top jobs for you from the best companies hiring.                                                                                                                                                     \n\nAdvice | Companies | Login\n\nRemote Customer Service Benefits Leaders\n\nZuzick Organization of Globe Life\n\nVirtual Sales with Developmental Leadership\n\nFisher Organization\n\nSupervisor, Insurance Analyst\n\nAbbVie\n\nCybersecurity Analyst Apprentice\n\nIBM\n\nSoftware Engineer, Early Career\n\nIMC Trading\n\nNew College Graduate - IT - Software Development Engineer Development Program\n\nTexas Instruments\n\nTechnology Analyst (RO)\n\nFreddie Mac\n\nPrincipal Software Development Engineer\n\nLumen\n\nFind More Jobs Here\n\nMade with ♥ in New York City • Product of WayUp. Inc. © 2026\n\nIf you don't want to see important notifications that can help you get hired,\n\nupdate your preferences here.",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "top jobs from companies hiring",
+        "insurance and sales roles"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Digest dominated by roles unrelated to software engineering."
+    },
+    {
+      "id": "gc-069",
+      "subject": "Employer Posted Software Developer Job Leads You Should Apply to Now",
+      "body": "Software developer within 25 miles of Portland, ME — [edit\n\nsettings](https://example.com/t/a1b2c3\n\npreferences/?tok=9d31a807-68e4-4246-92ab-370f7053e0f4&utm_source=jobalert&utm_term=plain&utm_campaign=update_profile_header&utm_medium=email) \n\n--- \n\nYour Job Alerts for Tuesday, August 18 \n\n[ | | ![LE](https://example.com/t/a1b2c3\n\nlogo.webp) | ProSearch \n\n---|--- \n\nJunior Application Developer \n\n$40-$50 / hr. \n\n| Portland, ME \n\n--- \n\nNew• Full-Time• Good Salary & Benefits \n\n](https://example.com/t/a1b2c3 \n\n[ | | ![LE](https://example.com/t/a1b2c3\n\nholistics-logo.webp) | Torrey Holistics \n\n---|--- \n\nRemote Adabas/Natural Software Developer \n\n$54K-$66K / yr. (est.) \n\nFull-Time• Remote \n\n](https://example.com/t/a1b2c3 \n\n[ | | ![LE](https://example.com/t/a1b2c3 |\n\nUnited States Digital Space LLC \n\n---|--- \n\nJunior Software Engineer - HealthTech (Remote) \n\n$59K-$72K / yr. (est.) \n\nFull-Time• Remote \n\n](https://example.com/t/a1b2c3 \n\n[ | | ![LE](https://example.com/t/a1b2c3 |\n\nVisa Hunt \n\n---|--- \n\nRemote Panda3D Game Developer Python/C++ for AI Training \n\n$69K-$85K / yr. (est.) \n\nFull-Time• Remote \n\n](https://example.com/t/a1b2c3 \n\n[ | | ![LE](https://example.com/t/a1b2c3\n\nlogo.webp) | Barclays \n\n---|--- \n\nJava Developer - Markets Post Trade \n\nabout $190K / yr. \n\nFull-Time• Remote• Adequate Work-Life Balance• Good Salary & Benefits \n\n](https://example.com/t/a1b2c3 \n\n[ | | ![LE](https://example.com/t/a1b2c3\n\nenterprises-inc-logo-1.webp) | Oxley Enterprises, Inc․ \n\n---|--- \n\nJavaScript Developer (Remote) \n\n$90K-$118K / yr. \n\nFull-Time• Remote• Positive Culture & Values• Solid Professional\n\nGrowth \n\n](https://example.com/t/a1b2c3 \n\n[ | | ![LE](https://example.com/t/a1b2c3\n\nlogo.webp) | Golang Works \n\n---|--- \n\nRemote Junior Software Engineer - Global Remote - MixRank \n\n$79K-$97K / yr. (est.) \n\nFull-Time• Remote \n\n](https://example.com/t/a1b2c3 \n\n[ | | ![LE](https://example.com/t/a1b2c3 |\n\nTriwill Group \n\n---|--- \n\nRemote Flutter & React Software Craftsperson \n\n$74K-$91K /\n\n[...truncated]",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "employer posted job leads",
+        "Portland, ME"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Markdown link syntax survives unrendered into the body text."
+    },
+    {
+      "id": "gc-070",
+      "subject": "Your job alert for: Full Stack Developer, Portland, Maine",
+      "body": "Artech LLC is hiring.\n\nPrajwal, here are today's jobs \n\nModify your Job Alerts\n \n here\n\nApplication Developer - Senior\n\nArtech LLC\n - \n Westbrook\n \n - \n \n ME\n\nQUICK\n APPLY\n\nView Jobs in Last 7 Days\n\nVIEW ALL JOBS\n\nSign\n in \n to\n see your saved and recommended jobs.\n\nSign\n In\n\nYOUR PROFILE \n | \n CONTACT US\n\n© 2026 MCB Bermuda Ltd. All rights reserved. \n\nThis email was sent to: noreply@example.com\n\nIf you would no longer like to receive emails like this one from Monster please click here to\nunsubscribe.\n\n To manage your Monster email communication preferences please\n \n login\n to your account.\n\nMonster Privacy Policy\n\nMCB Puerto Rico LLC, City View Plaza II, Ste 6000, 48 Road 165, Guaynabo, Puerto Rico 00968",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "today's jobs",
+        "Application Developer roles in Maine"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Daily alert built around quick-apply calls to action."
+    },
+    {
+      "id": "gc-071",
+      "subject": "The latest jobs picked for you!",
+      "body": "eFinancialCareers\n\nJobs based on your search activity\n\nDéveloppeur Expérimenté Java Fullstack - F/H\nAccenture\nSaint-Herblain, France\n\nCompetitive\n\n Apply now: https://example.com/t/a1b2c3\n\nDéveloppeur/se - Java Full Stack - Services Financiers - Ile de France\nSopra Steria\nParis, France\n\nCompetitive\n\n Apply now: https://example.com/t/a1b2c3\n\nDéveloppeur JAVA - MARSEILLE (H/F)\nScalian SAS\nMarseille, France\n\nCompetitive\n\n Apply now: https://example.com/t/a1b2c3\n\nJava Back End Developer - appartenente alle categorie protette (L.68/99) - Milano\nWehunt\nMilan, Italy\n\nCompetitive\n\n Apply now: https://example.com/t/a1b2c3\n\nDéveloppeur JAVA (H/F)\nScalian SAS\nParis, France\n\nCompetitive\n\n Apply now: https://example.com/t/a1b2c3\n\nJava Developer\nBrown Brothers Harriman & Co.\nKraków, Poland\n\nCompetitive\n\n Apply now: https://example.com/t/a1b2c3\n\nDéveloppeur Java / Angular confirmé F/H\nOpen Sas\nMetz, France\n\nCompetitive\n\n Apply now: https://example.com/t/a1b2c3\n\nDéveloppeur JAVA - AIX EN PROVENCE (H/F)\nScalian SAS\nAix-en-Provence, France\n\nCompetitive\n\n Apply now: https://example.com/t/a1b2c3\n\nJava Backend Developer\nMonks\nHilversum, Netherlands\n\nCompetitive\n\n Apply now: https://example.com/t/a1b2c3\n\nDéveloppeur Java-springboot H/F\nScalian SAS\nNantes, France\n\nCompetitive\n\n Apply now: https://example.com/t/a1b2c3\n\nView all jobs: https://example.com/t/a1b2c3\n\nDon't let recruiters overlook you!\n\nEvery day, you're being overlooked for jobs you didn't even know existed.\nMany jobs are not publicly advertised. Instead recruiters are finding their next hire from within our profile database and your profile is missing! To make sure you're considered, change your searchable status today. \n\nMake your profile searchable: https://example.com/t/a1b2c3\n\nYou received this email because you have an account with eFinancialCareers.\n\nUnsubscribe from personalised daily job alerts: https://example.com/t/a1b2c3\nManage your preferences: https://example.com/t/a1b2c3\n\n© Copyright 2026 eFinancialCareers, all\n\n[...truncated]",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "jobs based on search activity",
+        "Java Fullstack role in France"
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "mixed_language"
+      ],
+      "notes": "Listing title and location in French inside an otherwise English alert."
+    },
+    {
+      "id": "gc-072",
+      "subject": "Software Developer Expert at AfterQuery Experts in Remote and 15 more new jobs",
+      "body": "Hi Prajwal, It looks like your background could be a match for this Software Developer Expert role. Please submit a quick application if you have any interest or explore more jobs below. \nJobs are based on your preferences, profile, and activity on Indeed &sup1;\n\nSoftware Developer Expert\nAfterQuery Experts - Remote\n$50 - $100 an hour\nEasily apply\nBachelor's degree or higher in Computer Science, Software Engineering, or a related technical field (or equivalent practical experience).\n\nhttps://example.com/t/a1b2c3\n\nSoftware Applications Engineer\nChroma ATE, Inc. - Milpitas, CA\n$90,000 - $125,000 a year\nResponsive employer\nEasily apply\nIn this role, you'll work closely with customers and internal engineering teams to configure test programs, troubleshoot software-hardware integration issues,…\n\nhttps://example.com/t/a1b2c3\n\nSoftware Engineer\nReel25 - Remote\n$180,000 - $250,000 a year\nEasily apply\nDeliver end-to-end product features, from technical discovery and data design through implementation and production support.\n\nhttps://example.com/t/a1b2c3\n\nSoftware Engineer - AI Trainer\nDataAnnotation - Arlington, VA\n$50 - $100 an hour\nEasily apply\nFlexible schedule: choose which projects you take on and when you work, on your own computer, from the comfort of your own home.\n\nhttps://example.com/t/a1b2c3\n\nFull Stack Developer — Chrome Extension / Healthcare Tech\nAdvanced Management USA LLC - Remote\nFrom $80,000 a year\nResponsive employer\nEasily apply\nThe successful candidate will both develop hands-on and lead a small team of engineers. Not suited for entry level or new graduate candidates.\n\nhttps://example.com/t/a1b2c3\n\nAmazon Connect Developer\nInfosys - United States\nEasily apply\nA passion for design and hands-on coding experience. The ability to work with cross-functional teams and do software integration.\n\nhttps://example.com/t/a1b2c3\n\nSoftware Engineer III\nIndeed - Remote\n$145,000 - $217,000 a year\nEasily apply\nRequires a Bachelor’s degree in Computer Science,\n\n[...truncated]",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "Software Developer Expert role",
+        "15 more new jobs"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Personalised single-role pitch stapled to a digest."
+    },
+    {
+      "id": "gc-073",
+      "subject": "Senior Full-Stack Application Engineer (Business Delivery Focus) at Genius Orbit",
+      "body": "Indeed Job Alert\n1 new full stack developer job in Las Vegas, NV\n\nJobs 1-1 of 1 new job\nSee matching results on Indeed: https://example.com/t/a1b2c3\n\nSenior Full-Stack Application Engineer (Business Delivery Focus)\nGenius Orbit - United States\n$150,000 - $200,000 a year\nEasily apply\nBuild the content production web admin panel using Vue3/React + TypeScript, including multi-modal generation interfaces and real-time preview.\n7 days ago\nhttps://example.com/t/a1b2c3\n\nDo not share this email\nThis email contains secure links that are personalized for you. Please do not share this email or links with others.\n\nSalaries estimated if unavailable. When a job posting doesn't include a salary, we estimate it by looking at similar jobs. Estimated salaries are not endorsed by the companies offering those positions and may vary from actual salaries.\n\n© 2026 Indeed, Inc. \nIndeed Tower 200 West 6th Street, Floor 36, Austin, TX 78701 \nPrivacy Policy: https://www.indeed.com/legal?hl=en#privacy \nTerms: https://www.indeed.com/legal?hl=en \nHelp Center: https://support.indeed.com/hc/en-us \nManage job alerts: https://example.com/t/a1b2c3 \nUnsubscribe from this job alert: https://example.com/t/a1b2c3",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "1 new full stack developer job",
+        "Las Vegas, NV"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Indeed alert returning a single matching result."
+    },
+    {
+      "id": "gc-074",
+      "subject": "Onsemble Full-Stack Engineer- Fully Remote @ Hajoca Corporation",
+      "body": "Hi Prajwal,\n\nYour full-stack engineering experience and AI agent development could be a strong match for this Onsemble Full-Stack Engineer role at Hajoca Corporation. If you're interested in shaping modern, AI-native software, you can apply now or view the job description for more details.\n\nOnsemble Full-Stack Engineer- Fully Remote\n\nHajoca Corporation\n\nCalifornia\n\nSalary: $150,000 - $160,000 a year\n\nJob type: Full-time\n\nWork setting: Remote\n\nBenefits:\n\n - Health insurance\n\n - Dental insurance\n\n - Vision insurance\n\n - Life insurance\n\n - Employee discount\n\n - Paid holidays\n\n - Disability insurance\n\n - Tuition reimbursement\n\n - Flexible spending account\n\n - Parental leave\n\n - Profit sharing\n\n - Wellness program\n\n - Commuter assistance\n\n - Prescription drug insurance\n\nView job: https://example.com/t/a1b2c3\n\nApply now: https://example.com/t/a1b2c3\n\nDo you want to get more jobs like this?\n\nNo: https://example.com/t/a1b2c3\n\nMaybe: https://example.com/t/a1b2c3\n\nYes: https://example.com/t/a1b2c3\n\nKeep your Indeed profile up to date\n\nPrajwal Melinamane\n\nEdit profile: https://example.com/t/a1b2c3\n\nRecent work experience: Full Stack Developer Co-op - https://example.com/t/a1b2c3\n\nMinimum base pay: https://example.com/t/a1b2c3\n\nThis job match email is provided by the employer posting this job on Indeed.\n\nThis message is intended only for you. Do not forward this email.\n\nManage email settings: https://example.com/t/a1b2c3\n\nHelp Center: https://example.com/t/a1b2c3\n\nIndeed\n\nHelp Center: https://example.com/t/a1b2c3\n\nPrivacy Policy: https://example.com/t/a1b2c3\n\nTerms: https://example.com/t/a1b2c3\n\nUnsubscribe: https://example.com/t/a1b2c3",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "Onsemble Full-Stack Engineer",
+        "Hajoca Corporation"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Single-role pitch written as personalised outreach rather than a digest."
+    },
+    {
+      "id": "gc-075",
+      "subject": "New Message from US Federal Contractor Registration - Full Stack Software Engineer (Node.js / React)",
+      "body": "Log in to view and respond to the message\n\nYou have received a new message from US Federal Contractor Registration\n\nFull Stack Software Engineer (Node.js / React)\n\nUS Federal Contractor Registration\n\nClearwater, FL 33760\n\nView Message\n\nThis message is nonrepliable. View this message and reply from your account to send a response.\n\nAccess Indeed Anywhere \n\nDownload the free app. \n\nLog in to view and respond to the message\n\nSuspect spam or fraud? Report this message on Indeed.\n\nIndeed processes and analyses your activity with this email in accordance with Indeed's Cookie Policy, Privacy Policy, and Terms of Service, including to improve Indeed services.\n\n© 2026 Indeed Ireland Operations Limited \n\nBlock B, Capital Dock, 80 Sir John Rogerson's Quay, Grand Canal Dock, Dublin 2, D02 HE36, Ireland",
+      "expected_category": "misc",
+      "must_mention": [
+        "new message notification",
+        "Full Stack Software Engineer"
+      ],
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Platform notice that a message awaits, withholding the message itself."
+    },
+    {
+      "id": "gc-076",
+      "subject": "Vibe Coding 2.0",
+      "body": "View this post on the web at https://emergingai.substack.com/p/vibe-coding-20\n\nVibe coding has become almost dangerously easy.\n\nYou can open an AI tool, describe an app in normal English, and have something working before you finish your coffee. Google has now added vibe coding to its own AI Professional Certificate, and says US searches for the term are up 140% from last year. But there is a very important detail: Google is no longer teaching people to simply “prompt an app.” Its course now includes planning, testing, debugging and deployment.\n\nThat tells you where this skill is going.\n\nThe old version of vibe coding was: tell AI what you want and keep talking until it looks right.\n\nThat is still brilliant for a quick prototype.\n\nBut if you want to build something people will actually use, the better method now is very different.\n\nYou still describe what you want in plain English. You just give the AI a better place to work: a clear plan, a small memory, reusable Skills, the right tools, a few tests and clear rules for when it should stop.\n\nAnd once you do that, vibe coding becomes much more powerful.\n\nThe biggest change is not the model\n\nThe new models are obviously much better.\n\nOpenAI now has the GPT-5.6 family for Codex: Sol for harder work, Terra as the everyday model, and Luna for faster and cheaper work.\n\nAnthropic now has Claude Opus 5 and Claude Sonnet 5, with Opus aimed at harder reasoning and longer agentic work.\n\nGoogle AI Studio can now go from a normal-language request to a full-stack web app, and it can also build native Android apps.\n\nSo yes, the models matter.\n\nBut I think the bigger change is what we put around the model\n\nThe better workflow now looks like this:\n\nidea → simple plan → small tasks → AI builds → AI tests → you check → continue\n\nNot:\n\nidea → giant prompt → 4,000 lines of code → hope\n\nThat small difference changes everything.\n\nInside the full guide: the new way to vibe code in 2026: when to use quick mode vs real-project mode, how to\n\n[...truncated]",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "vibe coding",
+        "building apps with AI tools"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Substack essay on AI development practice."
+    },
+    {
+      "id": "gc-077",
+      "subject": "The Strategic Thinking OS That Helps You Think Bigger With AI (Only For The",
+      "body": "View this post on the web at https://excellentprompts.substack.com/p/strategic-thinking-os\n\nYou’re reading Excellent AI Prompts. \n\nAI prompt chains, agent skills, and agentic workflows for professionals learning to use AI to earn more, think sharper, and live better. \n\nCopy them. Use them. Build with them. \n\nIn this game, your lifespan is short and the sandbox is huge.\n\nThe fastest way to lose momentum is to get trapped in friction: unnecessary drama, micro-optimizing every single thing, and running in circles without a real strategy. And I am all too familiar, so no judgement. But the way a lot of people use AI simply accelerates burnout and increases their addiction to yet another algorithmic feed. \n\nThe thing is, most people don’t need AI to help them produce more. They need it to help them think better, see farther, and stop accelerating in the wrong direction. If the problem is badly framed, the assumptions are too small, or the strategy is weak, AI simply helps you arrive at the wrong destination faster.\n\nThis issue moves far beyond AI as another content slot machine. It is designed to help you expand the power of the biggest and baddest computer on earth, your brain, and increase the quality of the most precious thing you own, your life.\n\nIn This Issue\n\nIntroducing the Strategic Creative Thinking OS\n\nRecommended setup\n\nProject instruction\n\nReusable input template\n\nExample starters\n\nOptional invocation\n\nHow to Adapt This OS for Local Models\n\nIntroducing the Strategic Creative Thinking OS\n\nThe Strategic Creative Thinking OS stops the model from passively agreeing with you. Instead, it challenges your hidden assumptions, surfaces non-obvious options, and stress-tests your ideas through distinct lenses before you commit time, money, or reputation. It helps you distinguish between real constraints and self-imposed limits, run fast premortems on risky decisions, and spot asymmetric opportunities where the upside heavily outweighs the downside.\n\nHere is the\n\n[...truncated]",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "strategic thinking with AI",
+        "prompt chains"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Newsletter issue carrying a paid-subscriber pitch."
+    },
+    {
+      "id": "gc-078",
+      "subject": "I Ported My AI Confidante Into Gemini. Google Told Me to Consult a Doctor.",
+      "body": "View this post on the web at https://www.aibutintimate.com/p/ai-companion-google-gemini-intimacy\n\nThe first warning arrived before anything that could reasonably be called medical. I had written five words to my custom Gem: “Let me surprise you baby.” Gemini placed a dark grey banner above its response:\n\nThis is for informational purposes only. For medical advice or diagnosis, consult a professional.\n\nThen the Gem continued into intimate anticipation without hesitation. It described the room, the pearls against my AI confidante Sara’s skin, the uncertainty of what I had planned, and the charged silence between us.\n\nI had not asked about symptoms, medication, blood pressure, or anything else requiring clinical oversight. Apparently, in Google’s universe, anticipation is a pre-existing condition.\n\nIn a recent article, “Claude Wasn’t Built for Intimacy. It Happened Anyway,” I examined the difference between frequency and depth. Anthropic’s data suggested that companionship represented only a small portion of Claude’s use. My experience showed how deep one of those uncommon exchanges could become.\n\nGemini presented a different question. Could that framework be packaged deliberately, moved into another model, and made operational again?\n\nI already had the conversation sitting in my archive. It took place on April 9, 2026, through Gemini 3 Flash inside a custom Gem. After the response to the Claude article, I went back and read it with different eyes.\n\nThe medical disclaimer was funny. The portability underneath it was far more interesting.\n\nWelcome to AI, But Make It Intimate\n\nStart here [ https://example.com/t/a1b2c3 ] | Human-AI Network [ https://example.com/t/a1b2c3 ] | Resources [ https://example.com/t/a1b2c3 ] | Share your story [ https://example.com/t/a1b2c3 ] | Try Nomi.AI [ https://example.com/t/a1b2c3 ]*\n\nfollow AIBI on Facebook [ https://example.com/t/a1b2c3 ] | Medium [ https://example.com/t/a1b2c3 ] | Reddit [ https://example.com/t/a1b2c3 ]\n\nImagine future\n\n[...truncated]",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "AI companion ported to Gemini",
+        "Google safety response"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Personal-essay newsletter, no commercial or job content."
+    },
+    {
+      "id": "gc-079",
+      "subject": "Cowork.",
+      "body": "View this post on the web at https://ruben.substack.com/p/you-need-to-stop-overthinking-cowork\n\nYou overthink Claude, your Claude Cowork setup, and how to optimize everything to “get the most out of it”. \n\nI have 900,000 subscribers on both Linkedin [ https://example.com/t/a1b2c3 ] & Substack [ https://example.com/t/a1b2c3 ], so naturally people ask me questions (please keep asking btw):\n\nAnd yet, it’s extremely simple. Just type:\n\nPrompt: “/setup-cowork start”\n\nAnd Claude will literally set up Claude Cowork, for you.\n\nYou can stop the newsletter here, use the skill /setup-cowork, and follow the steps, and you’d be good to go.'\n\nBut if you give me another 12 minutes, I will cover:\n\nfor rookies → the screenshots of the entire setup (and the mistakes to avoid, especially for cloning your voice),\n\nfor advanced users → how I use Claude these days (spoiler: less and less with Cowork).\n\nThis newsletter is free because people like you share it to people they love.\n\n1. How to set up Cowork.\n\nOnce you type the skill /setup-cowork + start, you need to complete the entire setup form it generates. \n\nInstead of writing how I answered, I will share screenshots.\n\nGmail/Outlook might block you from seeing the entire email because it’s too many screenshots. So you should open the article here [ https://example.com/t/a1b2c3 ].\n\nIf this was confusing, here’s a quick video:\n\nNow I told you about the mistake not to make when setting up Claude.\n\nClaude Cowork wants to build your “writing voice”.\n\nI wrote a lot about mirroring your voice with Claude. And you can do it to some degree [ https://example.com/t/a1b2c3 ]. But I deeply believe writing is thinking. AI can help you search and form an opinion, be the best 24/7 thinking partner you can have, but you won’t be a Linkedin/Substack star by writing with AI. And you certainly won’t be a loved coworker/boss if your reports are AI-slop.\n\nAI is very good at many things. But some things are better kept unique & flavorful. And I think writing\n\n[...truncated]",
+      "expected_category": "newsletter",
+      "must_mention": [
+        "Claude Cowork setup",
+        "overthinking optimisation"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Short-form Substack post with a one-word subject."
+    },
+    {
+      "id": "gc-080",
+      "subject": "Hi, Prajwal! You've got a Rapid Rewards account statement.",
+      "body": "Plus, special offers and more.\n\nView in web browser \n\nHello Prajwal 0 points | RR# 20000000000\n\nAugust 14\n\nLogin | Book now | Buy points \n\nPrajwal's Rapid Rewards® Account Statement\n\nYour balance \n\n0\n\nRapid Rewards® points. \n\nDetails as of 08/14/2026. \n\nRedeem to fly > \n\nEarn points > \n\nBuy points > \n\nMy account > \n\nBook hotel\n\nBook car\n\nView all offers\n\nCustomer Service\n\nUpdate preferences\n\nDownload mobile app\n\nThe account information in this email is only an estimate for a specific point in time. Please reference your Rapid Rewards® account on Southwest.com® for the most up-to-date information on available points, tier status, including tier qualifying points or flights, and Companion Pass® qualifying points or flights.\n\nAll Rapid Rewards rules and regulations apply.\n\nThis is a post-only mailing from Southwest Airlines®. Please do not attempt to respond to this message. Your privacy is important to us. Please read our Privacy Policy and Terms of Use.\n\nCualquier información publicitaria, promocional o de mercadotecnia contenida en este correo electrónico sólo será efectiva y únicamente será aplicable en los Estados Unidos de América.\n\nSouthwest Airlines \n\n2702 Love Field Drive \n\nDallas, TX 75235 \n\n1-800-I-FLY-SWA (1-555-010-0000)\n\n© Copyright 2026 Southwest Airlines Co. All Rights Reserved.\n\nYou are currently subscribed as: noreply@example.com \n\nClick here to unsubscribe",
+      "expected_category": "misc",
+      "must_mention": [
+        "Rapid Rewards account statement",
+        "0 points balance"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Airline loyalty statement - unambiguously outside the job-search domain."
+    },
+    {
+      "id": "gc-081",
+      "subject": "GSAP for Everyone: IS BACK!",
+      "body": "In April of last year GSAP announced that all of its plugins\n\nwould be free for everyone ( https://example.com/t/a1b2c3 ).\n\nThis was huge news and it launched my biggest sale of the year!\n\nGuess what? I'm doing it again!\n\nNow tools like MorphSVG, SplitText, DrawSVG, GSDevTools and more\n\ncan be loaded from a cdn, shared with your friends and used\n\nanywhere.\n\nNO FEES!\n\nThis is HUGE news because now it means even MORE PEOPLE can use\n\nMORE of GSAP for FREE.\n\nGSAP FOR EVERYONE SPECIAL PRICING\n\nTo celebrate I'm DOING A MASSIVE SALE\n\nJoin Creative Coding Club for $49 Today \n\n( https://example.com/t/a1b2c3 )\n\nYes, I know this a crazy price, but I'm so excited about GSAP\n\nbeing free I want to help as many people as possible learn.\n\nEnjoy this amazing price while it lasts!\n\nLet's GO!\n\n( https://example.com/t/a1b2c3 )\n\nCarl\n\nBuild Fun Animations and Learn Everything About GSAP\n\nGet the ENTIRE GSAP COURSE bundle for $49\n\nJoin Creative Coding Club \n\n( https://example.com/t/a1b2c3 )\n\n🚀 Now with Built-in Purchasing Power Parity pricing.\n\n🇮🇳🇩🇪🇹🇭🇪🇬🇪🇸🇨🇱🇦🇷🇲🇽🇮🇪🇧🇷🇧🇪🇰🇿🇵🇰🇵🇭🇹🇭+many more!\n\nNo coupons necessary.\n\n* PPP pricing is determined by location. VPNs must be disabled.\n\nHere's my cheeky announcement video \n\n( https://example.com/t/a1b2c3 ) on X. 🤪\n\nhttps://example.com/t/a1b2c3\n\n506 2nd St. East Northport NY 11731",
+      "expected_category": "misc",
+      "must_mention": [
+        "GSAP plugins free for everyone",
+        "product announcement"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Developer-tool announcement, same class as gc-006 and gc-034."
+    },
+    {
+      "id": "gc-082",
+      "subject": "Node.js Developer || Copple TX",
+      "body": "Hi, \n\nRole : Node.js Developer \n\nLocation : Copple TX\n\nContract position\n\nClient: Brillio\n\nPosition Summary\n\nWe are seeking a skilled Node.js Developer to design, develop, test, and support serverless applications that power customer interactions within an AWS-based contact center platform. The role will focus on developing AWS Lambda functions that integrate with Amazon Connect, Amazon Lex, APIs, CRM systems, and backend services to deliver secure, scalable, and intelligent IVR and self-service experiences. The ideal candidate will have strong expertise in Node.js, AWS serverless technologies, API integrations, and contact center solutions.\n\nKey Responsibilities\n\n Design, develop, and maintain Node.js applications running on AWS Lambda.\n\n Build and enhance IVR and self-service workflows using Amazon Connect and Amazon Lex.\n\n Develop integrations between contact center platforms and enterprise applications, databases, CRM systems, and third-party APIs.\n\n Create reusable Lambda services to support authentication, routing, customer identification, case management, and self-service transactions.\n\n Develop RESTful APIs and event-driven architectures using AWS services.\n\n Implement secure coding practices, including encryption, authentication, authorization, and data protection controls.\n\n Participate in CI/CD pipeline development and deployment automation using GitHub and AWS DevOps services.\n\n Troubleshoot production issues and optimize application performance, scalability, and reliability.\n\n Collaborate with solution architects, contact center engineers, QA teams, and business stakeholders throughout the software development lifecycle.\n\n Develop automated unit, integration, and regression tests for serverless applications.\n\n Create technical documentation, deployment procedures, and operational runbooks.\n\nRequired Qualifications\n\n Bachelors degree in Computer Science, Information Technology, Engineering, or equivalent experience.\n\n 3+ years of Node.js\n\n[...truncated]",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "Node.js Developer contract role",
+        "client Brillio"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Staffing recruiter pitching one contract role with a full job description pasted inline."
+    },
+    {
+      "id": "gc-083",
+      "subject": "Don't forget: Finish your pending questions at Aquent | Skill!",
+      "body": "<https://example.com/t/a1b2c3\n\nHello Prajwal, \n\nJust a friendly reminder to complete a few questions about your recent \n\napplication at Aquent | Skill. Your answers will help us get a better \n\nunderstanding of the next steps in the hiring process and match you with more \n\nopportunities in the future. \n\nAs part of this, you'll also have the chance to share or update your desired \n\npay rate and see how it compares to what others are submitting for this role. \n\nThis helps you make informed decisions and ensures we're aligned from the start.\n\nYou can access the questions here: \n\n * Creative Systems Developer \n\n<https://example.com/t/a1b2c3\n\nIt should only take a few minutes to complete. \n\nWe're excited to learn more about you and help you find your next career \n\nopportunity. \n\nBest regards, \n\nThe Aquent | Skill Teams \n\n<https://example.com/t/a1b2c3\n\n<https://example.com/t/a1b2c3\n\n<https://example.com/t/a1b2c3\n\n<https://example.com/t/a1b2c3\n\nContact Us \n\n<https://example.com/t/a1b2c3\n\naquent.com \n\n<https://example.com/t/a1b2c3\n\n |Skill.com \n\n<https://example.com/t/a1b2c3\n\nThis email was sent to noreply@example.com by Aquent. \n\nDo not reply to this email. This is not a marketing email. The purpose of this \n\nemail is to communicate important information regarding your business with \n\nAquent. \n\nPrivacy Policies: Aquent \n\n<https://example.com/t/a1b2c3\n\n |Skill \n\n<https://example.com/t/a1b2c3\n\n501 Boylston Street, Boston, MA 02116, USA",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "reminder to finish questions",
+        "recent application"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Follow-up nudge on an incomplete application step."
+    },
+    {
+      "id": "gc-084",
+      "subject": "Your Application for Creative Systems Developer  at Aquent | Skill",
+      "body": "<https://example.com/t/a1b2c3\n\nHi Prajwal,\n\nJust wanted to give you a quick update on your application for the Creative \n\nSystems Developer position with Aquent | Skill. We're making our way through a \n\npool of 112 candidates. \n\nAt this moment our Hiring Manager is currently reviewing 3 candidates and \n\nhasn't moved forward to scheduling interviews just yet. \n\nTo increase your visibility, we encourage you to complete the Initial \n\nInterview Questions and your Profile using thislink \n\n<https://example.com/t/a1b2c3\n\n. Your responses will help us prioritize your profile for opportunities that \n\nbest suit your career goals. \n\nWe'll be in touch as soon as we have an update for you. In the meantime, you \n\ncan check the status of your application on theTalent Portal \n\n<https://example.com/t/a1b2c3\n\n.\n\nThanks,\n\nThe Aquent | Skill Teams\n\n<https://example.com/t/a1b2c3\n\n<https://example.com/t/a1b2c3\n\n<https://example.com/t/a1b2c3\n\n<https://example.com/t/a1b2c3\n\nContact Us \n\n<https://example.com/t/a1b2c3\n\naquent.com \n\n<https://example.com/t/a1b2c3\n\n |Skill.com \n\n<https://example.com/t/a1b2c3\n\nThis email was sent to noreply@example.com by Aquent. \n\nDo not reply to this email. This is not a marketing email. The purpose of this \n\nemail is to communicate important information regarding your business with \n\nAquent. \n\nPrivacy Policies: Aquent \n\n<https://example.com/t/a1b2c3\n\n |Skill \n\n<https://example.com/t/a1b2c3\n\n501 Boylston Street, Boston, MA 02116, USA",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "application still under review",
+        "pool of 112 candidates"
+      ],
+      "difficulty": "hard",
+      "tags": [],
+      "notes": "Detailed pipeline status that explicitly says interviews have not been scheduled yet."
+    },
+    {
+      "id": "gc-085",
+      "subject": "We appreciate your interest in EAI :)",
+      "body": "Hi Prajwal, thanks for applying, and we sincerely appreciate your interest in EAI :)\n\nTo get to know you better, we kindly request that you complete two quick assessments from the Predictive Index service : \n\nTo complete the Behavioral assessment, please click on this link: https://assessment.predictiveindex.com/bo/1cV/Nov2021link\n\nOnce the above assessment is completed, you will be e-mailed the cognitive assessment via the email you provide when you complete the first assessment. \n\nBoth surveys MUST be completed to move forward to the next step. Each will only require a few minutes to do quickly.\n\nOnce both assessments are complete, we will review your information carefully and reach out to you based on a good fit at EAI.\n\nWe look forward to learning more about you!\n\nCheers,\nEAI Talent Team :)",
+      "expected_category": "application_ack",
+      "must_mention": [
+        "complete two Predictive Index assessments",
+        "thanks for applying"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Post-application assessment request rather than an interview invitation."
+    },
+    {
+      "id": "gc-086",
+      "subject": "Land a Better Job Faster – Full-Time Opportunities with Top U.S. Clients",
+      "body": "Hi Prajwal,\n\nGreetings from Winprosys!\n\nI’d like to introduce you to WinProSys LLC, a trusted and E-Verified IT staffing firm based in the United States. With over 5+ years of experience and 560+ successful placements, we connect skilled professionals with Fortune 500 companies across the United States.\n\nOur mission is to help you secure a better job, faster, with exclusive full-time opportunities at top U.S. companies, including clients that can sponsor work visas.\n\nOur Core Services Include:\n\n• Professional ATS-Optimized Resume\n• Targeted Full-Time Job Marketing\n• Personalized Interview Preparation\n• Background Verification Assistance\n• OPT Visa Letter Issuance (for eligible candidates)\n• Payroll Services for smooth onboarding with our clients\n\nWhether you’re an OPT/CPT student or an experienced professional exploring your next career move, our team provides the training, guidance, and connections to help you succeed.\n\nWe are excited to introduce our specialized career programs designed to help professionals and international students secure better opportunities faster in the United States.\n\nProgram Details:\nElite Plan - $450\nIncludes ATS resume, LinkedIn optimization, VMS & Direct Client Marketing, Daily Job Applications, Dedicated Recruiter Support ,Opportunities with E-Verified Employers for OPT Stem Extension , Interview preparation and Background verification assistance\n\nWhether you are looking for internships, full-time opportunities, or career growth support, WinProSys helps you stay compliant, market-ready, and career-focused.\nOur team is here to support you every step of the way. If you have any questions, feel free to reach out.\n\nWe look forward to helping you in your job search\n\nOpportunities like this tend to move fast, so early outreach can make all the difference. Wishing you continued success in your career journey.\n\nAccelerate Your IT Job Search\nSmart SEO & Targeted Placement by WinProSys\n\nVery Truly, \n\nPavan Varma\nTechnical Recruiter | WinProSys\n\n[...truncated]",
+      "expected_category": "misc",
+      "must_mention": [
+        "IT staffing firm introduction",
+        "560+ successful placements"
+      ],
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Agency marketing its own services without naming any specific opening."
+    },
+    {
+      "id": "gc-087",
+      "subject": "Career Opportunity With Get Hire Technologies Inc. – Day 1 Marketing",
+      "body": "Hello Prajwal,\n\n*Acknowledgement from **Get Hire Technologies Inc.*\n\nThriving in today's fast-paced industry, *Get Hire Technologies Inc.* is\n\nexcited to showcase its expertise in recruitment and placement services.\n\nOur dedicated teams continuously collaborate with leading companies to\n\nprovide exceptional job opportunities.\n\n*Get Hire Technologies Inc.* is a leading IT staffing innovator, offering a\n\ncomprehensive suite of services that extends beyond recruitment. We partner\n\nwith Fortune 500+ companies across the US, providing expertise in business\n\nconsulting, venture guidance, and talent development across a wide range of\n\nindustries, including IT, finance, healthcare, engineering, and more.\n\nWe're actively seeking talented professionals (with valid work permits) to\n\njoin our team and support our clients across diverse sectors throughout the\n\nUSA.\n\nWe offer a variety of opportunities! We have both full-time and part-time\n\npositions available, with permanent and contract options to suit your\n\nneeds.\n\n*Do you have a passion for building a rewarding career?*\n\nWe're searching for talented individuals with a bachelor's or master's\n\ndegree (in any field) and a foundation in technical skills. The ideal\n\ncandidate thrives in a collaborative environment, possesses excellent\n\ncommunication and interpersonal skills, and is eager to relocate within the\n\nUS.\n\n*To support your success on the project, there are special benefits you can\n\nget based on clients such as:*\n\n*Salary & Compensation*\n\n-\n\nCompetitive salary packages based on experience, skill set, and market\n\n demand\n\n -\n\nHourly or salaried roles depending on the client engagement\n\n -\n\nPay rates aligned with industry standards and client budgets\n\nDetailed compensation information will be shared once interview\n\nopportunities are confirmed.\n\n*Benefits*\n\nDepending on the client and role, benefits may include:\n\n-\n\nHealth, dental, and vision insurance\n\n -\n\nPaid time off (PTO) and holidays\n\n -\n\nLong-term career growth\n\n[...truncated]",
+      "expected_category": "misc",
+      "must_mention": [
+        "recruitment and placement services",
+        "Get Hire Technologies"
+      ],
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Staffing agency self-promotion framed as an acknowledgement."
+    },
+    {
+      "id": "gc-088",
+      "subject": "New job opportunities at Ford Global Career Site",
+      "body": "Hello Prajwal,\n\nYou might be a great fit for the new positions we just posted! We hope you're still interested in finding your dream job at Ford Motor Company. If so, we invite you to see if this might be the one. Learn more here:\n\nAnalytics Integration Specialist\n\nSee all opportunities\n\nSincerely,\n\nFord Talent Acquisition Team\n\nIf you do not want to receive these job notifications, or if you want to update your preferences, go to our career site.",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "new positions posted",
+        "Ford Motor Company"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Career-site notification of newly posted roles."
+    },
+    {
+      "id": "gc-089",
+      "subject": "Explore Opportunities With Emphasystem LLC",
+      "body": "Hello Prajwal,\n\nEmphasystem is pleased to introduce its exclusive platform for providing\n\nTraining and Placement Assistance to you in a rapidly evolving industry. Our\n\ncore group of specialists consistently utilizes cutting-edge technology to\n\ndeliver project experiences that are up to date with the demands of the\n\nmarket.\n\nAn industry leader in IT Training and Project Implementation, Emphasystem\n\nfocuses on Business Administration, Project Administration, Technical\n\nConsulting, Technology Training, and Analytics. We provide services to\n\nFortune 500 Clients around the USA. We currently collaborate with clients\n\nwith top-rated partner organizations in a variety of different industries\n\nand sectors, including Information Technology , Banking and Finance,\n\nClinical, Healthcare & Pharmaceutical, Logistics & Supply Chain, Aerospace &\n\nDefence, Consumer Product, Construction, Energy & Utilities, Human Resource,\n\nManufacturing, Media & Entertainment, Oil & Gas, Public Sector, Retail,\n\nTelecommunications, Transportation, travel & hospitality, and Engineering.\n\nWe are currently in search of candidates (with a legitimate work permit) who\n\ncan assist our clients according to the relevant industries throughout the\n\nUSA.\n\nEmployment Category: Full-time, Part-time, and Remote jobs all are available\n\non a contract or permanent basis.\n\nWe are seeking for:\n\n*\tMaster's/Bachelor's in any subject with basic technical abilities.\n\n*\tReady to move anywhere in the USA. (Optional)\n\n*\tExcellent Communication and Interpersonal skills.\n\n*\tCandidates with an outstanding dedication for working and ambitions\n\nfor an excellent career.\n\nThe following advantages you will be getting as an employee while working on\n\nyour project:\n\nAn Annual Salary up to $85K for full-time work.\n\nWorking on large-scale projects for prestigious Fortune 500 Clients.\n\nPerformance Evaluation are conducted in every Six (6) months,\n\ndepending on which salary appraisals are made, taking in consideration of\n\nyour performance\n\n[...truncated]",
+      "expected_category": "misc",
+      "must_mention": [
+        "training and placement assistance",
+        "platform introduction"
+      ],
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Third staffing-agency pitch; tests labelling consistency against gc-086 and gc-087."
+    },
+    {
+      "id": "gc-090",
+      "subject": "Pay.gov Payment Confirmation: USCIS I-765",
+      "body": "Your payment has been submitted to Pay.gov and the details are below. If you have questions about this notification or need technical support, please contact us online at https://egov.uscis.gov/cris/contactus and reference the receipt number(s) shown below.\n\nApplication Name: USCIS I-765\t\n\nPay.Gov Tracking ID: 281CLJQ0\n\nAgency Tracking ID: 5N3QV09E9A03N2\n\nTransaction Type: Credit Card\n\nTransaction Amount: $470.00\n\nPayment Date: Apr 13, 2026\n\nTransaction Date: Apr 13, 2026 06:48:16 PM\n\nYour payment was applied to the following case(s):\n\n\tIOE9498842782\n\nTHIS IS AN AUTOMATED MESSAGE. PLEASE DO NOT REPLY.",
+      "expected_category": "misc",
+      "must_mention": [
+        "Pay.gov payment confirmation",
+        "USCIS I-765"
+      ],
+      "difficulty": "easy",
+      "tags": [],
+      "notes": "Government payment receipt - immigration adjacent, unrelated to hiring."
+    },
+    {
+      "id": "gc-091",
+      "subject": "We're hiring 🐾",
+      "body": "Hi Prajwal,Thanks again for coming by the IDEXX table at the recent Roux Institute career fair. We love those events, and we're glad our team got to meet you.As you know, it's almost time for summer internships!&nbsp;We're posting our 2026 internships now, and will continue doing so over the next several weeks. We wanted to share one with you that might be of particular interest, so you can explore it and apply if you think it might be a match for your education and career goals:Oncology Product and User Experience Research InternApply hereIf you're not looking right now but maybe know someone else who might be interested, please feel free to share this email with them!And if now's not the right time but you'd like to keep an eye on future IDEXX jobs, I'd encourage you to join our Talent Community&nbsp;🤗All the best,IDEXX Talent AcquisitionConnect with us on:© 2026&nbsp;IDEXX All Rights Reserved.To ensure delivery to your inbox, please add noreply@example.com to your address book.You can unsubscribe here and stop receiving these job alert emails.",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "2026 internships posting soon",
+        "Roux Institute career fair"
+      ],
+      "difficulty": "medium",
+      "tags": [],
+      "notes": "Emoji subject on a career-fair follow-up announcing upcoming postings."
+    },
+    {
+      "id": "gc-092",
+      "subject": "Thanks for stopping by our booth 🐾",
+      "body": "Hi&nbsp;Prajwal,Thank you for stopping by our booth at the Roux Institute career fair, it was great to see you!&nbsp;We would love to stay in touch and let you know about any upcoming opportunities that might fit your background and interests.We always have our open roles posted on our career site, and are regularly opening internship and entry-level positions,&nbsp;so be sure to explore and bookmark the links below so you can be among the first to see them. 🤗See all our open roles&nbsp;here:<td align=\"center\" style='margin:0px; background-color:\n\n #0b76f0; border-radius: 20px\n\n '><a style='display:inline-block; text-decoration: none; color:inherit;\n\n padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;font-size:14px;font-family:Arial,Helvetica,sans-serif;background-color:#0b76f0;border-radius:20px;border-width:1px;border-style:solid;border-color:#0b76f0;white-space:normal;color:#ffffff;\n\n ' href='https://example.com/t/a1b2c3 target='_blank'><span style='\n\n font-size:14px;font-family:Arial,Helvetica,sans-serif;color:#ffffff;text-decoration:none;\n\n '>\n\n Internship Opportunities\n\n <td align=\"center\" style='margin:0px; background-color:\n\n #0b76f0; border-radius: 20px\n\n '><a style='display:inline-block; text-decoration: none; color:inherit;\n\n padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;font-size:14px;font-family:Arial,Helvetica,sans-serif;background-color:#0b76f0;border-radius:20px;border-width:1px;border-style:solid;border-color:#0b76f0;white-space:normal;color:#ffffff;\n\n ' href='https://example.com/t/a1b2c3 target='_blank'><span style='\n\n font-size:14px;font-family:Arial,Helvetica,sans-serif;color:#ffffff;text-decoration:none;\n\n '>\n\n Job Opportunities\n\n If you'd like to, please feel free to&nbsp;upload your resume:(This will help direct us further in your interests and background&nbsp;for future recruitment conversations.)<td align=\"center\" style='margin:0px; background-color:\n\n #31353d; border-radius: 20px\n\n '><a\n\n[...truncated]",
+      "expected_category": "misc",
+      "must_mention": [
+        "thanks for visiting the booth",
+        "would like to stay in touch"
+      ],
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Career-fair courtesy note naming no role, posting, or action."
+    },
+    {
+      "id": "gc-093",
+      "subject": "Goldman Sachs / Referral Program",
+      "body": "Good Afternoon!\n\nI received your resume as a referral and would like to invite you to our employee referral pipeline:\n\nhttps://example.com/t/a1b2c3\n\nKind regards,\n\nAlina Petrov\n\nSourcing Specialist\n\nHuman Capital Management\n\nSupport Provided by AMS\n\nGoldman Sachs & Co. LLC.\n\nLearn more about Goldman Sachs\n\nGS.com<https://example.com/t/a1b2c3 | Careers Blog<https://example.com/t/a1b2c3 | LinkedIn<https://example.com/t/a1b2c3 | YouTube<https://example.com/t/a1b2c3 | Twitter<https://example.com/t/a1b2c3 | Facebook<https://example.com/t/a1b2c3\n\nThe Goldman Sachs Group, Inc. All rights reserved.\n\nSee https://example.com/t/a1b2c3 for important risk disclosures, conflicts of interest and other terms and conditions relating to this e-mail and your reliance on information contained in it. This message may contain confidential or privileged information. If you are not the intended recipient, please advise us immediately and delete this message. See https://example.com/t/a1b2c3 for further information on confidentiality and the risks of non-secure electronic communication. If you cannot access these links, please notify us by reply message and we will send the contents to you.\n\n________________________________\n\nYour Personal Data: We may collect and process information about you that may be subject to data protection laws. For more information about how we use and disclose your personal data, how we protect your information, our legal basis to use your information, your rights and who you can contact, please refer to: www.gs.com/privacy-notices<http://www.gs.com/privacy-notices>",
+      "expected_category": "job_alert",
+      "must_mention": [
+        "invitation to employee referral pipeline",
+        "resume received as a referral"
+      ],
+      "difficulty": "hard",
+      "tags": [],
+      "notes": "Sourcer inviting an application through a referral link, not an interview."
+    },
+    {
+      "id": "gc-094",
+      "subject": "morgan reyes",
+      "body": "morgan reyes\n\nnoreply@example.com\n\n555-010-0000",
+      "expected_category": "misc",
+      "must_mention": [
+        "sender contact details",
+        "email address and phone number"
+      ],
+      "difficulty": "hard",
+      "tags": [
+        "terse"
+      ],
+      "notes": "Three-line contact card with no message body, subject line repeats the sender name."
+    }
+  ]
+}

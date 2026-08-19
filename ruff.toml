@@ -1,0 +1,5 @@
+target-version = "py311"
+exclude = ["promptwatch-env"]
+
+[lint]
+select = ["E", "F", "I", "B", "UP"]
