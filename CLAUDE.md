@@ -93,5 +93,5 @@ Known weaknesses to revisit in Phase 3: `misc` is heterogeneous (non-job mail, p
 ## Workflow notes
 
 - **Never run git commands.** Prajwal runs every git command manually. This is enforced by a `deny` rule in `.claude/settings.local.json` (`Bash(git *)`, `PowerShell(git *)`), including read-only ones like `status` and `diff`. When a commit is warranted, write out the commit message and the exact commands, and let them run it.
-- Commits are gated through `no-mistakes` before reaching the GitHub remote.
+- **No external commit gate.** `no-mistakes` was dropped — it broke on a CLI incompatibility and Phase 5 builds project-specific CI (GitHub Actions) instead. Run `ruff check .` before committing; use `/code-review` on meaningful diffs.
 - Keep diffs focused and reviewable. Don't bundle unrelated changes.
