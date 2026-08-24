@@ -1,12 +1,14 @@
 from pathlib import Path
 
 import yaml
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, ConfigDict, model_validator
 
 from promptwatch.models import Category
 
 
 class FewShotExample(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     subject: str
     body: str
     category: Category
@@ -20,6 +22,8 @@ class PromptConfig(BaseModel):
     widening the `Category` type in code cannot retroactively change what an
     older prompt version is allowed to emit.
     """
+
+    model_config = ConfigDict(extra="forbid")
 
     version: str
     timestamp: str
@@ -39,6 +43,12 @@ class PromptConfig(BaseModel):
 
     @classmethod
     def load(cls, path: str | Path) -> "PromptConfig":
-        with open(path) as f:
+        """Load a versioned prompt from YAML.
+
+        Raises:
+            ValueError: if the file is missing a required key, declares an
+                unknown one, or uses a category its few-shot examples do not.
+        """
+        with open(path, encoding="utf-8") as f:
             data = yaml.safe_load(f)
         return cls(**data)
