@@ -5,10 +5,11 @@ from pydantic import BaseModel
 from promptwatch.models import Category
 from promptwatch.results import RunResult
 
-Verdict = Literal["pass", "warn", "critical"]
+Verdict = Literal["pass", "warn", "critical", "no_data"]
 
 DEFAULT_WARN = 0.03
 DEFAULT_CRITICAL = 0.08
+MIN_SCORED_RATIO = 0.8
 
 
 class CaseFlip(BaseModel):
@@ -25,6 +26,8 @@ class RunDiff(BaseModel):
     head_accuracy: float
     base_summary_score: float
     head_summary_score: float
+    base_scored_ratio: float
+    head_scored_ratio: float
     regressions: list[CaseFlip]
     improvements: list[CaseFlip]
     base_out_of_contract: int
@@ -105,6 +108,11 @@ def diff_runs(
             improvements.append(flip)
 
     delta = head.category_accuracy - base.category_accuracy
+    if min(base.scored_ratio, head.scored_ratio) < MIN_SCORED_RATIO:
+        verdict: Verdict = "no_data"
+    else:
+        verdict = _verdict(delta, warn, critical)
+
     return RunDiff(
         base_run_id=base.run_id,
         head_run_id=head.run_id,
@@ -112,6 +120,8 @@ def diff_runs(
         head_accuracy=head.category_accuracy,
         base_summary_score=base.mean_summary_score,
         head_summary_score=head.mean_summary_score,
+        base_scored_ratio=base.scored_ratio,
+        head_scored_ratio=head.scored_ratio,
         regressions=regressions,
         improvements=improvements,
         base_out_of_contract=base.count("out_of_contract"),
@@ -121,7 +131,7 @@ def diff_runs(
         only_in_base=sorted(set(base_cases) - set(head_cases)),
         only_in_head=sorted(set(head_cases) - set(base_cases)),
         confounders=_confounders(base, head),
-        verdict=_verdict(delta, warn, critical),
+        verdict=verdict,
     )
 
 
@@ -138,8 +148,16 @@ def format_diff(diff: RunDiff) -> str:
         f"   ({diff.accuracy_delta:+.1%})   {diff.verdict.upper()}",
         f"summary mean        {diff.base_summary_score:.2f} -> "
         f"{diff.head_summary_score:.2f}   ({diff.summary_delta:+.2f})   reported only",
+        f"cases scored        base {diff.base_scored_ratio:.0%}"
+        f"   head {diff.head_scored_ratio:.0%}",
         "",
     ]
+    if diff.verdict == "no_data":
+        lines.insert(
+            2,
+            f"VERDICT WITHHELD: too few cases scored to compare "
+            f"(minimum {MIN_SCORED_RATIO:.0%})\n",
+        )
 
     lines.append(f"regressions ({len(diff.regressions)})")
     for flip in diff.regressions:

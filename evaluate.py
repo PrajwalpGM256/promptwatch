@@ -17,7 +17,7 @@ from promptwatch.runner import (
 DEFAULT_DATASET = Path("datasets/golden_v1.json")
 DEFAULT_JUDGE = Path("prompts/judge_v1.yaml")
 
-EXIT_CODES = {"pass": 0, "warn": 1, "critical": 2}
+EXIT_CODES = {"pass": 0, "warn": 1, "critical": 2, "no_data": 2}
 
 
 def _summarise(run) -> str:

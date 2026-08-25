@@ -77,6 +77,15 @@ class RunResult(BaseModel):
         return [case for case in self.cases if case.category_match is not None]
 
     @property
+    def attempted(self) -> list[CaseResult]:
+        return [case for case in self.cases if case.status != "out_of_contract"]
+
+    @property
+    def scored_ratio(self) -> float:
+        attempted = self.attempted
+        return len(self.scored) / len(attempted) if attempted else 0.0
+
+    @property
     def category_accuracy(self) -> float:
         scored = self.scored
         if not scored:
