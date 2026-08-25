@@ -20,5 +20,8 @@ Thumbs.db
 # Unredacted mail pulled from Gmail. Never commit.
 raw_emails/
 
+# Generated review artifacts
+.lavish/
+
 # claude
 .claude/

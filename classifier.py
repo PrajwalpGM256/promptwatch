@@ -1,15 +1,10 @@
 import json
-import os
-from functools import lru_cache
 
-from dotenv import load_dotenv
-from google import genai
 from google.genai import types
 
 from promptwatch.config import PromptConfig
+from promptwatch.gemini import DEFAULT_MODEL, client
 from promptwatch.models import ClassificationResult, EmailInput
-
-load_dotenv()
 
 
 def _response_schema(categories: list[str]) -> dict:
@@ -101,16 +96,22 @@ def _parse_result(text: str, categories: list[str]) -> ClassificationResult:
     return ClassificationResult(category=category, summary=summary)
 
 
-@lru_cache(maxsize=1)
-def _get_client(api_key: str) -> genai.Client:
-    """Return a cached Gemini client so connections are reused across calls."""
-    return genai.Client(api_key=api_key)
+def _request(prompt_config: PromptConfig, email: EmailInput, model: str) -> dict:
+    return {
+        "model": model,
+        "contents": _build_contents(prompt_config, email),
+        "config": types.GenerateContentConfig(
+            system_instruction=prompt_config.system_prompt,
+            response_mime_type="application/json",
+            response_schema=_response_schema(prompt_config.categories),
+        ),
+    }
 
 
 def classify_email(
     prompt_config: PromptConfig,
     email: EmailInput,
-    model: str = "gemini-2.5-flash",
+    model: str = DEFAULT_MODEL,
 ) -> ClassificationResult:
     """Classify an email into a Category and summarize it, via Gemini.
 
@@ -126,21 +127,32 @@ def classify_email(
         RuntimeError: if GEMINI_API_KEY is not set.
         ValueError: if the model's response is off-contract (see _parse_result).
     """
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        raise RuntimeError("GEMINI_API_KEY is not set. Add it to your .env file.")
-
-    client = _get_client(api_key)
-    response = client.models.generate_content(
-        model=model,
-        contents=_build_contents(prompt_config, email),
-        config=types.GenerateContentConfig(
-            system_instruction=prompt_config.system_prompt,
-            response_mime_type="application/json",
-            response_schema=_response_schema(prompt_config.categories),
-        ),
+    response = client().models.generate_content(
+        **_request(prompt_config, email, model)
     )
     return _parse_result(response.text, prompt_config.categories)
+
+
+async def classify_email_async(
+    prompt_config: PromptConfig,
+    email: EmailInput,
+    model: str = DEFAULT_MODEL,
+) -> tuple[ClassificationResult, types.GenerateContentResponseUsageMetadata | None]:
+    """Async twin of `classify_email`, also returning token usage.
+
+    Returns:
+        The validated ClassificationResult and the response's usage metadata,
+        which the eval runner records per case.
+
+    Raises:
+        RuntimeError: if GEMINI_API_KEY is not set.
+        ValueError: if the model's response is off-contract (see _parse_result).
+    """
+    response = await client().aio.models.generate_content(
+        **_request(prompt_config, email, model)
+    )
+    result = _parse_result(response.text, prompt_config.categories)
+    return result, response.usage_metadata
 
 
 if __name__ == "__main__":
