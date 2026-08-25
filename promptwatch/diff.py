@@ -61,7 +61,7 @@ def _confounders(base: RunResult, head: RunResult) -> list[str]:
 
 
 def _verdict(delta: float, warn: float, critical: float) -> Verdict:
-    drop = -delta
+    drop = round(-delta, 6)
     if drop > critical:
         return "critical"
     if drop > warn:
