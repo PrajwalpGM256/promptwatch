@@ -100,6 +100,7 @@ def test_scored_ratio_floor_is_the_boundary():
 @pytest.mark.parametrize(
     "kwargs,fragment",
     [
+        ({"provider": "ollama"}, "provider"),
         ({"model": "gemini-2.5-flash"}, "model"),
         ({"dataset_version": "v2"}, "dataset"),
         ({"judge_version": "none"}, "judge"),

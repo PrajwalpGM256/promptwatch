@@ -15,6 +15,7 @@ SCHEMA = """
 CREATE TABLE IF NOT EXISTS runs (
     run_id          TEXT PRIMARY KEY,
     prompt_version  TEXT NOT NULL,
+    provider        TEXT NOT NULL DEFAULT 'gemini',
     model           TEXT NOT NULL,
     dataset_version TEXT NOT NULL,
     judge_version   TEXT NOT NULL,
@@ -66,6 +67,7 @@ class CaseResult(BaseModel):
 class RunResult(BaseModel):
     run_id: str
     prompt_version: str
+    provider: str = "gemini"
     model: str
     dataset_version: str
     judge_version: str
@@ -119,12 +121,29 @@ class RunResult(BaseModel):
         return {case.case_id: case for case in self.cases}
 
 
+def _add_provider_column(connection: sqlite3.Connection) -> None:
+    columns = {
+        row["name"] for row in connection.execute("PRAGMA table_info(runs)")
+    }
+    if "provider" not in columns:
+        with connection:
+            connection.execute(
+                "ALTER TABLE runs ADD COLUMN provider TEXT NOT NULL "
+                "DEFAULT 'gemini'"
+            )
+
+
 def connect(path: str | Path = DEFAULT_DB) -> sqlite3.Connection:
-    """Open the run database, creating the schema if absent."""
+    """Open the run database, creating the schema if absent.
+
+    Databases written before providers were pluggable gain a `provider` column
+    defaulted to gemini, which is what those runs used.
+    """
     connection = sqlite3.connect(path)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
     connection.executescript(SCHEMA)
+    _add_provider_column(connection)
     return connection
 
 
@@ -136,10 +155,11 @@ def save_run(connection: sqlite3.Connection, run: RunResult) -> None:
     """
     with connection:
         connection.execute(
-            "INSERT INTO runs (run_id, prompt_version, model, dataset_version, "
-            "judge_version, started_at) VALUES (?, ?, ?, ?, ?, ?)",
-            (run.run_id, run.prompt_version, run.model, run.dataset_version,
-             run.judge_version, run.started_at),
+            "INSERT INTO runs (run_id, prompt_version, provider, model, "
+            "dataset_version, judge_version, started_at) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (run.run_id, run.prompt_version, run.provider, run.model,
+             run.dataset_version, run.judge_version, run.started_at),
         )
         connection.executemany(
             f"INSERT INTO case_results (run_id, {_CASE_COLUMNS}) "
@@ -173,14 +193,29 @@ def load_run(connection: sqlite3.Connection, run_id: str) -> RunResult:
 
 
 def latest_run(
-    connection: sqlite3.Connection, prompt_version: str | None = None
+    connection: sqlite3.Connection,
+    prompt_version: str | None = None,
+    provider: str | None = None,
+    model: str | None = None,
 ) -> RunResult | None:
-    """Most recent run, optionally restricted to one prompt version."""
+    """Most recent run matching every filter given.
+
+    A run is only a baseline for the next one if the backend also matches, so
+    callers looking for "the previous run of this prompt" must pass the
+    provider and model too. Diffing across backends measures the swap, not the
+    prompt.
+    """
+    filters = {
+        "prompt_version": prompt_version,
+        "provider": provider,
+        "model": model,
+    }
+    clauses = [f"{column} = ?" for column, value in filters.items() if value]
+    params = tuple(value for value in filters.values() if value)
+
     sql = "SELECT run_id FROM runs"
-    params: tuple[str, ...] = ()
-    if prompt_version:
-        sql += " WHERE prompt_version = ?"
-        params = (prompt_version,)
+    if clauses:
+        sql += " WHERE " + " AND ".join(clauses)
     sql += " ORDER BY started_at DESC, run_id DESC LIMIT 1"
 
     row = connection.execute(sql, params).fetchone()

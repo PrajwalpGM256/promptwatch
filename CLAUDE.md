@@ -10,11 +10,14 @@ The point of the project: most teams ship prompt/model changes blind. This prove
 
 ## Current status
 
-**Phases 1 and 2 complete.** `classify_email()` is verified end-to-end against live Gemini, and `datasets/golden_v1.json` holds 94 labelled cases that pass `check_balance()`. No eval engine, alerting, or CI exists yet. Do not scaffold ahead. Next: Phase 3, the eval engine.
+**Phases 1 to 3 complete.** The eval engine runs, diffs and stores runs in SQLite. Providers were made pluggable afterwards because a full judged run is 188 requests and Gemini's free tier caps at 500/day — roughly 2.6 runs, which is not enough to iterate on a prompt. Ollama is now the default so iteration is unmetered; Gemini and Groq stay for hosted runs and CI. No alerting or CI exists yet. Do not scaffold ahead. Next: Phase 4.
+
+The recorded Gemini baselines in `runs.db` predate the `provider` column and are backfilled to `gemini` on open. Local runs will not diff against them, by design.
 
 ## Non-negotiables
 
-- **LLM provider is Gemini, not OpenAI.** The spec says OpenAI; we deliberately use Gemini instead. Always use the `google-genai` SDK and the `GEMINI_API_KEY` env var. Never introduce `openai`, `OPENAI_API_KEY`, or Anthropic SDKs.
+- **Providers are pluggable, and never OpenAI or Anthropic.** Three backends implement the `Provider` protocol in `promptwatch/provider.py`: `ollama` (local, the default, no quota), `gemini` (`google-genai`, `GEMINI_API_KEY`), and `groq` (`GROQ_API_KEY`, raw HTTP). Groq's endpoint is OpenAI-shaped but the `openai` SDK is not a dependency and must not become one; hosted providers are reached with `httpx` directly. Never introduce `OPENAI_API_KEY` or an Anthropic SDK. Only `promptwatch/gemini.py` may import `google.genai` — nothing else in the package knows which backend it is talking to.
+- **A run is identified by prompt version *and* backend.** `RunResult` records `provider` and `model`, `latest_run()` filters on both, and `diff.py` flags a backend change as a confounder. Comparing a local run against a hosted one measures the swap, not the prompt.
 - **Types are Pydantic.** Data models in `promptwatch/models.py`; config models in `promptwatch/config.py`. Any structured data crossing a function boundary is a typed model, not a loose dict.
 - **Prompts are versioned YAML** in `prompts/` (e.g. `v1.yaml`). A prompt change is a new version file, not an in-place edit. These files are the "code" CI runs against.
 - **Golden dataset is hand-labeled, never LLM-generated.** Human-verified ground truth is the whole point. Each case: stable ID, input, expected output, difficulty tag, notes on why it matters.
@@ -24,35 +27,67 @@ The point of the project: most teams ship prompt/model changes blind. This prove
 ## Coding style
 
 - **Keep it minimal; think like a senior dev.** Smallest change that does the job. No speculative abstraction, no defensive scaffolding for problems that don't exist yet, no restating the obvious in comments, docstrings, or commit messages. This applies to prose too — commit messages and explanations should be short and carry only what isn't already evident from the diff.
-- Python 3.11+, full type hints on every function signature.
-- Prefer stdlib and deps already in `requirements.txt`. Ask before adding a new dependency.
+- Python 3.11+, full type hints on every function signature. Hints are load-bearing, not decoration — `mypy --strict` must pass on `src/` with no `type: ignore` unless a stdlib stub is genuinely wrong (there is one, in `tools/fetch_emails.py`).
+- Prefer stdlib and deps already in `pyproject.toml`. Ask before adding a new dependency.
+- **Name the concept, not the shape.** A recurring structural type gets an alias in the module that owns it — `JsonSchema` in `provider.py`, not `dict[str, Any]` repeated across six files. Bare `dict` and `list` in a signature are a lint failure under strict mode anyway.
 - **Be modular.** Every function does one thing and its seams are obvious — build, call, validate are separate steps, not one long body. Modular means clean boundaries, not file count: extract a function when a block has a name, split a file when it has two reasons to change. Don't scatter a small module across files for its own sake.
 - **Never write comments unless asked.** No inline `#` comments, no module docstrings, no class docstrings. The code and its names carry the meaning; if a line needs explaining, that's a signal to rename or restructure it, not to annotate it. When a *why* is genuinely non-obvious (a workaround, a subtle constraint), it belongs in the commit message or CLAUDE.md, not the source.
 - Small, single-purpose functions. Docstring on public functions only — what it does, what it returns, what it raises.
 - Config from env via `python-dotenv`. Never hardcode keys or model names; make the model a parameter with a sensible default.
 - Fail loud and early: validate model output against the `Category` contract and raise a clear error on anything off-contract. No silent fallbacks.
+- **Depend on a protocol, not a vendor.** Anything reached over the network sits behind a `Protocol` in this package, with the vendor SDK confined to one module. `runner.py` must never import `google.genai`. The test for this: adding a fourth backend is a new file, not a refactor.
+- **Every seam gets a fake.** A protocol that can't be faked in `conftest.py` is the wrong shape. `FakeProvider` is why `runner.py` is testable offline; new seams follow it.
 - Match the style of existing files rather than introducing new patterns.
+
+## Tooling gates
+
+All three must pass before a commit. There is no CI yet, so they are run by hand.
+
+```bash
+ruff check .
+mypy
+pytest
+```
+
+- `mypy` reads its config from `pyproject.toml`: strict over `src/` and `tools/`, tests excluded. Tests are excluded deliberately — several deliberately construct invalid input to assert Pydantic rejects it, so type-checking them reports false positives that can only be silenced by weakening the test.
+- `pytest` fails under 80% coverage, configured in `addopts`. Current is ~83%. The uncovered remainder is the three provider transports, which is correct: those are live HTTP and SDK calls. Raise the floor when it drifts up; do not lower it to make a commit pass.
+- Coverage is a floor, not a target. Do not write tests to move the number.
 
 ## Project layout
 
-Package code lives under `promptwatch/`; the entry point, prompts, and env sit at the repo root.
+`src/` layout. Everything importable lives in `src/promptwatch/`; data, prompts and dev scripts sit at the repo root. Install with `pip install -e ".[dev]"` — the package is not importable otherwise, which is the point: tests cannot accidentally pass against loose files in the working directory.
 
 ```
-promptwatch/
+pyproject.toml    — deps, ruff, mypy, pytest and coverage config, all of it
+src/promptwatch/
+  __main__.py     — python -m promptwatch
+  cli.py          — CLI: run, diff, runs
+  classifier.py   — classify_email(): Provider + PromptConfig + EmailInput -> ClassificationResult
   models.py       — EmailInput, ClassificationResult, Category literal type
   config.py       — FewShotExample, PromptConfig (with load() for YAML)
   dataset.py      — GoldenCase, GoldenDataset, Tag, Difficulty, check_balance()
-classifier.py     — classify_email(): PromptConfig + EmailInput -> ClassificationResult
+  provider.py     — Turn, Completion, Provider protocol, TransientError, get_provider()
+  gemini.py       — Gemini backend (the only google-genai importer)
+  ollama.py       — local backend over /api/chat, default
+  groq.py         — Groq backend, strict json_schema (gpt-oss models only)
+  judge.py        — JudgeConfig, score_summary()
+  runner.py       — concurrent execution, pacing, failure handling
+  results.py      — CaseResult, RunResult, SQLite storage
+  diff.py         — run-vs-run diffing and the verdict
+tests/
+  conftest.py     — FakeProvider, fixtures, run/case builders
 prompts/v1.yaml   — versioned system prompt + few-shot examples (v2.yaml is current)
 datasets/golden_v1.json — the labelled corpus
 tools/
   fetch_emails.py — Gmail IMAP pull into a labelling worksheet
   redact.py       — shared clean/redact/cap helpers for assembling cases
 raw_emails/       — unredacted worksheets (gitignored, never commit)
-.env              — GEMINI_API_KEY, GMAIL_ADDRESS, GMAIL_APP_PASSWORD (gitignored)
+.env              — GEMINI_API_KEY, GROQ_API_KEY, OLLAMA_HOST, GMAIL_ADDRESS, GMAIL_APP_PASSWORD (gitignored)
 ```
 
-Imports are always package-qualified: `from promptwatch.models import ...`, never bare `from models import ...`. Run from the repo root so `promptwatch` resolves. There is no `promptwatch/__init__.py` — it works as an implicit namespace package, which is fine for now but will need a real `__init__.py` if this ever becomes pip-installable.
+Imports are always package-qualified: `from promptwatch.models import ...`, never bare `from models import ...`. Run commands from the repo root — `prompts/` and `datasets/` are resolved relative to the working directory, not the package.
+
+Where a new module goes: inside `src/promptwatch/` if anything imports it, `tools/` if it is a script a human runs by hand. `tools/` is not part of the shipped package and is held to a looser mypy bar.
 
 ## Categories (the contract)
 
@@ -82,7 +117,7 @@ Known weaknesses to revisit in Phase 3: `misc` is heterogeneous (non-job mail, p
 2. ~~**Golden dataset**~~ — 94 hand-labeled cases, balanced, versioned JSON. Done.
 3. **Eval engine** — test runner (async batching), multi-dim scoring (exact category match, LLM-as-judge summary 1–5, latency, tokens), run-vs-run diffing, warn >3% / critical >8% thresholds (configurable). ← current
 4. **Alerting + reporting** — HTML diff report (scorecard, side-by-side regressions, trend chart), Slack webhook alerts, rolling-average slow-drift detection.
-5. **CI/CD** — GitHub Action on PRs touching `prompts/`; runs eval, comments status, blocks merge on critical regressions. Dockerize. README as onboarding docs, not a tutorial.
+5. **CI/CD** — GitHub Action on PRs touching `prompts/`; runs eval, comments status, blocks merge on critical regressions. Dockerize. README as onboarding docs, not a tutorial. **CI must use a hosted provider** — GitHub runners have no GPU, so `--provider ollama` is local-only. The Docker image must not bundle model weights; point it at a host Ollama via `OLLAMA_HOST`.
 6. **Portfolio polish** — Loom walkthrough, short writeup of the problem/approach/one proud design decision.
 
 ## Tooling / infra choices
@@ -94,5 +129,5 @@ Known weaknesses to revisit in Phase 3: `misc` is heterogeneous (non-job mail, p
 
 - **Never run git commands.** Prajwal runs every git command manually. This is enforced by a `deny` rule in `.claude/settings.local.json` (`Bash(git *)`, `PowerShell(git *)`), including read-only ones like `status` and `diff`. When a commit is warranted, write out the commit message and the exact commands, and let them run it.
 - **Prajwal runs and tests the app.** Don't execute the application or its scripts to verify behaviour — write the code, then hand over the exact commands to run and say what output to expect. Applies to eval runs, smoke tests, and anything that calls the Gemini API.
-- **No external commit gate.** `no-mistakes` was dropped — it broke on a CLI incompatibility and Phase 5 builds project-specific CI (GitHub Actions) instead. Run `ruff check .` before committing; use `/code-review` on meaningful diffs.
+- **No external commit gate.** `no-mistakes` was dropped — it broke on a CLI incompatibility and Phase 5 builds project-specific CI (GitHub Actions) instead. Run `ruff check .`, `mypy` and `pytest` before committing; use `/code-review` on meaningful diffs.
 - Keep diffs focused and reviewable. Don't bundle unrelated changes.

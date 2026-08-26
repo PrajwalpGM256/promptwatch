@@ -59,7 +59,7 @@ def _decode(value: str | None) -> str:
 
 def _decoded_payload(part: Message) -> str:
     raw = part.get_payload(decode=True)
-    if not raw:
+    if not isinstance(raw, bytes):
         return ""
     return raw.decode(part.get_content_charset() or "utf-8", errors="replace")
 
@@ -113,7 +113,7 @@ def fetch(query: str, limit: int) -> list[tuple[str, str]]:
     with imaplib.IMAP4_SSL(IMAP_HOST) as imap:
         imap.login(address, password)
         imap.select("INBOX", readonly=True)
-        imap.literal = query.encode("utf-8")
+        imap.literal = query.encode("utf-8")  # type: ignore[assignment]
         status, data = imap.search("UTF-8", "X-GM-RAW")
         if status != "OK":
             raise RuntimeError(f"IMAP search failed for query {query!r}")
@@ -124,7 +124,10 @@ def fetch(query: str, limit: int) -> list[tuple[str, str]]:
             status, fetched = imap.fetch(message_id, "(RFC822)")
             if status != "OK":
                 continue
-            parsed = email.message_from_bytes(fetched[0][1])
+            head = fetched[0]
+            if not isinstance(head, tuple):
+                continue
+            parsed = email.message_from_bytes(head[1])
             messages.append((_decode(parsed.get("Subject")), _body_text(parsed)))
     return messages
 

@@ -1,6 +1,9 @@
+import json
+
 import pytest
 
 from promptwatch.dataset import GoldenCase
+from promptwatch.provider import Completion, JsonSchema, Turn
 from promptwatch.results import CaseResult, RunResult
 
 ALL_CATEGORIES = [
@@ -11,6 +14,60 @@ ALL_CATEGORIES = [
     "newsletter",
     "misc",
 ]
+
+
+class FakeProvider:
+    """An in-memory Provider that answers from canned values.
+
+    Distinguishes a judge call from a classify call by the schema it is given,
+    so it stays correct however the runner interleaves them.
+    """
+
+    name = "fake"
+    default_model = "fake-1"
+    default_requests_per_minute = 0
+
+    def __init__(
+        self,
+        category: str = "misc",
+        summary: str = "A short summary.",
+        score: int = 5,
+        error: Exception | None = None,
+        text: str | None = None,
+    ) -> None:
+        self.category = category
+        self.summary = summary
+        self.score = score
+        self.error = error
+        self.text = text
+        self.calls: list[str] = []
+
+    async def generate_json(
+        self,
+        system_prompt: str,
+        turns: list[Turn],
+        schema: JsonSchema,
+        model: str,
+        temperature: float | None = None,
+    ) -> Completion:
+        judging = "score" in schema["properties"]
+        self.calls.append("judge" if judging else "classify")
+        if self.error is not None:
+            raise self.error
+        if self.text is not None:
+            payload = self.text
+        elif judging:
+            payload = json.dumps({"score": self.score})
+        else:
+            payload = json.dumps(
+                {"category": self.category, "summary": self.summary}
+            )
+        return Completion(text=payload, prompt_tokens=10, output_tokens=5)
+
+
+@pytest.fixture
+def fake_provider() -> FakeProvider:
+    return FakeProvider()
 
 
 @pytest.fixture
@@ -59,6 +116,7 @@ def make_run(
     run_id: str,
     cases: list[CaseResult],
     prompt_version: str = "v2",
+    provider: str = "gemini",
     model: str = "gemini-3.5-flash-lite",
     dataset_version: str = "v1",
     judge_version: str = "v1",
@@ -66,6 +124,7 @@ def make_run(
     return RunResult(
         run_id=run_id,
         prompt_version=prompt_version,
+        provider=provider,
         model=model,
         dataset_version=dataset_version,
         judge_version=judge_version,

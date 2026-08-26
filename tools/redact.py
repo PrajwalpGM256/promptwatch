@@ -43,10 +43,10 @@ def redact(text: str, extra: list[tuple[str, str]] | None = None) -> str:
     `extra` supplies per-batch replacements such as recruiter names, applied
     before the shared patterns.
     """
-    for pattern, replacement in extra or []:
-        text = re.sub(pattern, replacement, text)
-    for pattern, replacement in _PATTERNS:
-        text = pattern.sub(replacement, text)
+    for raw, replacement in extra or []:
+        text = re.sub(raw, replacement, text)
+    for compiled, replacement in _PATTERNS:
+        text = compiled.sub(replacement, text)
     return text
 
 

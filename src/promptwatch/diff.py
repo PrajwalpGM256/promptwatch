@@ -51,6 +51,7 @@ class RunDiff(BaseModel):
 def _confounders(base: RunResult, head: RunResult) -> list[str]:
     changed = []
     for label, before, after in (
+        ("provider", base.provider, head.provider),
         ("model", base.model, head.model),
         ("dataset", base.dataset_version, head.dataset_version),
         ("judge", base.judge_version, head.judge_version),

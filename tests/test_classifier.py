@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from classifier import _build_contents, _parse_result, _response_schema
+from promptwatch.classifier import _build_turns, _parse_result, _response_schema
 from promptwatch.config import PromptConfig
 from promptwatch.models import EmailInput
 
@@ -49,23 +49,23 @@ def test_parse_result_rejects_overlong_summary():
         _parse_result(payload, CATEGORIES)
 
 
-def test_build_contents_alternates_turns_and_ends_with_the_email():
+def test_build_turns_alternates_and_ends_with_the_email():
     config = PromptConfig.load("prompts/v2.yaml")
     email = EmailInput(subject="Subject here", body="Body here")
-    turns = _build_contents(config, email)
+    turns = _build_turns(config, email)
 
     expected = len(config.few_shot_examples) * 2 + 1
     assert len(turns) == expected
-    assert [t.role for t in turns[:-1]] == ["user", "model"] * len(
+    assert [t.role for t in turns[:-1]] == ["user", "assistant"] * len(
         config.few_shot_examples
     )
     assert turns[-1].role == "user"
-    assert "Subject here" in turns[-1].parts[0].text
+    assert "Subject here" in turns[-1].text
 
 
-def test_build_contents_renders_examples_as_json_answers():
+def test_build_turns_renders_examples_as_json_answers():
     config = PromptConfig.load("prompts/v2.yaml")
-    turns = _build_contents(config, EmailInput(subject="s", body="b"))
-    answer = json.loads(turns[1].parts[0].text)
+    turns = _build_turns(config, EmailInput(subject="s", body="b"))
+    answer = json.loads(turns[1].text)
     assert answer["category"] == config.few_shot_examples[0].category
     assert answer["summary"] == config.few_shot_examples[0].summary

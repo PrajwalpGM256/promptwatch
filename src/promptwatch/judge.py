@@ -2,11 +2,10 @@ import json
 from pathlib import Path
 
 import yaml
-from google.genai import types
 from pydantic import BaseModel, ConfigDict
 
 from promptwatch.dataset import GoldenCase
-from promptwatch.gemini import DEFAULT_MODEL, client
+from promptwatch.provider import Provider, Turn
 
 _SCORE_SCHEMA = {
     "type": "object",
@@ -52,10 +51,11 @@ def _grading_request(case: GoldenCase, summary: str) -> str:
 
 
 async def score_summary(
+    provider: Provider,
     judge_config: JudgeConfig,
     case: GoldenCase,
     summary: str,
-    model: str = DEFAULT_MODEL,
+    model: str | None = None,
 ) -> int:
     """Grade a generated summary against a golden case, 1 to 5.
 
@@ -66,25 +66,22 @@ async def score_summary(
         An integer score from 1 to 5.
 
     Raises:
-        RuntimeError: if GEMINI_API_KEY is not set.
+        ProviderError: if the provider is unreachable or misconfigured.
         ValueError: if the judge returns anything other than an integer 1-5.
     """
-    response = await client().aio.models.generate_content(
-        model=model,
-        contents=_grading_request(case, summary),
-        config=types.GenerateContentConfig(
-            system_instruction=judge_config.system_prompt,
-            response_mime_type="application/json",
-            response_schema=_SCORE_SCHEMA,
-            temperature=0,
-        ),
+    completion = await provider.generate_json(
+        system_prompt=judge_config.system_prompt,
+        turns=[Turn(role="user", text=_grading_request(case, summary))],
+        schema=_SCORE_SCHEMA,
+        model=model or provider.default_model,
+        temperature=0,
     )
 
     try:
-        data = json.loads(response.text)
+        data = json.loads(completion.text)
     except json.JSONDecodeError as exc:
         raise ValueError(
-            f"judge response was not valid JSON: {response.text!r}"
+            f"judge response was not valid JSON: {completion.text!r}"
         ) from exc
 
     score = data.get("score")

@@ -10,6 +10,15 @@ env/
 __pycache__/
 *.pyc
 
+# Build and tool caches
+*.egg-info/
+build/
+dist/
+.coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
 # VS Code
 .vscode/
 
