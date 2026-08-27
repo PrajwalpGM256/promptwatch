@@ -1,8 +1,14 @@
 import json
 
 import pytest
+from conftest import FakeProvider
 
-from promptwatch.classifier import _build_turns, _parse_result, _response_schema
+from promptwatch.classifier import (
+    _build_turns,
+    _parse_result,
+    _response_schema,
+    classify_email,
+)
 from promptwatch.config import PromptConfig
 from promptwatch.models import EmailInput
 
@@ -69,3 +75,13 @@ def test_build_turns_renders_examples_as_json_answers():
     answer = json.loads(turns[1].text)
     assert answer["category"] == config.few_shot_examples[0].category
     assert answer["summary"] == config.few_shot_examples[0].summary
+
+
+@pytest.mark.asyncio
+async def test_classification_is_greedy_by_default():
+    provider = FakeProvider()
+    config = PromptConfig.load("prompts/v2.yaml")
+
+    await classify_email(provider, config, EmailInput(subject="s", body="b"))
+
+    assert provider.temperatures == [0.0]

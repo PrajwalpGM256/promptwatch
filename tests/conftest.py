@@ -26,6 +26,7 @@ class FakeProvider:
     name = "fake"
     default_model = "fake-1"
     default_requests_per_minute = 0
+    default_concurrency = 5
 
     def __init__(
         self,
@@ -41,6 +42,7 @@ class FakeProvider:
         self.error = error
         self.text = text
         self.calls: list[str] = []
+        self.temperatures: list[float | None] = []
 
     async def generate_json(
         self,
@@ -52,6 +54,7 @@ class FakeProvider:
     ) -> Completion:
         judging = "score" in schema["properties"]
         self.calls.append("judge" if judging else "classify")
+        self.temperatures.append(temperature)
         if self.error is not None:
             raise self.error
         if self.text is not None:

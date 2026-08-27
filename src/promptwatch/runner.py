@@ -3,6 +3,7 @@ from datetime import UTC, datetime
 from time import perf_counter
 
 from tenacity import (
+    RetryCallState,
     retry,
     retry_if_exception_type,
     stop_after_attempt,
@@ -22,8 +23,6 @@ from promptwatch.provider import (
     get_provider,
 )
 from promptwatch.results import CaseResult, RunResult
-
-DEFAULT_CONCURRENCY = 5
 
 
 class RateLimiter:
@@ -51,17 +50,27 @@ class RateLimiter:
             await asyncio.sleep(wait)
 
 
+_backoff = wait_exponential(multiplier=3, min=3, max=60)
+
+
+def _wait(state: RetryCallState) -> float:
+    """Wait as long as the provider asked, or back off exponentially."""
+    exception = state.outcome.exception() if state.outcome else None
+    if isinstance(exception, TransientError) and exception.retry_after:
+        return exception.retry_after
+    return _backoff(state)
+
+
 _transient_retry = retry(
     retry=retry_if_exception_type(TransientError),
     stop=stop_after_attempt(5),
-    wait=wait_exponential(multiplier=3, min=3, max=60),
+    wait=_wait,
     reraise=True,
 )
 
 
-def _run_id(prompt_version: str) -> str:
-    stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S")
-    return f"{stamp}-{prompt_version}"
+def _run_id(prompt_version: str, started: datetime) -> str:
+    return f"{started.strftime('%Y%m%dT%H%M%S')}-{prompt_version}"
 
 
 async def _classify(
@@ -148,6 +157,7 @@ async def _run_case(
     judge_model: str,
     semaphore: asyncio.Semaphore,
     limiter: RateLimiter,
+    judge_limiter: RateLimiter,
 ) -> CaseResult:
     if case.expected_category not in prompt_config.categories:
         return CaseResult(
@@ -160,7 +170,12 @@ async def _run_case(
         result = await _classify(provider, prompt_config, case, model, limiter)
         if judge_config is not None and result.summary:
             await _judge(
-                judge_provider, result, case, judge_config, judge_model, limiter
+                judge_provider,
+                result,
+                case,
+                judge_config,
+                judge_model,
+                judge_limiter,
             )
     return result
 
@@ -173,7 +188,7 @@ async def run_dataset(
     model: str | None = None,
     judge_provider: Provider | None = None,
     judge_model: str | None = None,
-    concurrency: int = DEFAULT_CONCURRENCY,
+    concurrency: int | None = None,
     requests_per_minute: int | None = None,
     limit: int | None = None,
 ) -> RunResult:
@@ -183,7 +198,10 @@ async def run_dataset(
     out_of_contract without spending a provider call, so an older prompt is
     never penalised for a category that postdates it. Passing `judge_config` as
     None skips summary scoring and halves the calls. A `requests_per_minute` of
-    None takes the provider's own pacing; 0 disables pacing entirely.
+    None takes the provider's own pacing; 0 disables pacing entirely. The
+    judge is paced from its own backend's limit when it differs from the one
+    under test, and shares the same limiter when it does not, because one
+    account is one quota however many call sites draw on it.
 
     The judge runs on `judge_provider`, which is deliberately independent of
     the backend under test: a grader that changes with the thing it grades
@@ -193,13 +211,20 @@ async def run_dataset(
         A RunResult holding one CaseResult per case evaluated.
     """
     model = model or provider.default_model
+    concurrency = concurrency or provider.default_concurrency
     judge_provider = judge_provider or get_provider(DEFAULT_JUDGE_PROVIDER)
     judge_model = judge_model or judge_provider.default_model
     if requests_per_minute is None:
         requests_per_minute = provider.default_requests_per_minute
     cases = dataset.cases[:limit] if limit else dataset.cases
+    started = datetime.now(UTC)
     semaphore = asyncio.Semaphore(concurrency)
     limiter = RateLimiter(requests_per_minute)
+    judge_limiter = (
+        limiter
+        if judge_provider.name == provider.name
+        else RateLimiter(judge_provider.default_requests_per_minute)
+    )
 
     results = await asyncio.gather(
         *(
@@ -213,13 +238,14 @@ async def run_dataset(
                 judge_model,
                 semaphore,
                 limiter,
+                judge_limiter,
             )
             for case in cases
         )
     )
 
     return RunResult(
-        run_id=_run_id(prompt_config.version),
+        run_id=_run_id(prompt_config.version, started),
         prompt_version=prompt_config.version,
         provider=provider.name,
         model=model,
@@ -227,6 +253,6 @@ async def run_dataset(
         judge_version=judge_config.version if judge_config else "none",
         judge_provider=judge_provider.name if judge_config else "none",
         judge_model=judge_model if judge_config else "none",
-        started_at=datetime.now(UTC).isoformat(timespec="seconds"),
+        started_at=started.isoformat(timespec="seconds"),
         cases=list(results),
     )

@@ -29,13 +29,23 @@ class ProviderError(Exception):
 
 
 class TransientError(ProviderError):
-    """A rate limit or server-side failure worth retrying."""
+    """A rate limit or server-side failure worth retrying.
+
+    `retry_after` carries the server's own Retry-After hint in seconds when it
+    sends one. A token-bucket limit refills on the server's schedule, not ours,
+    so guessing a backoff wastes attempts.
+    """
+
+    def __init__(self, message: str, retry_after: float | None = None) -> None:
+        super().__init__(message)
+        self.retry_after = retry_after
 
 
 class Provider(Protocol):
     name: str
     default_model: str
     default_requests_per_minute: int
+    default_concurrency: int
 
     async def generate_json(
         self,

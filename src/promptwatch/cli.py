@@ -15,7 +15,7 @@ from promptwatch.results import (
     load_run,
     save_run,
 )
-from promptwatch.runner import DEFAULT_CONCURRENCY, run_dataset
+from promptwatch.runner import run_dataset
 
 DEFAULT_DATASET = Path("datasets/golden_v1.json")
 DEFAULT_JUDGE = Path("prompts/judge_v1.yaml")
@@ -136,7 +136,9 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--judge-model", help="defaults to the judge backend's own")
     run.add_argument("--limit", type=int)
     run.add_argument("--skip-judge", action="store_true")
-    run.add_argument("--concurrency", type=int, default=DEFAULT_CONCURRENCY)
+    run.add_argument(
+        "--concurrency", type=int, help="defaults to the provider's own"
+    )
     run.add_argument(
         "--rpm", type=int, help="requests per minute; 0 disables pacing"
     )

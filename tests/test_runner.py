@@ -3,12 +3,13 @@ from time import perf_counter
 
 import pytest
 from conftest import FakeProvider
+from tenacity import Future, RetryCallState
 
 from promptwatch.config import PromptConfig
 from promptwatch.dataset import GoldenCase, GoldenDataset
 from promptwatch.judge import JudgeConfig
-from promptwatch.provider import ProviderError, get_provider
-from promptwatch.runner import RateLimiter, _run_case, run_dataset
+from promptwatch.provider import ProviderError, TransientError, get_provider
+from promptwatch.runner import RateLimiter, _run_case, _wait, run_dataset
 
 
 def case_expecting(category: str, fields: dict) -> GoldenCase:
@@ -46,6 +47,7 @@ async def test_out_of_contract_case_never_calls_the_api(valid_case_fields):
         FakeProvider(),
         "no-such-judge-model",
         asyncio.Semaphore(1),
+        RateLimiter(600),
         RateLimiter(600),
     )
 
@@ -194,3 +196,70 @@ async def test_limit_truncates_the_case_list(valid_case_fields):
 
     assert len(run.cases) == 1
     assert provider.calls == ["classify"]
+
+
+@pytest.mark.asyncio
+async def test_judge_is_paced_by_its_own_backend(valid_case_fields, monkeypatch):
+    intervals = []
+    original = RateLimiter.__init__
+
+    def record(self, per_minute):
+        intervals.append(per_minute)
+        original(self, per_minute)
+
+    monkeypatch.setattr(RateLimiter, "__init__", record)
+
+    judge = JudgeConfig.load("prompts/judge_v1.yaml")
+    grader = FakeProvider()
+    grader.name = "fake-judge"
+    grader.default_requests_per_minute = 600
+
+    await run_dataset(
+        FakeProvider(),
+        PromptConfig.load("prompts/v2.yaml"),
+        two_cases(valid_case_fields),
+        judge,
+        judge_provider=grader,
+        requests_per_minute=0,
+    )
+
+    assert intervals == [0, 600]
+
+
+@pytest.mark.asyncio
+async def test_one_backend_gets_one_limiter(valid_case_fields, monkeypatch):
+    built = []
+    original = RateLimiter.__init__
+
+    def record(self, per_minute):
+        built.append(per_minute)
+        original(self, per_minute)
+
+    monkeypatch.setattr(RateLimiter, "__init__", record)
+
+    same = FakeProvider()
+    await run_dataset(
+        same,
+        PromptConfig.load("prompts/v2.yaml"),
+        two_cases(valid_case_fields),
+        JudgeConfig.load("prompts/judge_v1.yaml"),
+        judge_provider=same,
+        requests_per_minute=0,
+    )
+
+    assert built == [0]
+
+
+def _state(exception):
+    state = RetryCallState(None, None, (), {})
+    state.outcome = Future.construct(1, exception, True)
+    state.attempt_number = 1
+    return state
+
+
+def test_wait_honours_the_provider_hint():
+    assert _wait(_state(TransientError("429", retry_after=45))) == 45
+
+
+def test_wait_falls_back_to_backoff_without_a_hint():
+    assert _wait(_state(TransientError("429"))) == 3

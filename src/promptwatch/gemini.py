@@ -54,6 +54,7 @@ class GeminiProvider:
     name = "gemini"
     default_model = DEFAULT_MODEL
     default_requests_per_minute = 12
+    default_concurrency = 5
 
     async def generate_json(
         self,

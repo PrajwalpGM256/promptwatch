@@ -51,6 +51,17 @@ def _messages(system_prompt: str, turns: list[Turn]) -> list[dict[str, str]]:
     ]
 
 
+def _retry_after(response: httpx.Response) -> float | None:
+    """Read the server's Retry-After hint in seconds, if it sent one."""
+    raw = response.headers.get("retry-after")
+    if raw is None:
+        return None
+    try:
+        return float(raw)
+    except ValueError:
+        return None
+
+
 def _strict(schema: JsonSchema) -> JsonSchema:
     """Close every object in `schema` to extra keys, as strict mode demands."""
     if schema.get("type") != "object":
@@ -64,7 +75,8 @@ def _strict(schema: JsonSchema) -> JsonSchema:
 class GroqProvider:
     name = "groq"
     default_model = DEFAULT_MODEL
-    default_requests_per_minute = 20
+    default_requests_per_minute = 6
+    default_concurrency = 5
 
     async def generate_json(
         self,
@@ -106,7 +118,9 @@ class GroqProvider:
         except httpx.HTTPStatusError as exc:
             status = exc.response.status_code
             if status == 429 or status >= 500:
-                raise TransientError(f"Groq returned {status}") from exc
+                raise TransientError(
+                    f"Groq returned {status}", _retry_after(exc.response)
+                ) from exc
             raise ProviderError(f"Groq returned {status}: {exc.response.text}") from exc
         except httpx.HTTPError as exc:
             raise ProviderError(f"{type(exc).__name__}: {exc}") from exc

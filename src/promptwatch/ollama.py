@@ -44,6 +44,7 @@ class OllamaProvider:
     name = "ollama"
     default_model = DEFAULT_MODEL
     default_requests_per_minute = 0
+    default_concurrency = 1
 
     async def generate_json(
         self,

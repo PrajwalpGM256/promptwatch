@@ -87,6 +87,7 @@ async def classify_email(
     prompt_config: PromptConfig,
     email: EmailInput,
     model: str | None = None,
+    temperature: float = 0.0,
 ) -> tuple[ClassificationResult, Completion]:
     """Classify an email into a Category and summarize it.
 
@@ -94,6 +95,11 @@ async def classify_email(
     instruction and its few-shot examples as prior turns, with `email` as the
     final user turn. The model is constrained to JSON matching the
     ClassificationResult schema.
+
+    Defaults to temperature 0 because this is the sampling path a regression
+    suite measures: at a provider's default temperature the same prompt and
+    model disagree with themselves between runs, and the diff reports that as
+    a regression.
 
     Returns:
         A validated ClassificationResult and the raw Completion, whose token
@@ -108,6 +114,7 @@ async def classify_email(
         turns=_build_turns(prompt_config, email),
         schema=_response_schema(prompt_config.categories),
         model=model or provider.default_model,
+        temperature=temperature,
     )
     return _parse_result(completion.text, prompt_config.categories), completion
 
