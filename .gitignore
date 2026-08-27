@@ -10,6 +10,10 @@ env/
 __pycache__/
 *.pyc
 
+# Throwaway eval databases. runs.db is tracked deliberately: run history is
+# the baseline CI diffs against.
+smoke.db
+
 # Build and tool caches
 *.egg-info/
 build/
