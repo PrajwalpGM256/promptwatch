@@ -12,13 +12,14 @@ from tenacity import (
 from promptwatch.classifier import classify_email
 from promptwatch.config import PromptConfig
 from promptwatch.dataset import GoldenCase, GoldenDataset
-from promptwatch.judge import JudgeConfig, score_summary
+from promptwatch.judge import DEFAULT_JUDGE_PROVIDER, JudgeConfig, score_summary
 from promptwatch.models import ClassificationResult, EmailInput
 from promptwatch.provider import (
     Completion,
     Provider,
     ProviderError,
     TransientError,
+    get_provider,
 )
 from promptwatch.results import CaseResult, RunResult
 
@@ -143,6 +144,8 @@ async def _run_case(
     prompt_config: PromptConfig,
     judge_config: JudgeConfig | None,
     model: str,
+    judge_provider: Provider,
+    judge_model: str,
     semaphore: asyncio.Semaphore,
     limiter: RateLimiter,
 ) -> CaseResult:
@@ -156,7 +159,9 @@ async def _run_case(
     async with semaphore:
         result = await _classify(provider, prompt_config, case, model, limiter)
         if judge_config is not None and result.summary:
-            await _judge(provider, result, case, judge_config, model, limiter)
+            await _judge(
+                judge_provider, result, case, judge_config, judge_model, limiter
+            )
     return result
 
 
@@ -166,6 +171,8 @@ async def run_dataset(
     dataset: GoldenDataset,
     judge_config: JudgeConfig | None = None,
     model: str | None = None,
+    judge_provider: Provider | None = None,
+    judge_model: str | None = None,
     concurrency: int = DEFAULT_CONCURRENCY,
     requests_per_minute: int | None = None,
     limit: int | None = None,
@@ -178,10 +185,16 @@ async def run_dataset(
     None skips summary scoring and halves the calls. A `requests_per_minute` of
     None takes the provider's own pacing; 0 disables pacing entirely.
 
+    The judge runs on `judge_provider`, which is deliberately independent of
+    the backend under test: a grader that changes with the thing it grades
+    makes summary scores incomparable between runs.
+
     Returns:
         A RunResult holding one CaseResult per case evaluated.
     """
     model = model or provider.default_model
+    judge_provider = judge_provider or get_provider(DEFAULT_JUDGE_PROVIDER)
+    judge_model = judge_model or judge_provider.default_model
     if requests_per_minute is None:
         requests_per_minute = provider.default_requests_per_minute
     cases = dataset.cases[:limit] if limit else dataset.cases
@@ -196,6 +209,8 @@ async def run_dataset(
                 prompt_config,
                 judge_config,
                 model,
+                judge_provider,
+                judge_model,
                 semaphore,
                 limiter,
             )
@@ -210,6 +225,8 @@ async def run_dataset(
         model=model,
         dataset_version=dataset.version,
         judge_version=judge_config.version if judge_config else "none",
+        judge_provider=judge_provider.name if judge_config else "none",
+        judge_model=judge_model if judge_config else "none",
         started_at=datetime.now(UTC).isoformat(timespec="seconds"),
         cases=list(results),
     )

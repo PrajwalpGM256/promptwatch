@@ -5,7 +5,7 @@ from pathlib import Path
 from promptwatch.config import PromptConfig
 from promptwatch.dataset import GoldenDataset
 from promptwatch.diff import DEFAULT_CRITICAL, DEFAULT_WARN, diff_runs, format_diff
-from promptwatch.judge import JudgeConfig
+from promptwatch.judge import DEFAULT_JUDGE_PROVIDER, JudgeConfig
 from promptwatch.provider import get_provider, names
 from promptwatch.results import (
     DEFAULT_DB,
@@ -29,6 +29,7 @@ def _summarise(run: RunResult) -> str:
             f"run           {run.run_id}",
             f"prompt        {run.prompt_version}   judge {run.judge_version}",
             f"backend       {run.provider}   model {run.model}",
+            f"judged by     {run.judge_provider}   model {run.judge_model}",
             f"cases         {len(run.cases)}  "
             f"(scored {len(run.scored)}, "
             f"out of contract {run.count('out_of_contract')}, "
@@ -49,6 +50,8 @@ def _run(args: argparse.Namespace) -> int:
     judge_config = None if args.skip_judge else JudgeConfig.load(args.judge)
     provider = get_provider(args.provider)
     model = args.model or provider.default_model
+    judge_provider = get_provider(args.judge_provider)
+    judge_model = args.judge_model or judge_provider.default_model
 
     connection = connect(args.db)
     previous = latest_run(connection, prompt_config.version, provider.name, model)
@@ -60,6 +63,8 @@ def _run(args: argparse.Namespace) -> int:
             dataset,
             judge_config,
             model=model,
+            judge_provider=judge_provider,
+            judge_model=judge_model,
             concurrency=args.concurrency,
             requests_per_minute=args.rpm,
             limit=args.limit,
@@ -122,6 +127,13 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--judge", type=Path, default=DEFAULT_JUDGE)
     run.add_argument("--provider", choices=names(), default="ollama")
     run.add_argument("--model", help="defaults to the provider's own default")
+    run.add_argument(
+        "--judge-provider",
+        choices=names(),
+        default=DEFAULT_JUDGE_PROVIDER,
+        help="backend that grades summaries; kept independent of --provider",
+    )
+    run.add_argument("--judge-model", help="defaults to the judge backend's own")
     run.add_argument("--limit", type=int)
     run.add_argument("--skip-judge", action="store_true")
     run.add_argument("--concurrency", type=int, default=DEFAULT_CONCURRENCY)

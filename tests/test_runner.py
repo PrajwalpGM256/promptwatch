@@ -43,6 +43,8 @@ async def test_out_of_contract_case_never_calls_the_api(valid_case_fields):
         v1,
         None,
         "no-such-model",
+        FakeProvider(),
+        "no-such-judge-model",
         asyncio.Semaphore(1),
         RateLimiter(600),
     )
@@ -110,11 +112,38 @@ async def test_run_dataset_judges_only_when_given_a_judge(valid_case_fields):
     unjudged = await run_dataset(FakeProvider(), v2, dataset)
     assert [c.summary_score for c in unjudged.cases] == [None, None]
     assert unjudged.judge_version == "none"
+    assert unjudged.judge_provider == "none"
 
-    judged = await run_dataset(FakeProvider(score=4), v2, dataset, judge)
+    grader = FakeProvider(score=4)
+    judged = await run_dataset(
+        FakeProvider(), v2, dataset, judge, judge_provider=grader
+    )
     assert [c.summary_score for c in judged.cases] == [4, 4]
     assert judged.judge_version == judge.version
     assert judged.mean_summary_score == 4
+    assert grader.calls == ["judge", "judge"]
+
+
+@pytest.mark.asyncio
+async def test_judge_runs_on_its_own_backend(valid_case_fields):
+    v2 = PromptConfig.load("prompts/v2.yaml")
+    judge = JudgeConfig.load("prompts/judge_v1.yaml")
+    under_test = FakeProvider(category="misc")
+    grader = FakeProvider(score=2)
+
+    run = await run_dataset(
+        under_test,
+        v2,
+        two_cases(valid_case_fields),
+        judge,
+        judge_provider=grader,
+    )
+
+    assert run.provider == "fake"
+    assert run.judge_provider == "fake"
+    assert run.judge_model == "fake-1"
+    assert under_test.calls == ["classify", "classify"]
+    assert grader.calls == ["judge", "judge"]
 
 
 @pytest.mark.asyncio

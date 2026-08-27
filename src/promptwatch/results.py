@@ -19,6 +19,8 @@ CREATE TABLE IF NOT EXISTS runs (
     model           TEXT NOT NULL,
     dataset_version TEXT NOT NULL,
     judge_version   TEXT NOT NULL,
+    judge_provider  TEXT NOT NULL DEFAULT 'none',
+    judge_model     TEXT NOT NULL DEFAULT 'none',
     started_at      TEXT NOT NULL
 );
 
@@ -71,6 +73,8 @@ class RunResult(BaseModel):
     model: str
     dataset_version: str
     judge_version: str
+    judge_provider: str = "none"
+    judge_model: str = "none"
     started_at: str
     cases: list[CaseResult]
 
@@ -121,29 +125,47 @@ class RunResult(BaseModel):
         return {case.case_id: case for case in self.cases}
 
 
-def _add_provider_column(connection: sqlite3.Connection) -> None:
+def _migrate(connection: sqlite3.Connection) -> None:
     columns = {
         row["name"] for row in connection.execute("PRAGMA table_info(runs)")
     }
-    if "provider" not in columns:
-        with connection:
+    with connection:
+        if "provider" not in columns:
             connection.execute(
                 "ALTER TABLE runs ADD COLUMN provider TEXT NOT NULL "
                 "DEFAULT 'gemini'"
+            )
+        if "judge_provider" not in columns:
+            connection.execute(
+                "ALTER TABLE runs ADD COLUMN judge_provider TEXT NOT NULL "
+                "DEFAULT ''"
+            )
+            connection.execute(
+                "ALTER TABLE runs ADD COLUMN judge_model TEXT NOT NULL "
+                "DEFAULT ''"
+            )
+            connection.execute(
+                "UPDATE runs SET"
+                " judge_provider = CASE WHEN judge_version = 'none'"
+                "                  THEN 'none' ELSE provider END,"
+                " judge_model = CASE WHEN judge_version = 'none'"
+                "               THEN 'none' ELSE model END"
+                " WHERE judge_provider = ''"
             )
 
 
 def connect(path: str | Path = DEFAULT_DB) -> sqlite3.Connection:
     """Open the run database, creating the schema if absent.
 
-    Databases written before providers were pluggable gain a `provider` column
-    defaulted to gemini, which is what those runs used.
+    Older databases are migrated forward. The judge columns are backfilled
+    from each run's own provider and model rather than a fixed value, because
+    before the judge was separable it always ran on the backend under test.
     """
     connection = sqlite3.connect(path)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
     connection.executescript(SCHEMA)
-    _add_provider_column(connection)
+    _migrate(connection)
     return connection
 
 
@@ -156,10 +178,11 @@ def save_run(connection: sqlite3.Connection, run: RunResult) -> None:
     with connection:
         connection.execute(
             "INSERT INTO runs (run_id, prompt_version, provider, model, "
-            "dataset_version, judge_version, started_at) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?)",
+            "dataset_version, judge_version, judge_provider, judge_model, "
+            "started_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (run.run_id, run.prompt_version, run.provider, run.model,
-             run.dataset_version, run.judge_version, run.started_at),
+             run.dataset_version, run.judge_version, run.judge_provider,
+             run.judge_model, run.started_at),
         )
         connection.executemany(
             f"INSERT INTO case_results (run_id, {_CASE_COLUMNS}) "

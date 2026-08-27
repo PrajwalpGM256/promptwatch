@@ -120,6 +120,8 @@ def make_run(
     model: str = "gemini-3.5-flash-lite",
     dataset_version: str = "v1",
     judge_version: str = "v1",
+    judge_provider: str = "groq",
+    judge_model: str = "openai/gpt-oss-20b",
 ) -> RunResult:
     return RunResult(
         run_id=run_id,
@@ -128,6 +130,8 @@ def make_run(
         model=model,
         dataset_version=dataset_version,
         judge_version=judge_version,
+        judge_provider=judge_provider,
+        judge_model=judge_model,
         started_at="2026-08-25T00:00:00Z",
         cases=cases,
     )

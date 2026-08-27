@@ -59,6 +59,7 @@ GMAIL_APP_PASSWORD=your-app-password
 promptwatch run prompts/v2.yaml                 # evaluate, store, auto-diff
 promptwatch run prompts/v2.yaml --limit 5 --skip-judge   # quick smoke run
 promptwatch run prompts/v2.yaml --provider gemini        # hosted backend
+promptwatch run prompts/v2.yaml --judge-provider gemini   # change the grader
 promptwatch runs                                # list recorded runs
 promptwatch diff <base_run_id> <head_run_id>
 ```
@@ -68,7 +69,7 @@ promptwatch diff <base_run_id> <head_run_id>
 ```bash
 ruff check .    # lint
 mypy            # strict over src/ and tools/
-pytest          # 100 tests, no API calls, fails under 80% coverage
+pytest          # 103 tests, no API calls, fails under 80% coverage
 ```
 
 `run` exits 0 on pass, 1 on warn, 2 on critical or when there is too little data to judge, so it can gate CI directly.
@@ -88,7 +89,7 @@ provider.py                       one transport interface
   ollama.py  gemini.py  groq.py   three backends behind it
 ```
 
-A run is `(prompt version, provider, model, dataset version, judge version, timestamp)` plus one scored result per case, stored in SQLite with the constraints enforced by the database rather than only in Python.
+A run is `(prompt version, provider, model, dataset version, judge version, judge backend, timestamp)` plus one scored result per case, stored in SQLite with the constraints enforced by the database rather than only in Python.
 
 ## Design decisions worth reading
 
@@ -99,6 +100,8 @@ A run is `(prompt version, provider, model, dataset version, judge version, time
 **Transport errors are quarantined from contract violations.** A model returning a category the prompt forbids is real signal and counts as wrong. A network failure is noise: it is retried, then excluded from the denominator entirely. A run with five dropped connections must not read as five wrong answers.
 
 **Confounders are detected.** If two runs differ in provider, model, dataset version or judge version, the diff prints `NOT A CLEAN PROMPT COMPARISON` and names what changed. This was added after a diff proudly reported a 20% improvement that was entirely due to a model swap.
+
+**The judge is pinned to one backend, whatever is under test.** Summary scores are only comparable if the grader is constant, so `--judge-provider` defaults to Groq and does not follow `--provider`. Letting it inherit meant gpt-oss-20b wrote summaries and then graded them, and a Gemini run and a Groq run reported 4.60 and 3.60 with no way to tell whether that was summary quality or grader strictness. Both numbers were measuring two things at once.
 
 **The backend is part of a run's identity, not a setting.** A run records its provider and model, and "the previous run to compare against" is scoped to both. The alternative — keying baselines on prompt version alone — means a local run silently diffs against a hosted one and reports the backend swap as a prompt regression. That is the exact failure the tool exists to catch, so it cannot be allowed in the tool itself. It also turns a constraint into a feature: the same golden suite runs against three backends, so "is the cheap local model good enough" becomes a question the harness answers rather than one you guess at.
 
@@ -166,5 +169,5 @@ src/promptwatch/
 prompts/                 v1.yaml, v2.yaml, judge_v1.yaml
 datasets/golden_v1.json  94 labelled cases
 tools/                   Gmail fetcher and redaction helpers
-tests/                   100 tests, no API calls
+tests/                   103 tests, no API calls
 ```

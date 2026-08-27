@@ -55,6 +55,8 @@ def _confounders(base: RunResult, head: RunResult) -> list[str]:
         ("model", base.model, head.model),
         ("dataset", base.dataset_version, head.dataset_version),
         ("judge", base.judge_version, head.judge_version),
+        ("judge backend", base.judge_provider, head.judge_provider),
+        ("judge model", base.judge_model, head.judge_model),
     ):
         if before != after:
             changed.append(f"{label} {before} -> {after}")

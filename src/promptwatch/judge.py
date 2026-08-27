@@ -7,6 +7,8 @@ from pydantic import BaseModel, ConfigDict
 from promptwatch.dataset import GoldenCase
 from promptwatch.provider import Provider, Turn
 
+DEFAULT_JUDGE_PROVIDER = "groq"
+
 _SCORE_SCHEMA = {
     "type": "object",
     "properties": {"score": {"type": "integer"}},

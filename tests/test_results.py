@@ -141,3 +141,50 @@ def test_latest_run_filters_by_prompt_version(connection):
     assert latest_run(connection, "v1").run_id == "old-v1"
     assert latest_run(connection, "v9") is None
     assert latest_run(connection) is not None
+
+
+LEGACY_SCHEMA = """
+CREATE TABLE runs (
+    run_id          TEXT PRIMARY KEY,
+    prompt_version  TEXT NOT NULL,
+    model           TEXT NOT NULL,
+    dataset_version TEXT NOT NULL,
+    judge_version   TEXT NOT NULL,
+    started_at      TEXT NOT NULL
+);
+"""
+
+
+def test_migration_backfills_a_pre_provider_database(tmp_path):
+    path = tmp_path / "legacy.db"
+    legacy = sqlite3.connect(path)
+    legacy.executescript(LEGACY_SCHEMA)
+    legacy.executemany(
+        "INSERT INTO runs VALUES (?, ?, ?, ?, ?, ?)",
+        [
+            ("judged", "v2", "gemini-3.5-flash-lite", "v1", "v1", "2026-08-25"),
+            ("unjudged", "v2", "gemini-3.5-flash-lite", "v1", "none", "2026-08-24"),
+        ],
+    )
+    legacy.commit()
+    legacy.close()
+
+    rows = {
+        row["run_id"]: dict(row)
+        for row in connect(path).execute(
+            "SELECT run_id, provider, judge_provider, judge_model FROM runs"
+        )
+    }
+
+    assert rows["judged"]["provider"] == "gemini"
+    assert rows["judged"]["judge_provider"] == "gemini"
+    assert rows["judged"]["judge_model"] == "gemini-3.5-flash-lite"
+    assert rows["unjudged"]["judge_provider"] == "none"
+    assert rows["unjudged"]["judge_model"] == "none"
+
+
+def test_migration_is_idempotent(tmp_path):
+    path = tmp_path / "twice.db"
+    connect(path)
+    columns = [row["name"] for row in connect(path).execute("PRAGMA table_info(runs)")]
+    assert columns.count("judge_provider") == 1
