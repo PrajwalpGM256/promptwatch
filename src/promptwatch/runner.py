@@ -214,8 +214,9 @@ async def run_dataset(
     None skips summary scoring and halves the calls. A `requests_per_minute` of
     None takes the provider's own pacing; 0 disables pacing entirely. The
     judge is paced from its own backend's limit when it differs from the one
-    under test, and shares the same limiter when it does not, because one
-    account is one quota however many call sites draw on it.
+    under test. When it does not, both share a single limiter running at half
+    the rate, because one account is one quota and a judged case spends two
+    calls on it rather than one.
 
     The judge runs on `judge_provider`, which is deliberately independent of
     the backend under test: a grader that changes with the thing it grades
@@ -237,13 +238,17 @@ async def run_dataset(
     judge_model = judge_model or judge_provider.default_model
     if requests_per_minute is None:
         requests_per_minute = provider.default_requests_per_minute
+    shares_quota = judge_config is not None and judge_provider.name == provider.name
+    if shares_quota:
+        requests_per_minute //= 2
+
     cases = dataset.cases[:limit] if limit else dataset.cases
     started = datetime.now(UTC)
     semaphore = asyncio.Semaphore(concurrency)
     limiter = RateLimiter(requests_per_minute)
     judge_limiter = (
         limiter
-        if judge_provider.name == provider.name
+        if shares_quota
         else RateLimiter(judge_provider.default_requests_per_minute)
     )
 

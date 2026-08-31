@@ -286,6 +286,38 @@ async def test_one_backend_gets_one_limiter(valid_case_fields, monkeypatch):
     assert built == [0]
 
 
+@pytest.mark.asyncio
+async def test_sharing_a_backend_halves_the_rate(valid_case_fields, monkeypatch):
+    built = []
+    original = RateLimiter.__init__
+
+    def record(self, per_minute):
+        built.append(per_minute)
+        original(self, per_minute)
+
+    monkeypatch.setattr(RateLimiter, "__init__", record)
+
+    same = FakeProvider()
+    v2 = PromptConfig.load("prompts/v2.yaml")
+    judge = JudgeConfig.load("prompts/judge_v1.yaml")
+
+    await run_dataset(
+        same,
+        v2,
+        two_cases(valid_case_fields),
+        judge,
+        judge_provider=same,
+        requests_per_minute=1200,
+    )
+    assert built == [600]
+
+    built.clear()
+    await run_dataset(
+        same, v2, two_cases(valid_case_fields), requests_per_minute=1200
+    )
+    assert built[0] == 1200
+
+
 def _state(exception):
     state = RetryCallState(None, None, (), {})
     state.outcome = Future.construct(1, exception, True)
