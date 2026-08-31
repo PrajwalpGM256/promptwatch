@@ -1,3 +1,4 @@
+import asyncio
 import json
 
 import pytest
@@ -52,6 +53,7 @@ class FakeProvider:
         model: str,
         temperature: float | None = None,
     ) -> Completion:
+        await asyncio.sleep(0)
         judging = "score" in schema["properties"]
         self.calls.append("judge" if judging else "classify")
         self.temperatures.append(temperature)

@@ -9,7 +9,13 @@ from promptwatch.config import PromptConfig
 from promptwatch.dataset import GoldenCase, GoldenDataset
 from promptwatch.judge import JudgeConfig
 from promptwatch.provider import ProviderError, TransientError, get_provider
-from promptwatch.runner import RateLimiter, _run_case, _wait, run_dataset
+from promptwatch.runner import (
+    RateLimiter,
+    RunAborted,
+    _run_case,
+    _wait,
+    run_dataset,
+)
 
 
 def case_expecting(category: str, fields: dict) -> GoldenCase:
@@ -161,17 +167,47 @@ async def test_undeclared_category_is_off_contract_output(valid_case_fields):
 
 
 @pytest.mark.asyncio
-async def test_provider_failure_is_quarantined_from_wrong_answers(
-    valid_case_fields,
-):
+async def test_provider_failure_abandons_the_run(valid_case_fields):
     v2 = PromptConfig.load("prompts/v2.yaml")
     provider = FakeProvider(error=ProviderError("no route to host"))
 
-    run = await run_dataset(provider, v2, two_cases(valid_case_fields))
+    with pytest.raises(RunAborted, match="no route to host"):
+        await run_dataset(provider, v2, two_cases(valid_case_fields))
 
-    assert {c.status for c in run.cases} == {"error"}
-    assert run.scored == []
-    assert run.scored_ratio == 0.0
+
+@pytest.mark.asyncio
+async def test_abort_stops_spending_requests(valid_case_fields):
+    v2 = PromptConfig.load("prompts/v2.yaml")
+    dataset = dataset_of(
+        *(
+            GoldenCase(**{**valid_case_fields, "id": f"gc-{n:03}"})
+            for n in range(1, 21)
+        )
+    )
+    provider = FakeProvider(error=ProviderError("quota exhausted"))
+
+    with pytest.raises(RunAborted):
+        await run_dataset(provider, v2, dataset, concurrency=2)
+
+    assert len(provider.calls) < 20
+
+
+@pytest.mark.asyncio
+async def test_progress_is_reported_per_case(valid_case_fields):
+    v2 = PromptConfig.load("prompts/v2.yaml")
+    seen: list[tuple[str, int, int]] = []
+
+    await run_dataset(
+        FakeProvider(),
+        v2,
+        two_cases(valid_case_fields),
+        on_case=lambda result, done, total: seen.append(
+            (result.case_id, done, total)
+        ),
+    )
+
+    assert [(done, total) for _, done, total in seen] == [(1, 2), (2, 2)]
+    assert {case_id for case_id, _, _ in seen} == {"gc-001", "gc-002"}
 
 
 @pytest.mark.asyncio

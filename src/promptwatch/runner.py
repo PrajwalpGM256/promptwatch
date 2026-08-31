@@ -1,4 +1,5 @@
 import asyncio
+from collections.abc import Callable
 from datetime import UTC, datetime
 from time import perf_counter
 
@@ -23,6 +24,18 @@ from promptwatch.provider import (
     get_provider,
 )
 from promptwatch.results import CaseResult, RunResult
+
+CaseObserver = Callable[[CaseResult, int, int], None]
+
+
+class RunAborted(Exception):
+    """A case failed after exhausting its retries, so the run was abandoned.
+
+    Raised instead of recording the failure. A provider that is still failing
+    after five retries and ninety seconds of backoff is out of quota or
+    misconfigured, not briefly unlucky, and every remaining request would be
+    spent confirming it.
+    """
 
 
 class RateLimiter:
@@ -191,6 +204,7 @@ async def run_dataset(
     concurrency: int | None = None,
     requests_per_minute: int | None = None,
     limit: int | None = None,
+    on_case: CaseObserver | None = None,
 ) -> RunResult:
     """Evaluate every case in `dataset` against one prompt version.
 
@@ -207,8 +221,15 @@ async def run_dataset(
     the backend under test: a grader that changes with the thing it grades
     makes summary scores incomparable between runs.
 
+    `on_case` is called with each finished case as it lands, in completion
+    order rather than dataset order, for progress reporting.
+
     Returns:
         A RunResult holding one CaseResult per case evaluated.
+
+    Raises:
+        RunAborted: if any case fails after exhausting its retries. Nothing is
+            returned, so the caller cannot record a partial run.
     """
     model = model or provider.default_model
     concurrency = concurrency or provider.default_concurrency
@@ -226,23 +247,36 @@ async def run_dataset(
         else RateLimiter(judge_provider.default_requests_per_minute)
     )
 
-    results = await asyncio.gather(
-        *(
-            _run_case(
-                provider,
-                case,
-                prompt_config,
-                judge_config,
-                model,
-                judge_provider,
-                judge_model,
-                semaphore,
-                limiter,
-                judge_limiter,
-            )
-            for case in cases
+    done = 0
+
+    async def evaluate(case: GoldenCase) -> CaseResult:
+        nonlocal done
+        result = await _run_case(
+            provider,
+            case,
+            prompt_config,
+            judge_config,
+            model,
+            judge_provider,
+            judge_model,
+            semaphore,
+            limiter,
+            judge_limiter,
         )
-    )
+        done += 1
+        if on_case is not None:
+            on_case(result, done, len(cases))
+        if result.status == "error":
+            raise RunAborted(f"{case.id}: {result.error}")
+        return result
+
+    try:
+        async with asyncio.TaskGroup() as group:
+            tasks = [group.create_task(evaluate(case)) for case in cases]
+    except* RunAborted as aborted:
+        raise aborted.exceptions[0] from None
+
+    results = [task.result() for task in tasks]
 
     return RunResult(
         run_id=_run_id(prompt_config.version, started),

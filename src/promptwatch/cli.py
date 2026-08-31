@@ -9,13 +9,14 @@ from promptwatch.judge import DEFAULT_JUDGE_PROVIDER, JudgeConfig
 from promptwatch.provider import get_provider, names
 from promptwatch.results import (
     DEFAULT_DB,
+    CaseResult,
     RunResult,
     connect,
     latest_run,
     load_run,
     save_run,
 )
-from promptwatch.runner import run_dataset
+from promptwatch.runner import RunAborted, run_dataset
 
 DEFAULT_DATASET = Path("datasets/golden_v1.json")
 DEFAULT_JUDGE = Path("prompts/judge_v1.yaml")
@@ -44,6 +45,32 @@ def _summarise(run: RunResult) -> str:
     )
 
 
+_MARKS = {
+    "scored": ("ok", "MISS"),
+    "out_of_contract": ("skip", "skip"),
+    "off_contract_output": ("BAD", "BAD"),
+    "error": ("ERROR", "ERROR"),
+}
+
+
+def _report_case(result: CaseResult, done: int, total: int) -> None:
+    hit, miss = _MARKS[result.status]
+    mark = hit if result.category_match else miss
+    if result.status == "scored":
+        detail = (
+            result.actual_category
+            if result.category_match
+            else f"{result.actual_category} != {result.expected_category}"
+        )
+    else:
+        detail = (result.error or "").splitlines()[0][:60]
+    print(
+        f"[{done:>3}/{total}] {result.case_id}  {mark:<5} "
+        f"{detail:<44} {result.latency_ms:>6}ms",
+        flush=True,
+    )
+
+
 def _run(args: argparse.Namespace) -> int:
     prompt_config = PromptConfig.load(args.prompt)
     dataset = GoldenDataset.load(args.dataset)
@@ -56,27 +83,37 @@ def _run(args: argparse.Namespace) -> int:
     connection = connect(args.db)
     previous = latest_run(connection, prompt_config.version, provider.name, model)
 
-    run = asyncio.run(
-        run_dataset(
-            provider,
-            prompt_config,
-            dataset,
-            judge_config,
-            model=model,
-            judge_provider=judge_provider,
-            judge_model=judge_model,
-            concurrency=args.concurrency,
-            requests_per_minute=args.rpm,
-            limit=args.limit,
+    try:
+        run = asyncio.run(
+            run_dataset(
+                provider,
+                prompt_config,
+                dataset,
+                judge_config,
+                model=model,
+                judge_provider=judge_provider,
+                judge_model=judge_model,
+                concurrency=args.concurrency,
+                requests_per_minute=args.rpm,
+                limit=args.limit,
+                on_case=None if args.quiet else _report_case,
+            )
         )
-    )
+    except RunAborted as exc:
+        print(f"\nRUN ABANDONED, NOTHING SAVED\n  {exc}")
+        print(
+            "  A case failed after five retries, so the backend is out of quota "
+            "or misconfigured.\n  The remaining requests would only confirm it."
+        )
+        return EXIT_CODES["no_data"]
+
     save_run(connection, run)
-    print(_summarise(run))
+    print("\n" + _summarise(run))
 
     if previous is None:
         print(
-            f"\nno earlier run of {prompt_config.version} on {provider.name}/{model}, "
-            "nothing to diff against"
+            f"\nno earlier run of {prompt_config.version} on "
+            f"{provider.name}/{model}, nothing to diff against"
         )
         return 0
 
@@ -135,6 +172,9 @@ def _parser() -> argparse.ArgumentParser:
     )
     run.add_argument("--judge-model", help="defaults to the judge backend's own")
     run.add_argument("--limit", type=int)
+    run.add_argument(
+        "--quiet", action="store_true", help="suppress per-case progress"
+    )
     run.add_argument("--skip-judge", action="store_true")
     run.add_argument(
         "--concurrency", type=int, help="defaults to the provider's own"
