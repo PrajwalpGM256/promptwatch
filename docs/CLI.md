@@ -18,7 +18,7 @@ Prints the backend, a validated `ClassificationResult`, and the token counts.
 ## Evaluate a prompt
 
 ```powershell
-promptwatch run prompts/v2.yaml
+promptwatch run prompts/v3.yaml
 ```
 
 Runs every case, scores it, stores the run, and diffs against the most recent earlier run *of the same prompt on the same backend*. `python -m promptwatch run ...` is identical if you would rather not rely on the console script.
@@ -43,8 +43,8 @@ Runs every case, scores it, stores the run, and diffs against the most recent ea
 `--db` and the thresholds are global flags and go *before* the subcommand:
 
 ```powershell
-promptwatch --db smoke.db run prompts/v2.yaml --limit 5 --skip-judge
-promptwatch --warn 0.01 --critical 0.05 run prompts/v2.yaml
+promptwatch --db smoke.db run prompts/v3.yaml --limit 5 --skip-judge
+promptwatch --warn 0.01 --critical 0.05 run prompts/v3.yaml
 ```
 
 ## Full dataset across all three backends
@@ -52,13 +52,13 @@ promptwatch --warn 0.01 --critical 0.05 run prompts/v2.yaml
 Run these **sequentially**. All three send judge traffic to the same Groq account, and three in-process rate limiters cannot see each other — running them in parallel produces nothing but 429s. One line guarantees the ordering:
 
 ```powershell
-promptwatch run prompts/v2.yaml --provider ollama; promptwatch run prompts/v2.yaml --provider groq; promptwatch run prompts/v2.yaml --provider gemini
+promptwatch run prompts/v3.yaml --provider ollama; promptwatch run prompts/v3.yaml --provider groq; promptwatch run prompts/v3.yaml --provider gemini
 ```
 
 Accuracy needs no judge, so measure that first if that is the question — it is faster and puts no load on Groq at all:
 
 ```powershell
-promptwatch run prompts/v2.yaml --provider ollama --skip-judge; promptwatch run prompts/v2.yaml --provider gemini --skip-judge; promptwatch run prompts/v2.yaml --provider groq --skip-judge
+promptwatch run prompts/v3.yaml --provider ollama --skip-judge; promptwatch run prompts/v3.yaml --provider gemini --skip-judge; promptwatch run prompts/v3.yaml --provider groq --skip-judge
 ```
 
 Rough cost and duration for one full 94-case run:

@@ -10,14 +10,20 @@ The point of the project: most teams ship prompt/model changes blind. This prove
 
 ## Current status
 
-**Phases 1 to 3 complete.** The eval engine runs, diffs and stores runs in SQLite. Providers were made pluggable afterwards because a full judged run is 188 requests and Gemini's free tier caps at 500/day — roughly 2.6 runs, which is not enough to iterate on a prompt. Ollama is now the default so iteration is unmetered; Gemini and Groq stay for hosted runs and CI. No alerting or CI exists yet. Do not scaffold ahead. Next: Phase 4.
+**Phases 1 to 3 complete**, validated end to end against all three backends on the full 94-case dataset. No alerting or CI exists yet. Do not scaffold ahead. Next: Phase 4.
 
-The recorded Gemini baselines in `runs.db` predate the `provider` and judge-backend columns. `connect()` migrates them forward, backfilling the judge columns from each run's own provider and model, which is correct because the judge always inherited the backend under test before it was separable. Local runs will not diff against them, by design.
+`v3.yaml` is the current prompt. It scores 97.87% on Gemini, 90.43% on Groq and 86.17% on Ollama, up from 90.43 / 79.79 / 78.72 for v2. Use v3 in examples and new runs unless a comparison specifically needs an older version.
+
+Providers were made pluggable because a full judged run is 188 requests against Gemini's 500/day cap, roughly 2.6 runs, which is not enough to iterate on a prompt. Ollama is the default so iteration is unmetered; Gemini and Groq stay for hosted runs and CI.
+
+Two behaviours worth knowing before changing the runner. Classification runs at temperature 0, because at the provider default two identical runs disagreed with each other and the diff reported that as a regression. And a case reaching `error` status has already survived five retries and up to ninety seconds of backoff, so the whole run is abandoned and nothing is written rather than recording a partial run.
 
 ## Non-negotiables
 
 - **Providers are pluggable, and never OpenAI or Anthropic.** Three backends implement the `Provider` protocol in `promptwatch/provider.py`: `ollama` (local, the default, no quota), `gemini` (`google-genai`, `GEMINI_API_KEY`), and `groq` (`GROQ_API_KEY`, raw HTTP). Groq's endpoint is OpenAI-shaped but the `openai` SDK is not a dependency and must not become one; hosted providers are reached with `httpx` directly. Never introduce `OPENAI_API_KEY` or an Anthropic SDK. Only `promptwatch/gemini.py` may import `google.genai` — nothing else in the package knows which backend it is talking to.
 - **The judge is pinned, never inherited.** `--judge-provider` defaults to `groq` and is deliberately independent of `--provider`. A grader that changes with the thing it grades makes summary scores incomparable, and lets a model mark its own homework. Groq specifically because it is the only backend that behaves identically on a laptop and on a GPU-less CI runner — pinning to Ollama makes CI unable to reproduce a score, pinning to Gemini puts every "free" local run back under the 500/day cap.
+- **The noise floor is measured, and thresholds sit above it.** Four runs of an identical configuration disagreed by 2 to 4 cases out of 94: hosted inference is not reproducible even at temperature 0, and 89 of 94 cases were stable across all four. `DEFAULT_WARN` is therefore 0.05, not the 0.03 it started at. Do not lower it without re-measuring the floor first. An alerting threshold inside the measurement noise fires on runs where nothing changed, which is the same failure the tool exists to catch.
+- **Classification runs at temperature 0.** `classify_email` passes it explicitly and every backend forwards it. The judge already ran at 0; the classifier did not, and that alone made runs disagree with themselves. Greedy decoding removes sampling variance and does not make hosted inference deterministic, which is why the floor above still exists.
 - **A run is identified by prompt version *and* backend.** `RunResult` records `provider`, `model`, `judge_provider` and `judge_model`; `latest_run()` filters on the classifier pair, and `diff.py` flags a change to either pair as a confounder. Comparing a local run against a hosted one measures the swap, not the prompt.
 - **Types are Pydantic.** Data models in `promptwatch/models.py`; config models in `promptwatch/config.py`. Any structured data crossing a function boundary is a typed model, not a loose dict.
 - **Prompts are versioned YAML** in `prompts/` (e.g. `v1.yaml`). A prompt change is a new version file, not an in-place edit. These files are the "code" CI runs against.
@@ -77,7 +83,7 @@ src/promptwatch/
   diff.py         — run-vs-run diffing and the verdict
 tests/
   conftest.py     — FakeProvider, fixtures, run/case builders
-prompts/v1.yaml   — versioned system prompt + few-shot examples (v2.yaml is current)
+prompts/v1.yaml   — versioned system prompt + few-shot examples (v3.yaml is current)
 datasets/golden_v1.json — the labelled corpus
 tools/
   fetch_emails.py — Gmail IMAP pull into a labelling worksheet
@@ -116,7 +122,7 @@ Known weaknesses to revisit in Phase 3: `misc` is heterogeneous (non-job mail, p
 
 1. ~~**Feature under test**~~ — classifier fn + Pydantic contract + versioned prompts. Done.
 2. ~~**Golden dataset**~~ — 94 hand-labeled cases, balanced, versioned JSON. Done.
-3. **Eval engine** — test runner (async batching), multi-dim scoring (exact category match, LLM-as-judge summary 1–5, latency, tokens), run-vs-run diffing, warn >3% / critical >8% thresholds (configurable). ← current
+3. ~~**Eval engine**~~ — test runner (async batching), multi-dim scoring (exact category match, LLM-as-judge summary 1–5, latency, tokens), run-vs-run diffing, warn >5% / critical >8% thresholds (configurable, and set above the measured noise floor). Done.
 4. **Alerting + reporting** — HTML diff report (scorecard, side-by-side regressions, trend chart), Slack webhook alerts, rolling-average slow-drift detection.
 5. **CI/CD** — GitHub Action on PRs touching `prompts/`; runs eval, comments status, blocks merge on critical regressions. Dockerize. README as onboarding docs, not a tutorial. **CI must use a hosted provider** — GitHub runners have no GPU, so `--provider ollama` is local-only. The Docker image must not bundle model weights; point it at a host Ollama via `OLLAMA_HOST`.
 6. **Portfolio polish** — Loom walkthrough, short writeup of the problem/approach/one proud design decision.
