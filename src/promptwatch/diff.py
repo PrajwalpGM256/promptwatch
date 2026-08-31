@@ -7,7 +7,7 @@ from promptwatch.results import RunResult
 
 Verdict = Literal["pass", "warn", "critical", "no_data"]
 
-DEFAULT_WARN = 0.03
+DEFAULT_WARN = 0.05
 DEFAULT_CRITICAL = 0.08
 MIN_SCORED_RATIO = 0.8
 

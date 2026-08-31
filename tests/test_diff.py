@@ -52,7 +52,15 @@ def test_cases_present_in_only_one_run_are_reported():
 
 @pytest.mark.parametrize(
     "wrong_in_head,expected",
-    [(0, "pass"), (3, "pass"), (5, "warn"), (9, "critical"), (20, "critical")],
+    [
+        (0, "pass"),
+        (4, "pass"),
+        (5, "pass"),
+        (6, "warn"),
+        (8, "warn"),
+        (9, "critical"),
+        (20, "critical"),
+    ],
 )
 def test_verdict_thresholds(wrong_in_head, expected):
     base = run_of("base", correct=100, wrong=0)
