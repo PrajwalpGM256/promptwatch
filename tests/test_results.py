@@ -244,3 +244,23 @@ def test_history_preserves_generated_summaries(connection):
     runs = run_history(connection, "v2", "gemini", "gemini-3.5-flash-lite")
 
     assert runs[0].by_id()["c1"].summary == text
+
+
+def test_unjudged_run_reports_no_summary_score():
+    run = make_run(
+        "unjudged",
+        [make_case_result("a", "misc", "misc", summary_score=None)],
+    )
+    assert run.mean_summary_score is None
+
+
+def test_partially_judged_run_averages_only_what_was_scored():
+    run = make_run(
+        "partial",
+        [
+            make_case_result("a", "misc", "misc", summary_score=5),
+            make_case_result("b", "misc", "misc", summary_score=3),
+            make_case_result("c", "misc", "misc", summary_score=None),
+        ],
+    )
+    assert run.mean_summary_score == 4

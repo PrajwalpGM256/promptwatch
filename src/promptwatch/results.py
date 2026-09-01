@@ -100,9 +100,9 @@ class RunResult(BaseModel):
         return sum(1 for case in scored if case.category_match) / len(scored)
 
     @property
-    def mean_summary_score(self) -> float:
+    def mean_summary_score(self) -> float | None:
         scores = [c.summary_score for c in self.cases if c.summary_score is not None]
-        return mean(scores) if scores else 0.0
+        return mean(scores) if scores else None
 
     @property
     def mean_latency_ms(self) -> float:

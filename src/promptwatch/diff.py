@@ -24,8 +24,8 @@ class RunDiff(BaseModel):
     head_run_id: str
     base_accuracy: float
     head_accuracy: float
-    base_summary_score: float
-    head_summary_score: float
+    base_summary_score: float | None
+    head_summary_score: float | None
     base_scored_ratio: float
     head_scored_ratio: float
     regressions: list[CaseFlip]
@@ -44,7 +44,10 @@ class RunDiff(BaseModel):
         return self.head_accuracy - self.base_accuracy
 
     @property
-    def summary_delta(self) -> float:
+    def summary_delta(self) -> float | None:
+        """The change in mean summary score, or None if either run was unjudged."""
+        if self.base_summary_score is None or self.head_summary_score is None:
+            return None
         return self.head_summary_score - self.base_summary_score
 
 
@@ -138,6 +141,19 @@ def diff_runs(
     )
 
 
+def format_score(value: float | None) -> str:
+    """Render a mean summary score, or say so when the run was unjudged."""
+    return "not judged" if value is None else f"{value:.2f}"
+
+
+def _summary_line(diff: RunDiff) -> str:
+    before = format_score(diff.base_summary_score)
+    after = format_score(diff.head_summary_score)
+    if diff.summary_delta is None:
+        return f"{before} -> {after}"
+    return f"{before} -> {after}   ({diff.summary_delta:+.2f})   reported only"
+
+
 def format_diff(diff: RunDiff) -> str:
     """Render a RunDiff as the terminal report."""
     lines = [f"{diff.head_run_id}  vs  {diff.base_run_id}", ""]
@@ -149,8 +165,7 @@ def format_diff(diff: RunDiff) -> str:
     lines += [
         f"category accuracy   {diff.base_accuracy:.2f} -> {diff.head_accuracy:.2f}"
         f"   ({diff.accuracy_delta:+.1%})   {diff.verdict.upper()}",
-        f"summary mean        {diff.base_summary_score:.2f} -> "
-        f"{diff.head_summary_score:.2f}   ({diff.summary_delta:+.2f})   reported only",
+        f"summary mean        {_summary_line(diff)}",
         f"cases scored        base {diff.base_scored_ratio:.0%}"
         f"   head {diff.head_scored_ratio:.0%}",
         "",

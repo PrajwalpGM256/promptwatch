@@ -126,3 +126,37 @@ def test_no_confounders_when_everything_matches():
     diff = diff_runs(run_of("base", 10, 0), run_of("head", 10, 0))
     assert diff.confounders == []
     assert "NOT A CLEAN PROMPT COMPARISON" not in format_diff(diff)
+
+
+def unjudged(run_id):
+    cases = [
+        make_case_result(f"c{i}", "misc", "misc", summary_score=None)
+        for i in range(10)
+    ]
+    return make_run(run_id, cases, judge_version="none", judge_provider="none")
+
+
+def test_delta_is_absent_when_either_run_was_unjudged():
+    judged = run_of("judged", correct=10, wrong=0)
+
+    assert diff_runs(judged, unjudged("head")).summary_delta is None
+    assert diff_runs(unjudged("base"), judged).summary_delta is None
+    assert diff_runs(unjudged("base"), unjudged("head")).summary_delta is None
+
+
+def test_unjudged_side_renders_as_not_judged():
+    text = format_diff(diff_runs(run_of("base", correct=10, wrong=0), unjudged("head")))
+
+    assert "not judged" in text
+    assert "0.00" not in text.split("summary mean")[1].split("\n")[0]
+
+
+def test_judged_pair_still_reports_a_delta():
+    text = format_diff(
+        diff_runs(
+            run_of("base", correct=10, wrong=0),
+            run_of("head", correct=10, wrong=0),
+        )
+    )
+    assert "reported only" in text
+    assert "not judged" not in text

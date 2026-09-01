@@ -4,7 +4,13 @@ from pathlib import Path
 
 from promptwatch.config import PromptConfig
 from promptwatch.dataset import GoldenDataset
-from promptwatch.diff import DEFAULT_CRITICAL, DEFAULT_WARN, diff_runs, format_diff
+from promptwatch.diff import (
+    DEFAULT_CRITICAL,
+    DEFAULT_WARN,
+    diff_runs,
+    format_diff,
+    format_score,
+)
 from promptwatch.judge import DEFAULT_JUDGE_PROVIDER, JudgeConfig
 from promptwatch.provider import get_provider, names
 from promptwatch.results import (
@@ -37,7 +43,7 @@ def _summarise(run: RunResult) -> str:
             f"off contract output {run.count('off_contract_output')}, "
             f"errors {run.count('error')})",
             f"accuracy      {run.category_accuracy:.2%}",
-            f"summary mean  {run.mean_summary_score:.2f}",
+            f"summary mean  {format_score(run.mean_summary_score)}",
             f"latency       mean {run.mean_latency_ms:.0f}ms  "
             f"max {run.max_latency_ms}ms",
             f"tokens        {run.total_tokens}",
