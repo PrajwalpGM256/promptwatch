@@ -10,6 +10,7 @@ from promptwatch.models import Category
 CaseStatus = Literal["scored", "out_of_contract", "off_contract_output", "error"]
 
 DEFAULT_DB = Path("runs.db")
+DEFAULT_HISTORY = 20
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS runs (
@@ -243,3 +244,28 @@ def latest_run(
 
     row = connection.execute(sql, params).fetchone()
     return load_run(connection, row["run_id"]) if row else None
+
+
+def run_history(
+    connection: sqlite3.Connection,
+    prompt_version: str,
+    provider: str,
+    model: str,
+    limit: int = DEFAULT_HISTORY,
+) -> list[RunResult]:
+    """The most recent `limit` runs of one prompt on one backend, oldest first.
+
+    Every filter is required: a series spanning backends is not a series, and
+    the judge is deliberately not part of it because it scores summaries and
+    cannot move category accuracy.
+
+    Returns:
+        Up to `limit` runs in chronological order, empty if none match.
+    """
+    rows = connection.execute(
+        "SELECT run_id FROM runs "
+        "WHERE prompt_version = ? AND provider = ? AND model = ? "
+        "ORDER BY started_at DESC, run_id DESC LIMIT ?",
+        (prompt_version, provider, model, limit),
+    ).fetchall()
+    return [load_run(connection, row["run_id"]) for row in reversed(rows)]

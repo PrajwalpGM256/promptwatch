@@ -127,6 +127,7 @@ def make_run(
     judge_version: str = "v1",
     judge_provider: str = "groq",
     judge_model: str = "openai/gpt-oss-20b",
+    started_at: str = "2026-08-25T00:00:00Z",
 ) -> RunResult:
     return RunResult(
         run_id=run_id,
@@ -137,6 +138,6 @@ def make_run(
         judge_version=judge_version,
         judge_provider=judge_provider,
         judge_model=judge_model,
-        started_at="2026-08-25T00:00:00Z",
+        started_at=started_at,
         cases=cases,
     )

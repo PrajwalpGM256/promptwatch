@@ -3,7 +3,13 @@ import sqlite3
 import pytest
 from conftest import make_case_result, make_run
 
-from promptwatch.results import connect, latest_run, load_run, save_run
+from promptwatch.results import (
+    connect,
+    latest_run,
+    load_run,
+    run_history,
+    save_run,
+)
 
 
 @pytest.fixture
@@ -188,3 +194,53 @@ def test_migration_is_idempotent(tmp_path):
     connect(path)
     columns = [row["name"] for row in connect(path).execute("PRAGMA table_info(runs)")]
     assert columns.count("judge_provider") == 1
+
+
+def series_run(run_id, day, **kwargs):
+    return make_run(
+        run_id,
+        [make_case_result("c1", "misc", "misc")],
+        started_at=f"2026-09-{day:02d}T00:00:00Z",
+        **kwargs,
+    )
+
+
+@pytest.fixture
+def history_db(connection):
+    for day, run_id in enumerate(["r1", "r2", "r3"], start=1):
+        save_run(connection, series_run(run_id, day))
+    save_run(connection, series_run("other-prompt", 4, prompt_version="v3"))
+    save_run(connection, series_run("other-provider", 5, provider="ollama"))
+    save_run(connection, series_run("other-model", 6, model="gemma3:4b"))
+    return connection
+
+
+def test_history_returns_the_series_oldest_first(history_db):
+    runs = run_history(history_db, "v2", "gemini", "gemini-3.5-flash-lite")
+    assert [r.run_id for r in runs] == ["r1", "r2", "r3"]
+
+
+def test_history_limit_keeps_the_newest(history_db):
+    runs = run_history(history_db, "v2", "gemini", "gemini-3.5-flash-lite", limit=2)
+    assert [r.run_id for r in runs] == ["r2", "r3"]
+
+
+def test_history_excludes_other_series(history_db):
+    ids = {r.run_id for r in run_history(history_db, "v2", "gemini",
+                                         "gemini-3.5-flash-lite")}
+    assert ids.isdisjoint({"other-prompt", "other-provider", "other-model"})
+
+
+def test_history_of_an_unknown_series_is_empty(history_db):
+    assert run_history(history_db, "v9", "gemini", "gemini-3.5-flash-lite") == []
+
+
+def test_history_preserves_generated_summaries(connection):
+    text = "Recruiter proposes a Thursday phone screen."
+    case = make_case_result("c1", "misc", "misc")
+    case.summary = text
+    save_run(connection, make_run("with-summary", [case]))
+
+    runs = run_history(connection, "v2", "gemini", "gemini-3.5-flash-lite")
+
+    assert runs[0].by_id()["c1"].summary == text
