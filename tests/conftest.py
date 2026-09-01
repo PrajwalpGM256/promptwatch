@@ -141,3 +141,28 @@ def make_run(
         started_at=started_at,
         cases=cases,
     )
+
+
+def make_series(
+    accuracies: list[float],
+    total: int = 94,
+    **kwargs,
+) -> list[RunResult]:
+    """Runs of one series with the given accuracies, oldest first."""
+    runs = []
+    for index, accuracy in enumerate(accuracies, start=1):
+        correct = round(accuracy * total)
+        cases = [make_case_result(f"gc-{n:03}", "misc", "misc") for n in range(correct)]
+        cases += [
+            make_case_result(f"gc-{n:03}", "misc", "rejection")
+            for n in range(correct, total)
+        ]
+        runs.append(
+            make_run(
+                f"r{index:02}",
+                cases,
+                started_at=f"2026-09-{index:02}T00:00:00Z",
+                **kwargs,
+            )
+        )
+    return runs
