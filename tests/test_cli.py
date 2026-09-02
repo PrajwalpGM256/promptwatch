@@ -1,7 +1,15 @@
 import pytest
 from conftest import make_case_result, make_run
 
-from promptwatch.cli import EXIT_CODES, _diff, _parser, _runs, _summarise, main
+from promptwatch.cli import (
+    EXIT_CODES,
+    _diff,
+    _parser,
+    _run,
+    _runs,
+    _summarise,
+    main,
+)
 from promptwatch.results import connect, save_run
 
 
@@ -87,3 +95,43 @@ def test_main_dispatches_to_the_subcommand(db, monkeypatch):
     monkeypatch.setattr("sys.argv", ["promptwatch", "runs"])
 
     assert main() == 0
+
+
+@pytest.fixture
+def fake_run(monkeypatch, db):
+    """Make _run testable: no provider, no network, a real temp database."""
+    monkeypatch.setattr("promptwatch.cli.connect", lambda path: db)
+
+    def install(result):
+        async def fake_run_dataset(*args, **kwargs):
+            return result
+
+        monkeypatch.setattr("promptwatch.cli.run_dataset", fake_run_dataset)
+
+    return install
+
+
+def test_run_prints_scorecard_and_drift(fake_run, capsys):
+    fake_run(run_of("20260901T000000-v3", correct=9, wrong=1,
+                    prompt_version="v3", provider="ollama", model="gemma3:4b"))
+
+    code = _run(parse("run", "prompts/v3.yaml", "--provider", "ollama"))
+
+    out = capsys.readouterr().out
+    assert code == 0
+    assert "accuracy      90.00%" in out
+    assert "1 of 6 runs of v3 on ollama/gemma3:4b" in out
+    assert "nothing to diff against" in out
+
+
+def test_run_drift_does_not_change_the_exit_code(fake_run, db, capsys):
+    save_run(db, run_of("older", correct=10, wrong=0,
+                        prompt_version="v3", provider="ollama", model="gemma3:4b"))
+    fake_run(run_of("20260901T000000-v3", correct=10, wrong=0,
+                    prompt_version="v3", provider="ollama", model="gemma3:4b"))
+
+    code = _run(parse("run", "prompts/v3.yaml", "--provider", "ollama"))
+
+    out = capsys.readouterr().out
+    assert "not enough history" in out
+    assert code == EXIT_CODES["pass"]

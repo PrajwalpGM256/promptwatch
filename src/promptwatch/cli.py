@@ -11,6 +11,7 @@ from promptwatch.diff import (
     format_diff,
     format_score,
 )
+from promptwatch.drift import detect_drift, format_drift
 from promptwatch.judge import DEFAULT_JUDGE_PROVIDER, JudgeConfig
 from promptwatch.provider import get_provider, names
 from promptwatch.results import (
@@ -20,6 +21,7 @@ from promptwatch.results import (
     connect,
     latest_run,
     load_run,
+    run_history,
     save_run,
 )
 from promptwatch.runner import RunAborted, run_dataset
@@ -115,6 +117,9 @@ def _run(args: argparse.Namespace) -> int:
 
     save_run(connection, run)
     print("\n" + _summarise(run))
+
+    history = run_history(connection, prompt_config.version, provider.name, model)
+    print("\n" + format_drift(detect_drift(history)))
 
     if previous is None:
         print(
