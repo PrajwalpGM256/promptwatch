@@ -65,6 +65,10 @@ class GoldenDataset(BaseModel):
             )
         return self
 
+    def by_id(self) -> dict[str, GoldenCase]:
+        """Cases keyed by id, for joining against a run's results."""
+        return {case.id: case for case in self.cases}
+
     def check_balance(self, min_per_category: int = 6, max_share: float = 0.30) -> None:
         """Raise unless the corpus is fit to evaluate against.
 
