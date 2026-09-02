@@ -32,6 +32,8 @@ class DriftReport(BaseModel):
     provider: str
     model: str
     window: int
+    warn: float
+    critical: float
     points: list[DriftPoint]
     prior_run_ids: list[str]
     recent_run_ids: list[str]
@@ -140,6 +142,8 @@ def detect_drift(
         provider=latest.provider,
         model=latest.model,
         window=window,
+        warn=warn,
+        critical=critical,
         points=points,
         prior_run_ids=prior_ids,
         recent_run_ids=recent_ids,
